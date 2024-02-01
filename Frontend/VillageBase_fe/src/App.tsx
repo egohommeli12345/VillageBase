@@ -1,11 +1,12 @@
 import "./App.css";
 import MainPage from "./components/MainPage";
+import MenuBar from "./components/MenuBar";
 
 function App() {
   return (
     <>
-      <div>
-        <MainPage />
+      <div className="main">
+        <MenuBar />
       </div>
     </>
   );
