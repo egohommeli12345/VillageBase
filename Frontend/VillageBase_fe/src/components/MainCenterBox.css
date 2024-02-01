@@ -6,16 +6,18 @@
 }
 
 .sidebar {
-    background: gray; 
+    background: rgb(1, 46, 65); 
     padding: 20px;
 }
 
 .mainbar {
-    background: #e6e6e6;
+    background: #00d9ff;
     padding: 20px; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border: 2px solid black;
+    box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.9);
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
 }
 
 h1 {
@@ -24,3 +26,5 @@ h1 {
     border: 2px solid black;
     color: white;
 }
+
+
