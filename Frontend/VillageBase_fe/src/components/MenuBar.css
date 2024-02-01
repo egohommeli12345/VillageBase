@@ -1,5 +1,44 @@
 .menuBarBG {
   width: 100vw;
-  height: 100px;
+  height: 50px;
   background-color: #474f7a;
+  display: flex;
+}
+
+.header {
+  background-color: #f3f3f3;
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Jos haluat headerin täyttävän menuBarBG:n leveyden */
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.button, .search-button, .search-input {
+  padding: 12.5px 30px;
+  border: 0;
+  border-radius: 100px;
+  background-color: #1F2544;
+  color: #ffffff;
+  font-weight: Bold;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s; 
+}
+
+.button:hover {
+  background-color: #dddddd;
+  color: #555;
+}
+
+.search-button:hover {
+  background-color: #ccc;
 }
