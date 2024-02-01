@@ -1,7 +1,9 @@
+import "./MainPage.css";
+
 export default function MainPage() {
   return (
     <>
-      <h1>VillageBase</h1>
+      <div className="mainpageBG">VillageBase</div>
     </>
   );
 }
