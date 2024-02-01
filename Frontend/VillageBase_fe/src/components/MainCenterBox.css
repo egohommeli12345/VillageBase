@@ -1,0 +1,25 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* Sivupalkki ja pääalueen suhde */
+    height: 100vh;
+}
+
+.sidebar {
+    background: gray; /* Harmaa tausta */
+    padding: 20px; /* Sisäinen tyhjä tila */
+}
+
+.mainbar {
+    background: #e6e6e6; /* Vaaleanpunainen tausta */
+    padding: 20px; /* Sisäinen tyhjä tila */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    margin: 0; /* Poistaa oletusmarginaalit */
+    background: blue;
+    border: 2px solid black;
+    color: white; /* Tekstin väri */
+}

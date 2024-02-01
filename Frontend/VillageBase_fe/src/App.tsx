@@ -1,5 +1,5 @@
 import "./App.css";
-import MainPage from "./components/MainPage";
+import MainCenterBox from "./components/MainCenterBox";
 import MenuBar from "./components/MenuBar";
 
 function App() {
@@ -7,6 +7,7 @@ function App() {
     <>
       <div className="main">
         <MenuBar />
+        <MainCenterBox />
       </div>
     </>
   );
