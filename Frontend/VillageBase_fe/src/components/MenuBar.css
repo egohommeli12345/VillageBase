@@ -1,44 +1,50 @@
 .menuBarBG {
-  width: 100vw;
-  height: 50px;
-  background-color: #474f7a;
-  display: flex;
-}
-
-.header {
-  background-color: #f3f3f3;
-  padding: 10px 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%; /* Jos haluat headerin täyttävän menuBarBG:n leveyden */
+    width: 100vw;
+    height: 75px;
+    background-color: #474f7a;
+    display: flex;
 }
 
 .buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
-.button, .search-button, .search-input {
-  padding: 12.5px 30px;
-  border: 0;
-  border-radius: 100px;
-  background-color: #1F2544;
-  color: #ffffff;
-  font-weight: Bold;
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s; 
+.button {
+    padding: 12.5px 30px;
+    border: 0;
+    border-radius: 100px;
+    background-color: #1f2544;
+    color: #ffffff;
+    font-weight: Bold;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    margin: 0 10px;
+}
+
+.search-container {
+}
+
+.search-input {
+    border: 0;
+    border-radius: 100px;
+    padding: 12.5px 30px;
+    background-color: #1f2544;
+    color: #ffffff;
+    font-weight: Bold;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    margin: 0 10px;
+}
+
+.search-button {
+    position: relative;
+    right: 25%;
 }
 
 .button:hover {
-  background-color: #dddddd;
-  color: #555;
-}
-
-.search-button:hover {
-  background-color: #ccc;
+    background-color: #dddddd;
+    color: #555;
 }
