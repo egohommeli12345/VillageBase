@@ -1,3 +1,5 @@
+import "./MenuBar.css";
+
 export default function MenuBar() {
   return (
     <>
