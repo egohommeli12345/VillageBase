@@ -4,24 +4,32 @@ export default function MenuBar() {
     return (
         <div className="menuBarBG">
             <div className="buttons">
-                <a className="button">Alueet ja mökit</a>
-                <a className="button">Palvelut</a>
-                <a className="button">Majoitusvaraukset</a>
-                <a className="button">Asiakkaat</a>
-                <a className="button">Laskutus</a>
-                <a className="button">Raportit</a>
-
-                <div className="search-container">
-                    <input
-                        type="text"
-                        className="search-input"
-                        placeholder="Etsi"
-                    />
-                    <button type="submit" className="search-button">
-                        Etsi
-                    </button>
+                <div className="btn" onClick={handleClick}>
+                    Alueet
+                </div>
+                <div className="btn" onClick={handleClick}>
+                    Mökit
+                </div>
+                <div className="btn" onClick={handleClick}>
+                    Palvelut
+                </div>
+                <div className="btn" onClick={handleClick}>
+                    Varaukset
+                </div>
+                <div className="btn" onClick={handleClick}>
+                    Asiakkaat
+                </div>
+                <div className="btn" onClick={handleClick}>
+                    Laskut
+                </div>
+                <div className="btn" onClick={handleClick}>
+                    Raportit
                 </div>
             </div>
         </div>
     );
+}
+
+function handleClick() {
+    alert("Not implemented yet!");
 }
