@@ -1,7 +1,6 @@
 .region-BG {
     display: flex;
     flex-direction: column;
-    background-color: gray;
     height: 100%;
     position: relative;
 }
@@ -9,7 +8,7 @@
 .regionTitle {
     text-align: center;
     margin-top: 1em;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .regionList {
@@ -27,7 +26,8 @@
 }
 
 .listItem {
-    background-color: rgb(87, 87, 87);
+    background-color: rgb(240, 240, 240);
     margin: 1em;
     padding: 1em;
+    border-radius: 0.5em;
 }

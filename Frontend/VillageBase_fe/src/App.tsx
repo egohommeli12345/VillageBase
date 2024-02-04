@@ -9,9 +9,9 @@ function App() {
             <div className="main">
                 <MenuBar />
                 <ToolBar />
+                <div className="horizontaldivider"></div>
                 <MainCenterBox />
             </div>
-
         </>
     );
 }
