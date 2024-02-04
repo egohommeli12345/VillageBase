@@ -22,7 +22,7 @@
     height: 40px;
     width: 100px;
     /* background-color: #7700ff; */
-    background-image: linear-gradient(180deg, #ffffff, #000000);
+    background-image: linear-gradient(180deg, #000000, #df0d0d, #fbff04,  #005304);
     border-end-end-radius: 20px;
     border-top-left-radius: 20px;
     color: white;
