@@ -4,10 +4,7 @@
     align-items: center;
     width: 100vw;
     height: 75px;
-    background: black;
-    padding: 0em;
-    margin: 0em;
-    /* background-color: #474f7a; */
+    background: rgb(0, 0, 0);
 }
 
 .buttons {
