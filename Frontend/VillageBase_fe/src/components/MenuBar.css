@@ -3,7 +3,9 @@
     justify-content: center;
     width: 100vw;
     height: 75px;
-    background-color: #474f7a;
+    background: black;
+    padding: 10px;
+    /* background-color: #474f7a; */
 }
 
 .buttons {
@@ -26,6 +28,8 @@
 }
 
 .btn:hover {
-    background-color: #5c648c;
+    background-color: #000000;
     font-size: 1.25em;
+    /* border-left: 0.2em solid #ffffff; */
+    border-bottom: 0.2em solid #ffffff;
 }
