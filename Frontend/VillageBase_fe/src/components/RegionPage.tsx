@@ -3,11 +3,10 @@ import "./RegionPage.css";
 // Fukntion runko
 export default function RegionPage() {
     return (
-
         <div className="region-BG">
-            <div className="regionTitle">Alueet</div>
-
             <div className="regionList">
+                <div className="regionTitle">Alueet</div>
+
                 <ul className="list">
                     <li className="listItem">Alue1</li>
                     <li className="listItem">Alue2</li>
@@ -27,11 +26,12 @@ export default function RegionPage() {
                     <li className="listItem">Alue10</li>
                     <li className="listItem">Alue10</li>
                     <li className="listItem">Alue10</li>
+                    <li className="listItem">Alue10</li>
+                    <li className="listItem">Alue10</li>
+                    <li className="listItem">Alue10</li>
+                    <li className="listItem">Alue10</li>
                 </ul>
             </div>
-
-
         </div>
-
     );
 }
