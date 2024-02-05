@@ -4,9 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+// @Entity is used to map this class as a data entity
+// It matches the datamodel in the database
+// @Table is used to specify the database table from which the data is read
 @Entity
 @Table(name = "alue")
 public class Region<R, S> {
+    // @Id specifies the primary key in the table
+    // Variable names need be same as in the table
     @Id
     private String alue_id;
     private String nimi;
