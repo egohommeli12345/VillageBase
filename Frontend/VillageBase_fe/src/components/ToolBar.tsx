@@ -16,6 +16,9 @@ export default function ToolBar() {
         <div className="tool" onClick={handleClick}>
           Poista
         </div>
+        <div className="tool" onClick={handleClick}>
+          Hae
+        </div>
       </div>
     </div>
   );

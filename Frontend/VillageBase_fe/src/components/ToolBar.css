@@ -15,24 +15,46 @@
 }
 
 .tool {
+
     display: flex;
+    position: relative;
+    justify-content: center;
     align-items: center;
     cursor: pointer;
-    justify-content: center;
+    overflow: hidden;
+    background-image: linear-gradient(#000000, rgb(0, 0, 0));
+    border-radius: 5px;
+    box-shadow: rgb(0, 0, 0) 0px 3px 9px 0px;
+    color: #fff;
+    z-index: 1;
     height: 40px;
     width: 100px;
-    /* background-color: #7700ff; */
-    background-image: linear-gradient(180deg, #000000, #df0d0d, #fbff04,  #005304);
-    border-end-end-radius: 20px;
     border-top-left-radius: 20px;
-    color: white;
-    transition: ease-in 0.2s;
-    box-shadow: 0px 0px 4px 1px #616161;
+    border-end-end-radius: 20px;
+   
 }
 
-.tool:hover {
+.tool::before {
+    content: "";
+    background-image: linear-gradient(180deg, #000000 90%, #ff0000 10%);
+    width: 0;
+    height: 100%;
+    position: absolute;
+    /* Aktivointi alla oleva -> bottom menee vasemmalta oikealle */
+    /* left: 0;  */
+    z-index: -1;
+    transition: 0.3s ease-in-out;
+}   
+
+.tool:hover::before {
+    width: 100%;
+}
+
+/* Alkuperäinen */
+
+/* .tool:hover {
+    background-image: linear-gradient(45deg, #07ffff, #000000);
     font-size: 1.25em;
     transition: 0.2s;
-    background-image: linear-gradient(45deg, #07ffff, #000000);
-    /* background-color: #987ab9; */
-}
+   
+} */

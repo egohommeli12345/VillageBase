@@ -27,7 +27,7 @@ export default function MenuBar() {
                     Asiakkaat
                 </div>
                 <div className="btn" onClick={goToRegionsPage}>
-                    Laskut
+                    Laskutus
                 </div>
                 <div className="btn" onClick={goToRegionsPage}>
                     Raportit

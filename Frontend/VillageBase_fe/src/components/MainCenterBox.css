@@ -1,13 +1,27 @@
 .mainbar {
-    display: flex;
+    /* ALKUPÄRINEN */
+    /* display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     background: transparent;
     height: 100%;
     margin-right: 1em;
     margin-left: 1em;
-    margin-bottom: 1em;
+    margin-bottom: 1em; */
+
+    
+    /* MALLI 1, poista tarvittaessa */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
+    background: rgba(255, 255, 255, 0.904) radial-gradient(rgba(0, 0, 0, 0.712) 10%, transparent 1%);
+    height: 100%;
+    background-size: 11px 11px;
+    margin-right: 1em;
+    margin-left: 1em;
+    margin-bottom: 1em;
 }
 
 .page {
