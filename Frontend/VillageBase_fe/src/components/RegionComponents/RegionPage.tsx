@@ -7,10 +7,10 @@ export default function RegionPage() {
             <div className="regionTitle">Alueet</div>
             <div className="regionList">
                 <ul className="list">
-                    <li className="listItem">Alue1</li>
-                    <li className="listItem">Alue2</li>
-                    <li className="listItem">Alue3</li>
-                    <li className="listItem">Alue4</li>
+                    <li className="listItem">Kuopio</li>
+                    <li className="listItem">Kuusamo</li>
+                    <li className="listItem">Kittilä</li>
+                    <li className="listItem">Äkäslompolo</li>
                     <li className="listItem">Alue5</li>
                     <li className="listItem">Alue6</li>
                     <li className="listItem">Alue7</li>
