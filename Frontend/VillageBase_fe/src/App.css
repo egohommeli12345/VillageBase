@@ -7,10 +7,3 @@
     color: black;
     overflow: hidden;
 }
-
-.horizontaldivider {
-    height: 2px;
-    background-color: rgb(231, 231, 231);
-    width: 95%;
-    align-self: center;
-}
