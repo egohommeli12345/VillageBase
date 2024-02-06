@@ -1,11 +1,9 @@
-import styles from "./RegionPage.module.css";
+import styles from "./CustomerPage.module.css";
 
-// Fukntion runko
-export default function RegionPage() {
+export default function CustomerPage() {
     return (
-        <div className={styles.regionBG}>
-            <div className={styles.regionTitle}>Alueet</div>
-            <div className={styles.regionList}>
+        <div className={styles.customerBG}>
+            <div className={styles.customerList}>
                 <ul className={styles.list}>
                     <li className={styles.listItem}>Kuopio</li>
                     <li className={styles.listItem}>Kuusamo</li>

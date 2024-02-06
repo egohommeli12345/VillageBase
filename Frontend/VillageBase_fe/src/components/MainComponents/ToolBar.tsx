@@ -1,22 +1,22 @@
-import "./ToolBar.css";
+import styles from "./ToolBar.module.css";
 
 export default function ToolBar() {
     return (
-        <div className="toolBarBG">
-            <div className="toolBar">
-                <div className="tool" onClick={handleClick}>
+        <div className={styles.toolBarBG}>
+            <div className={styles.toolBar}>
+                <div className={styles.tool} onClick={handleClick}>
                     Lisää
                 </div>
-                <div className="tool" onClick={handleClick}>
+                <div className={styles.tool} onClick={handleClick}>
                     Hae
                 </div>
-                <div className="tool" onClick={handleClick}>
+                <div className={styles.tool} onClick={handleClick}>
                     Muokkaa
                 </div>
-                <div className="tool" onClick={handleClick}>
+                <div className={styles.tool} onClick={handleClick}>
                     Poista
                 </div>
-                <div className="tool" onClick={handleClick}>
+                <div className={styles.tool} onClick={handleClick}>
                     Hae
                 </div>
             </div>

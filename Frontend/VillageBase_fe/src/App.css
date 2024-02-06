@@ -1,4 +1,4 @@
-.main {
+.mainApp {
     display: flex;
     flex-direction: column;
     width: 100vw;
@@ -6,4 +6,5 @@
     background-color: white;
     color: black;
     overflow: hidden;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }

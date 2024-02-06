@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "./MenuBar.css";
+import styles from "./MenuBar.module.css";
 
 export default function MenuBar() {
     const navigate = useNavigate();
@@ -27,27 +27,27 @@ export default function MenuBar() {
     };
 
     return (
-        <div className="menuBarBG">
-            <div className="buttons">
-                <div className="btn" onClick={goToRegionsPage}>
+        <div className={styles.menuBarBG}>
+            <div className={styles.buttons}>
+                <div className={styles.btn} onClick={goToRegionsPage}>
                     Alueet
                 </div>
-                <div className="btn" onClick={goToCottagesPage}>
+                <div className={styles.btn} onClick={goToCottagesPage}>
                     Mökit
                 </div>
-                <div className="btn" onClick={goToServicesPage}>
+                <div className={styles.btn} onClick={goToServicesPage}>
                     Palvelut
                 </div>
-                <div className="btn" onClick={goToReservationsPage}>
+                <div className={styles.btn} onClick={goToReservationsPage}>
                     Varaukset
                 </div>
-                <div className="btn" onClick={goToCustomersPage}>
+                <div className={styles.btn} onClick={goToCustomersPage}>
                     Asiakkaat
                 </div>
-                <div className="btn" onClick={goToBillingPage}>
+                <div className={styles.btn} onClick={goToBillingPage}>
                     Laskutus
                 </div>
-                <div className="btn" onClick={goToReportsPage}>
+                <div className={styles.btn} onClick={goToReportsPage}>
                     Raportit
                 </div>
             </div>
