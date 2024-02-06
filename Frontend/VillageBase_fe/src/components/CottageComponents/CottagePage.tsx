@@ -1,34 +1,40 @@
-import "./CottagePage.css";
+import styles from "./CottagePage.module.css";
 
 // Fukntion runko
 export default function CottagePage() {
-    return <div className="cottage-BG">
-        <div className="cottageCards">
+    return <div className={styles.cottageBG}>
+        <div className={styles.cottageCardsContainer}>
 
-            <div className="item">1.
-            <div className="name">Nimi</div>
-                <div className="location">Osote</div>
+            <div className={styles.item}>
+                <div>Nimi</div>
+                <div>Sijainti</div>
                 <div className="zip">PostiNro</div>
+                <button className={styles.cardButton}>Lisätietoja</button>
             </div>
 
-            <div className="item">2.
-                <div className="name">Nimi</div>
-                <div className="location">Osote</div>
+            <div className={styles.item}>
+                <div>Nimi</div>
+                <div>Sijainti</div>
                 <div className="zip">PostiNro</div>
+                <button className={styles.cardButton}>Lisätietoja</button>
             </div>
 
-            <div className="item">3.
-                <div className="name">Nimi</div>
-                <div className="location">Osote</div>
+            <div className={styles.item}>
+                <div>Nimi</div>
+                <div>Sijainti</div>
                 <div className="zip">PostiNro</div>
+                <button className={styles.cardButton}>Lisätietoja</button>
             </div>
 
-            <div className="item">4.
-                <div className="name">Nimi</div>
-                <div className="location">Osote</div>
+            <div className={styles.item}>
+                <div>Nimi</div>
+                <div>Sijainti</div>
                 <div className="zip">PostiNro</div>
+                <button className={styles.cardButton}>Lisätietoja</button>
             </div>
 
+            
+            {/* lisätään tarpeen mukaan  */}
         </div>
 
     </div>;

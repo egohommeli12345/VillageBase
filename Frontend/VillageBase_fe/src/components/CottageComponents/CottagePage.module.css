@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.cottageBG {
+    height: 100%;
+    background-color: transparent;
+    overflow: scroll;
+}
+
+.cottageCardsContainer  {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: start;
+    padding: 1em;
+}
+
+.item {
+    display: grid;
+    margin: 1em;
+    border: 0px solid #ffffff;
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+    padding: 8px;
+    background: rgb(255, 255, 255);
+    position: relative;
+    padding: 1.8rem;
+    transition: .5s ease-out;
+    overflow: visible;
+}
+
+.item:hover {
+    background: #ffffff;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 10px 0 #000000;
+    transform: scale(1.05);
+    z-index: 1;
+}
+
+.cardButton {
+    transform: translate(-50%, 125%);
+    width: 60%;
+    box-shadow: 0 0 5px 0px #000000;
+    border-radius: 1rem;
+    border: none;
+    background-color: #f80000;
+    color: #fff;
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    opacity: 0;
+    transition: 0.3s ease-out;
+   }
+
+   .item:hover .cardButton {
+    transform: translate(-50%, 50%);
+    opacity: 1;
+   }
