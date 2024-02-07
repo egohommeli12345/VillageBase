@@ -21,13 +21,21 @@ export default function RegionPage() {
                 <ul className={styles.list}>
                     {regions.map((region) => (
                         <li className={styles.listItem} key={region.alue_id}>
-                            <div className={styles.regionId}>
-                                Alueen ID:
-                                {region.alue_id}
-                            </div>
-                            <div className={styles.regionName}>
-                                Alueen nimi:
-                                {region.nimi}
+                            <div className={styles.itemData}>
+                                <div className={styles.itemTitle}>
+                                    Alueen ID:
+                                </div>
+                                <div className={styles.regionId}>
+                                    {region.alue_id}
+                                </div>
+
+                                <div className={styles.itemTitle}>
+                                    Alueen nimi:
+                                </div>
+                                <div className={styles.regionName}>
+                                    {region.nimi}
+                                </div>
+                                <div className={styles.listBtn}>SELECT</div>
                             </div>
                         </li>
                     ))}
