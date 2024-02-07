@@ -36,7 +36,6 @@
     border: 2px solid #ffffff;
     box-shadow: 0 0 10px 0 #000000;
     transform: scale(1.02);
-    z-index: 1;
 }
 
 .itemData {

@@ -7,10 +7,12 @@ import { RegionFetch } from "./RegionFetch";
 export default function RegionPage() {
     // useState hook for mapping the regions to RegionInterface objects
     const [regions, setRegions] = useState<RegionInterface[]>([]);
+    const [sortedRegions, setSortedRegions] = useState<RegionInterface[]>([]);
 
     useEffect(() => {
         RegionFetch().then((data) => {
             setRegions(data);
+            setSortedRegions(data.toSorted(CompareRegions));
         });
     }, []);
 
@@ -19,7 +21,7 @@ export default function RegionPage() {
             <div className={styles.regionTitle}>Alueet</div>
             <div className={styles.regionList}>
                 <ul className={styles.list}>
-                    {regions.map((region) => (
+                    {sortedRegions.map((region) => (
                         <li className={styles.listItem} key={region.alue_id}>
                             <div className={styles.itemData}>
                                 <div className={styles.itemTitle}>
@@ -43,4 +45,8 @@ export default function RegionPage() {
             </div>
         </div>
     );
+}
+
+function CompareRegions(a: RegionInterface, b: RegionInterface) {
+    return a.alue_id - b.alue_id;
 }
