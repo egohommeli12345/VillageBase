@@ -24,11 +24,11 @@ public class Region<R, S> {
         this.nimi = nimi;
     }
 
-    public String getAlue_alue_id() {
+    public String getAlue_id() {
         return alue_id;
     }
 
-    public void setAlue_alue_id(String alue_id) {
+    public void setAlue_id(String alue_id) {
         this.alue_id = alue_id;
     }
 
@@ -36,7 +36,7 @@ public class Region<R, S> {
         return nimi;
     }
 
-    public void setalue(String nimi) {
+    public void setNimi(String nimi) {
         this.nimi = nimi;
     }
 }
