@@ -1,7 +1,9 @@
 import styles from "./RegionPage.module.css";
 
-// Fukntion runko
+// Function for RegionPage
 export default function RegionPage() {
+    
+
     return (
         <div className={styles.regionBG}>
             <div className={styles.regionTitle}>Alueet</div>
