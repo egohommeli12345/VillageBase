@@ -5,18 +5,53 @@
 }
 
 .cottageBG {
-    height: 100%;
+    height: 100vh; /* Updated to ensure full viewport height */
     background-color: transparent;
-    overflow: scroll;
+    overflow: auto; /* Ensures smooth scrolling */
+}
+
+.cottageTitle {
+    text-align: center;
+    font-size: 2em; /* Increased size for better visibility */
+    margin: 20px 0; /* Add some space above and below the title */
+    color: #333; /* Darker text for better readability */
 }
 
 .cottageCardsContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     text-align: start;
     padding: 1em;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 1em;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 400px; /* Adjust width as necessary */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.cardHeader {
+    background: rgb(219, 219, 219);
+    color: #ffffff;
+    padding: 10px 15px;
+    font-size: 1.25rem;
+}
+
+.cardBody {
+    padding: 15px;
+    line-height: 1.5;
+    color: #333; /* Darker text for readability */
 }
 
 .item {
@@ -43,20 +78,24 @@
 }
 
 .cardButton {
-    transform: translate(-50%, 125%);
-    width: 60%;
+    display: block;
+    width: 80%;
+    margin: 10px auto 15px;
     box-shadow: 0 0 5px 0px #000000;
     border-radius: 1rem;
     border: none;
-    background-color: #f80000;
+    background-color: rgb(219, 219, 219);
     color: #fff;
     font-size: 1rem;
+    border: none;
+    border-radius: 5px;
     padding: 0.5rem 1rem;
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    opacity: 0;
-    transition: 0.3s ease-out;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cardButton:hover {
+    background-color: rgb(167, 167, 167)
 }
 
 .item:hover .cardButton {
