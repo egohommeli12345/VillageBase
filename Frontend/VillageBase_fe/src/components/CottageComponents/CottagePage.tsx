@@ -20,7 +20,7 @@ export default function CottagePage() {
   useEffect(() => {
     CottageFetch().then((data) => {
       setCottages(data);
-      setSortedCottages([...data].sort(CompareCottages)); // Ensure you create a copy of data before sorting
+      setSortedCottages(data.toSorted(CompareCottages));
     });
   }, []);
 

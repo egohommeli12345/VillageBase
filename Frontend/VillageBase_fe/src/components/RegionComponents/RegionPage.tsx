@@ -29,7 +29,7 @@ export default function RegionPage() {
 
                 <div className={styles.itemTitle}>Alueen nimi:</div>
                 <div className={styles.regionName}>{region.nimi}</div>
-                <div className={styles.listBtn}>SELECT</div>
+                <div className={styles.listBtn}>Valitse</div>
               </div>
             </li>
           ))}
