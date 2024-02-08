@@ -9,10 +9,18 @@ export default function CottagePage() {
   const [cottages, setCottages] = useState<CottageInterface[]>([]);
   const [sortedCottages, setSortedCottages] = useState<CottageInterface[]>([]);
 
+  // State to track the active container
+  const [activeContainerId, setActiveContainerId] = useState<number | null>(null);
+
+  // Function to toggle the active container
+  const makeActive = (id: number) => {
+    setActiveContainerId(id);
+  };
+
   useEffect(() => {
     CottageFetch().then((data) => {
       setCottages(data);
-      setSortedCottages(data.sort(CompareCottages));
+      setSortedCottages([...data].sort(CompareCottages)); // Ensure you create a copy of data before sorting
     });
   }, []);
 
@@ -21,29 +29,22 @@ export default function CottagePage() {
       <div className={styles.cottageTitle}>Mökit</div>
       <div className={styles.cottageCardsContainer}>
         {sortedCottages.map((cottage) => (
-          <div className={styles.card} key={cottage.mokki_id}>
+          <div
+            className={`${styles.card} ${activeContainerId === cottage.mokki_id ? styles.active : ''}`}
+            key={cottage.mokki_id}
+            onClick={() => makeActive(cottage.mokki_id)}
+          >
             <div className={styles.cardHeader}>
               {cottage.mokkinimi} {cottage.mokki_id}
             </div>
             <div className={styles.cardBody}>
-              <p>
-                <strong>Osoite:</strong> {cottage.katuosoite},{" "}
-                {cottage.postinro}
-              </p>
-              <p>
-                <strong>Hinta:</strong> {cottage.hinta}€/yö
-              </p>
-              <p>
-                <strong>Kuvaus:</strong> {cottage.kuvaus}
-              </p>
-              <p>
-                <strong>Henkilömäärä:</strong> {cottage.henkilomaara} henkilöä
-              </p>
-              <p>
-                <strong>Varustelu:</strong> {cottage.varustelu}
-              </p>
+              <p><strong>Osoite:</strong> {cottage.katuosoite}, {cottage.postinro}</p>
+              <p><strong>Hinta:</strong> {cottage.hinta}€/yö</p>
+              <p><strong>Kuvaus:</strong> {cottage.kuvaus}</p>
+              <p><strong>Henkilömäärä:</strong> {cottage.henkilomaara} henkilöä</p>
+              <p><strong>Varustelu:</strong> {cottage.varustelu}</p>
             </div>
-            <button className={styles.cardButton}>Lisätietoja</button>
+            {/* <button className={styles.cardButton}>Lisätietoja</button> */}
           </div>
         ))}
       </div>

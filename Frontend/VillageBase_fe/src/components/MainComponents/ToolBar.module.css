@@ -33,7 +33,7 @@
 
 .tool::before {
     content: "";
-    background-image: linear-gradient(180deg, #000000 90%, #ff0000 10%);
+    background-image: linear-gradient(180deg, #000000 90%, #007bff 10%); /* Highlight with a blue or with #ff0000 */
     width: 0;
     height: 100%;
     position: absolute;
