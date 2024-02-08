@@ -1,6 +1,5 @@
 * {
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -73,9 +72,13 @@
   z-index: 1;
 }
 
-.cardButton {
+.active {
+  border: 3px solid #007bff; /* Highlight with a blue border */
+}
+
+/*.cardButton {
   display: block;
-  width: 80%; /* Adjust width as necessary */
+  width: 80%; 
   margin: 10px auto 15px;
   box-shadow: 0 0 5px 0px #000000;
   background-color: rgb(219, 219, 219);
@@ -95,4 +98,4 @@
 .item:hover .cardButton {
   transform: scale(1.02);
   opacity: 1;
-}
+}//*/

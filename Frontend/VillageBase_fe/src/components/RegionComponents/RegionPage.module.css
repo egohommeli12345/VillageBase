@@ -60,8 +60,10 @@
   padding: 1em;
   border-radius: 0.5em;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .listBtn:hover {
   background-color: rgb(167, 167, 167);
+  transition: background-color 0.3s ease;
 }
