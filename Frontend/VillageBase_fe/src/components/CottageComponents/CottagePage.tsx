@@ -28,7 +28,6 @@ export default function CottagePage() {
     useEffect(() => {
         CottageFetch().then((data) => {
             setCottages(data);
-            setSortedCottages(data.toSorted(CompareCottages));
         });
     }, []);
 
@@ -74,8 +73,4 @@ export default function CottagePage() {
             </div>
         </div>
     );
-}
-
-function CompareCottages(a: CottageInterface, b: CottageInterface) {
-    return a.mokki_id - b.mokki_id;
 }
