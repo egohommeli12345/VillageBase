@@ -7,6 +7,7 @@ import { SortItems } from "../SortingComponents/SorterFunc";
 
 // Function for CottagePage
 export default function CottagePage() {
+    // useContext hook for getting the sortType from the SortTypeContext
     const { sortType } = useSortType();
 
     // useState hook for mapping the cottages to CottageInterface objects
