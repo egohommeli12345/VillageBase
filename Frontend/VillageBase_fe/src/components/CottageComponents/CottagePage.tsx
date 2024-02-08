@@ -26,11 +26,22 @@ export default function CottagePage() {
               {cottage.mokkinimi} {cottage.mokki_id}
             </div>
             <div className={styles.cardBody}>
-              <p><strong>Osoite:</strong> {cottage.katuosoite}, {cottage.postinro}</p>
-              <p><strong>Hinta:</strong> {cottage.hinta}€/yö</p>
-              <p><strong>Kuvaus:</strong> {cottage.kuvaus}</p>
-              <p><strong>Henkilömäärä:</strong> {cottage.henkilomaara} henkilöä</p>
-              <p><strong>Varustelu:</strong> {cottage.varustelu}</p>
+              <p>
+                <strong>Osoite:</strong> {cottage.katuosoite},{" "}
+                {cottage.postinro}
+              </p>
+              <p>
+                <strong>Hinta:</strong> {cottage.hinta}€/yö
+              </p>
+              <p>
+                <strong>Kuvaus:</strong> {cottage.kuvaus}
+              </p>
+              <p>
+                <strong>Henkilömäärä:</strong> {cottage.henkilomaara} henkilöä
+              </p>
+              <p>
+                <strong>Varustelu:</strong> {cottage.varustelu}
+              </p>
             </div>
             <button className={styles.cardButton}>Lisätietoja</button>
           </div>
