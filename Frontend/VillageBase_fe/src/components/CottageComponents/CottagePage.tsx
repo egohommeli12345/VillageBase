@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import styles from "./CottagePage.module.css";
 import { CottageFetch } from "./CottageFetch";
 import { CottageInterface } from "./CottageInterface";
+import { useSortType } from "../SortingComponents/SortTypeContext";
+import { SortItems } from "../SortingComponents/SorterFunc";
 
 // Function for CottagePage
 export default function CottagePage() {
+    const { sortType } = useSortType();
+
     // useState hook for mapping the cottages to CottageInterface objects
     const [cottages, setCottages] = useState<CottageInterface[]>([]);
-    const [sortedCottages, setSortedCottages] = useState<CottageInterface[]>(
-        []
-    );
 
     // State to track the active container
     const [activeContainerId, setActiveContainerId] = useState<number | null>(
@@ -27,15 +28,15 @@ export default function CottagePage() {
 
     useEffect(() => {
         CottageFetch().then((data) => {
-            setCottages(data);
+            setCottages(SortItems(sortType, data, "mokki_id"));
         });
-    }, []);
+    }, [sortType]);
 
     return (
         <div className={styles.cottageBG}>
             <div className={styles.cottageTitle}>Mökit</div>
             <div className={styles.cottageCardsContainer}>
-                {sortedCottages.map((cottage) => (
+                {cottages.map((cottage) => (
                     <div
                         className={`${styles.card} ${
                             activeContainerId === cottage.mokki_id

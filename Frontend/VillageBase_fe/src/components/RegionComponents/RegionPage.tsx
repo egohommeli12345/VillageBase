@@ -48,7 +48,3 @@ export default function RegionPage() {
         </div>
     );
 }
-
-function CompareRegions(a: RegionInterface, b: RegionInterface) {
-    return a.alue_id - b.alue_id;
-}
