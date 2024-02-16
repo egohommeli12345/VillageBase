@@ -10,9 +10,9 @@ const ToolBar = () => {
         <div className={styles.toolBarBG}>
             <div className={styles.toolBar}>
                 <div className={styles.tool}>Lisää</div>
-                <div className={styles.tool}>Hae</div>
-                <div className={styles.tool}>Muokkaa</div>
                 <div className={styles.tool}>Poista</div>
+                <div className={styles.tool}>Muokkaa</div>
+                <div className={styles.tool}>Hae</div>
                 <div className={styles.sort}>
                     <div className={styles.tool} onClick={ShowSortMenu}>
                         Lajittele
