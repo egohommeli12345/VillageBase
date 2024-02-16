@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 // @Table is used to specify the database table from which the data is read
 
 @Entity
-@Table (name = "varaukset")
+@Table (name = "varaus")
 public class Reservation<R, S> {
     // @Id specifies the primary key in the table
     // Variable names need be same as in the table
