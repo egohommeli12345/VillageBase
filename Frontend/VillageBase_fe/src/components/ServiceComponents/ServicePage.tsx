@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import styles from "./ServicePage.module.css";
 import { ServiceFetch } from "./ServiceFetch";
 import {ServiceInterface} from "./ServiceInterface";
+import { useSortType } from "../SortingComponents/SortTypeContext";
+import { SortItems } from "../SortingComponents/SorterFunc";
 
 // Function for ServicePage
 export default function ServicePage() {
+  const {sortType} = useSortType();
   // useState hook for mapping the services to ServiceInterface objects
   const [services, setServices] = useState<ServiceInterface[]>([]);
-  // const [sortedServices, setSortedServices>] = useState<ServiceInterface[]>([]);
 
   // State to track the active container
   const [activeContainerId, setActiveContainerId] = useState<number | null>(null);
@@ -19,16 +21,15 @@ export default function ServicePage() {
 
   useEffect(() => {
     ServiceFetch().then((data) => {
-      setServices(data);
-      setSortedServices([...data].sort(Compareservices)); // Ensure you create a copy of data before sorting
+      setServices(SortItems(sortType, data, "palvelu_id"));
     });
-  }, []);
+  }, [sortType]);
 
   return (
     <div className={styles.serviceBG}>
       <div className={styles.serviceTitle}>Palvelut</div>
       <div className={styles.serviceCardsContainer}>
-        {sortedServices.map((service) => (
+        {services.map((service) => (
           <div
             className={`${styles.card} ${activeContainerId === service.palvelu_id ? styles.active : ''}`}
             key={service.palvelu_id}
@@ -48,8 +49,4 @@ export default function ServicePage() {
       </div>
     </div>
   );
-}
-
-function Compareservices(a: ServiceInterface, b: ServiceInterface) {
-  return a.palvelu_id - b.palvelu_id;
 }
