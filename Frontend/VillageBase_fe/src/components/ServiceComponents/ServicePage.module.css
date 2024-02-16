@@ -1,22 +1,15 @@
-* {
-    margin: 0;
-    box-sizing: border-box;
-  }
-  
-  .serviceBG {
+.serviceBG {
     height: 100vh; /* Updated to ensure full viewport height */
     background-color: transparent;
     overflow: auto; /* Ensures smooth scrolling */
-  }
-  
-  .serviceTitle {
+}
+
+.serviceTitle {
     text-align: center;
-    font-size: 2em; /* Increased size for better visibility */
-    margin: 20px 0; /* Add some space above and below the title */
-    color: #333; /* Darker text for better readability */
-  }
-  
-  .serviceCardsContainer {
+    font-size: 1.5em;
+}
+
+.serviceCardsContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -24,9 +17,9 @@
     text-align: start;
     padding: 1em;
     gap: 1em; /* Adds space between the cards without having to use margin */
-  }
-  
-  .card {
+}
+
+.card {
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 #000000;
@@ -34,27 +27,27 @@
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 400px; /* Adjust width as necessary */
-  }
-  
-  .card:hover {
+}
+
+.card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  .cardHeader {
+}
+
+.cardHeader {
     background: rgb(219, 219, 219);
     color: #ffffff;
     padding: 10px 15px;
     font-size: 1.25rem;
-  }
-  
-  .cardBody {
+}
+
+.cardBody {
     padding: 15px;
     line-height: 1.5;
     color: #333; /* Darker text for readability */
-  }
-  
-  .item {
+}
+
+.item {
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Distributes space evenly inside the card */
@@ -62,21 +55,21 @@
     box-shadow: 0 0 10px 0 #000000;
     transition: 0.5s ease-out;
     overflow: hidden; /* Prevents content from spilling out */
-  }
-  
-  .item:hover {
+}
+
+.item:hover {
     background: #ffffff;
     border: 2px solid #ffffff;
     box-shadow: 0 0 10px 0 #000000;
     transform: scale(1.05);
     z-index: 1;
-  }
-  
-  .active {
+}
+
+.active {
     border: 3px solid #007bff; /* Highlight with a blue border */
-  }
-  
-  /*.cardButton {
+}
+
+/*.cardButton {
     display: block;
     width: 80%; 
     margin: 10px auto 15px;
