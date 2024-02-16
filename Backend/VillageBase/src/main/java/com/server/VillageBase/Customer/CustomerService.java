@@ -15,7 +15,5 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     // This returns all the customers from the database (through the repository layer)
-    public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
-    }
+    public List<Customer> getAllCustomers() { return customerRepository.findAll(); }
 }

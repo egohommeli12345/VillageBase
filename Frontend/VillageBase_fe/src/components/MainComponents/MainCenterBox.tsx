@@ -5,6 +5,7 @@ import ToolBar from "./ToolBar";
 import CottagePage from "../CottageComponents/CottagePage";
 import CustomerPage from "../CustomerComponents/CustomerPage";
 import { SortTypeProvider } from "../SortingComponents/SortTypeContext";
+import ReservationPage from "../ReservationComponents/ReservationPage";
 
 function MainCenterBox() {
     return (
@@ -16,6 +17,7 @@ function MainCenterBox() {
                         <Routes>
                             <Route path="/alueet" element={<RegionPage />} />
                             <Route path="/mokit" element={<CottagePage />} />
+                            <Route path="/varaukset" element={<ReservationPage />} />
                             <Route
                                 path="/asiakkaat"
                                 element={<CustomerPage />}
