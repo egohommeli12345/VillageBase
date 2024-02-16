@@ -1,26 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./ToolBar.module.css";
+import { useSortType } from "../SortingComponents/SortTypeContext";
 
-export default function ToolBar() {
+const ToolBar = () => {
+    const { setSortType } = useSortType();
     const [clicked, setClicked] = useState(false);
 
     return (
         <div className={styles.toolBarBG}>
             <div className={styles.toolBar}>
-                <div className={styles.tool} onClick={handleClick}>
-                    Lisää
-                </div>
-                <div className={styles.tool} onClick={handleClick}>
-                    Hae
-                </div>
-                <div className={styles.tool} onClick={handleClick}>
-                    Muokkaa
-                </div>
-                <div className={styles.tool} onClick={handleClick}>
-                    Poista
-                </div>
+                <div className={styles.tool}>Lisää</div>
+                <div className={styles.tool}>Hae</div>
+                <div className={styles.tool}>Muokkaa</div>
+                <div className={styles.tool}>Poista</div>
                 <div className={styles.sort}>
-                    <div className={styles.tool} onClick={handleSortClick}>
+                    <div className={styles.tool} onClick={ShowSortMenu}>
                         Lajittele
                     </div>
                     {clicked ? <SortDropDown /> : null}
@@ -29,28 +23,38 @@ export default function ToolBar() {
         </div>
     );
 
-    function handleClick() {
-        alert("Not implemented yet!");
-    }
-
-    function SortDropDown() {
-        return (
-            <div className={styles.dropDown}>
-                <div className={styles.dropDownItem} onClick={handleClick}>
-                    Laskeva
-                </div>
-                <div className={styles.dropDownItem} onClick={handleClick}>
-                    Kasvava
-                </div>
-            </div>
-        );
-    }
-
-    function handleSortClick() {
+    function ShowSortMenu() {
         if (clicked) {
             setClicked(false);
         } else if (!clicked) {
             setClicked(true);
         }
     }
-}
+
+    function SortDropDown() {
+        return (
+            <div className={styles.sortMenu}>
+                <div
+                    className={styles.sortMenuItem}
+                    onClick={() => setSortType("default")}
+                >
+                    Alkup.
+                </div>
+                <div
+                    className={styles.sortMenuItem}
+                    onClick={() => setSortType("ascending")}
+                >
+                    Kasvava
+                </div>
+                <div
+                    className={styles.sortMenuItem}
+                    onClick={() => setSortType("descending")}
+                >
+                    Laskeva
+                </div>
+            </div>
+        );
+    }
+};
+
+export default ToolBar;
