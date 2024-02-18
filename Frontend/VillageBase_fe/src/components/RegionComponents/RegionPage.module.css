@@ -1,69 +1,69 @@
 .regionBG {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
 }
 
 .regionTitle {
-  text-align: center;
-  font-size: 1.5em;
+    text-align: center;
+    font-size: 1.5em;
 }
 
 .regionList {
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-  width: 50%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    width: 50%;
 }
 
 .list {
-  list-style: none;
-  padding: 0;
-  margin: 1em;
+    list-style: none;
+    padding: 0;
+    margin: 1em;
 }
 
 .listItem {
-  background-color: rgb(240, 240, 240);
-  margin: 1em;
-  padding: 1em;
-  border-radius: 0.5em;
-  box-shadow: 0 0 10px 0 #000000;
+    background-color: rgb(240, 240, 240);
+    margin: 1em;
+    padding: 1em;
+    border-radius: 0.5em;
+    box-shadow: 0 0 10px 0 #000000;
 }
 
 .listItem:hover {
-  background: #ffffff;
-  border: 2px solid #ffffff;
-  box-shadow: 0 0 10px 0 #000000;
-  transform: scale(1.02);
+    background: #ffffff;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 10px 0 #000000;
+    transform: scale(1.02);
 }
 
 .itemData {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .itemTitle {
-  grid-column: 1;
+    grid-column: 1;
 }
 
 .regionName {
-  grid-column: 2;
+    grid-column: 2;
 }
 
 .listBtn {
-  grid-column: 3;
-  grid-row: 1 / span 2;
-  align-self: center;
-  justify-self: right;
-  background-color: rgb(219, 219, 219);
-  padding: 1em;
-  border-radius: 0.5em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    align-self: center;
+    justify-self: right;
+    background-color: rgb(219, 219, 219);
+    padding: 1em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .listBtn:hover {
-  background-color: rgb(167, 167, 167);
-  transition: background-color 0.3s ease;
+    background-color: rgb(167, 167, 167);
+    transition: background-color 0.3s ease;
 }
