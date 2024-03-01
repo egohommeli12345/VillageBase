@@ -42,7 +42,7 @@
 }
 
 .cardHeader {
-  background: rgb(219, 219, 219);
+  background: rgb(0, 0, 0);
   color: #ffffff;
   padding: 10px 15px;
   font-size: 1.25rem;
@@ -69,7 +69,7 @@
 }
 
 .active {
-  border: 3px solid #007bff; /* Highlight with a blue border */
+  border: 3px solid #0011ff; /* Highlight with a blue border */
 }
 
 /*.cardButton {
