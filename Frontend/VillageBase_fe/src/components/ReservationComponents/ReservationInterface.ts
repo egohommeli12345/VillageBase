@@ -7,4 +7,7 @@ export interface ReservationInterface {
     vahvistus_pvm: string;
     varattu_alkupvm: string;
     varattu_loppupvm: string;
+    // optional variables
+    // showDetails?: boolean;
+    showDetails: boolean;
 }

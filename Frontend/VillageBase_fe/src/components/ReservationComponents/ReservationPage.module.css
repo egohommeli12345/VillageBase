@@ -67,4 +67,22 @@
     background-color: rgb(167, 167, 167);
     transition: background-color 0.3s ease;
   }
+
+  /* Lisätiedot Btn */
+  .moreBtn {
+    grid-column: 1;
+    grid-row: 5 / span 3;
+    align-self: center;
+    justify-self: left;
+    background-color: rgb(219, 219, 219);
+    margin-top: 0.4em;
+    padding: 0.2em;
+    border-radius: 0.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .moreBtn:hover {
+    background-color: rgb(167, 167, 167);
+    transition: background-color 0.3s ease;
+  }
   
