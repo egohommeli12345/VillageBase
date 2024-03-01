@@ -1,4 +1,4 @@
-package com.server.VillageBase.Cottage;
+package com.server.VillageBase.Reservation;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 // Repository layer is created for each entity
 
 // EntityRepository needs to extend JpaRepository (it contains the CRUD logic)
-public interface CottageRepository extends JpaRepository<Cottage, Integer> {
-}
 
+public interface ReservationRepository extends JpaRepository<Reservation, String> {
+}

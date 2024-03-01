@@ -1,33 +1,37 @@
 import { useState } from "react";
 import styles from "./ToolBar.module.css";
 import { useSortType } from "../SortingComponents/SortTypeContext";
+import { useSearch } from "../SearchComponents/SearchContext";
 
 const ToolBar = () => {
     const { setSortType } = useSortType();
-    const [clicked, setClicked] = useState(false);
+    const [sortClicked, setSortClicked] = useState(false);
+    const { setSearchShowState } = useSearch();
 
     return (
         <div className={styles.toolBarBG}>
             <div className={styles.toolBar}>
                 <div className={styles.tool}>Lisää</div>
-                <div className={styles.tool}>Hae</div>
-                <div className={styles.tool}>Muokkaa</div>
                 <div className={styles.tool}>Poista</div>
+                <div className={styles.tool}>Muokkaa</div>
+                <div className={styles.tool} onClick={ShowSearch}>
+                    Hae
+                </div>
                 <div className={styles.sort}>
                     <div className={styles.tool} onClick={ShowSortMenu}>
                         Lajittele
                     </div>
-                    {clicked ? <SortDropDown /> : null}
+                    {sortClicked ? <SortDropDown /> : null}
                 </div>
             </div>
         </div>
     );
 
     function ShowSortMenu() {
-        if (clicked) {
-            setClicked(false);
-        } else if (!clicked) {
-            setClicked(true);
+        if (sortClicked) {
+            setSortClicked(false);
+        } else if (!sortClicked) {
+            setSortClicked(true);
         }
     }
 
@@ -54,6 +58,10 @@ const ToolBar = () => {
                 </div>
             </div>
         );
+    }
+
+    function ShowSearch() {
+        setSearchShowState((SearchShowState) => !SearchShowState);
     }
 };
 
