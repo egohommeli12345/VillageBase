@@ -87,14 +87,6 @@ export default function ReservationPage() {
 
 
                                 {/* Lisätietojen osio, joka avautuu, kun moreBtn-painiketta klikataan */}
-                                {/* {reservation.showDetails && (
-                                    <div className={styles.detailsSection}>
-                                        <p><strong>Henkilömäärä: {reservation.henkilomaara}</strong></p>
-                                        <p><strong>Palvelut: {reservation.palvelut}</strong></p>
-                                        <p><strong>Maksutapa: {reservation.maksutapa}</strong></p>
-                                        <p><strong>Lisätiedot: {reservation.lisatiedot}</strong></p>
-                                    </div>
-                                )} */}
                                 {reservation.showDetails && (
                                     <div className={styles.itemTitle}>
                                         <p><strong>Henkilömäärä: {reservation.henkilomaara}</strong></p>
