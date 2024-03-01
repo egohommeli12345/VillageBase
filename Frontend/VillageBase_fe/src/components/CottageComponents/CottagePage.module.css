@@ -1,12 +1,18 @@
 .cottageBG {
-    height: 100vh; /* Updated to ensure full viewport height */
+    height: 100%; /* Updated to ensure full viewport height */
     background-color: transparent;
-    overflow: auto; /* Ensures smooth scrolling */
+    display: flex;
+    flex-direction: column;
 }
 
 .cottageTitle {
     text-align: center;
     font-size: 1.5em;
+}
+.cottageList {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
 }
 
 .cottageCardsContainer {

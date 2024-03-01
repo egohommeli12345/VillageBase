@@ -2,13 +2,16 @@ import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import MainCenterBox from "./components/MainComponents/MainCenterBox";
 import MenuBar from "./components/MainComponents/MenuBar";
+import { SearchProvider } from "./components/SearchComponents/SearchContext";
 
 function App() {
     return (
         <BrowserRouter>
             <div className="mainApp">
                 <MenuBar />
-                <MainCenterBox />
+                <SearchProvider>
+                    <MainCenterBox />
+                </SearchProvider>
             </div>
         </BrowserRouter>
     );
