@@ -7,6 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 // Repository layer is created for each entity
 
 // EntityRepository needs to extend JpaRepository (it contains the CRUD logic)
-
 public interface BillingRepository extends JpaRepository<Billing, Integer>{
 }
