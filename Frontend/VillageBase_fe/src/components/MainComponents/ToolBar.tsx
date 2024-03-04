@@ -23,6 +23,7 @@ const ToolBar = () => {
         function handleClickOutside(event: MouseEvent) {
             if (toolBarRef.current && !toolBarRef.current.contains(event.target as Node)) {
                 setAddClicked(false);
+                setSortClicked(false);
             }
         }
 
