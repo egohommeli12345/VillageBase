@@ -9,6 +9,8 @@ import { useSearch } from "../SearchComponents/SearchContext";
 import ReservationPage from "../ReservationComponents/ReservationPage";
 import ServicePage from "../ServiceComponents/ServicePage";
 import SearchUI from "../SearchComponents/SearchUI";
+import AddCabinPage from "../CottageComponents/AddCabinPage"; // -sale
+
 
 function MainCenterBox() {
     const { SearchShowState } = useSearch();
@@ -31,6 +33,10 @@ function MainCenterBox() {
                             <Route
                                 path="/asiakkaat"
                                 element={<CustomerPage />}
+                            />
+                            <Route                          // -sale
+                                path="/add-cabin"
+                                element={<AddCabinPage />} 
                             />
                         </Routes>
                     </div>

@@ -11,6 +11,7 @@
     height: 5em;
     width: 60%;
     background-color: transparent;
+    position: relative; /* -sale */
 }
 
 .tool {
@@ -77,5 +78,40 @@
 }
 
 .sortMenuItem:hover {
+    cursor: pointer;
+}
+
+
+
+/* Lisää */
+
+/* Nää vois yhistää suoraan "Sort" kohdan kanssa esim. 
+sortMenu, addMenu {tyylit on samat} jne*/
+.add {
+    display: flex;
+    justify-content: center;
+}
+
+.addMenu {
+    position: absolute;
+    width: 100px;
+    background-color: rgb(255, 255, 255);
+    margin-top: 4em;
+    border-radius: 1em;
+    padding: 1em;
+    box-shadow: #000000 0px 3px 9px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+}
+
+.addMenuItem {
+    border-bottom: #000000 1px solid;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+
+.addMenuItem:hover {
     cursor: pointer;
 }
