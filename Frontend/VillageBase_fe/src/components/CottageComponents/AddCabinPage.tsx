@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import styles from './AddCabinPage.module.css';
 
 const AddCabinPage = () => {
     const [cabinName, setCabinName] = useState('');
