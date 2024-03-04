@@ -73,11 +73,14 @@ const ToolBar = () => {
     function AddDropDown() {
         return (
             <div className={styles.addMenu}>
+                <Link to="/add-region" className={styles.addMenuItem}>
+                    Alue
+                </Link>
                 <Link to="/add-cabin" className={styles.addMenuItem}>
                     Mökki
                 </Link>
-                <Link to="/add-region" className={styles.addMenuItem}>
-                    Alue
+                <Link to="/add-service" className={styles.addMenuItem}>
+                    Palvelu
                 </Link>
                 {/* Lisää muita kohtia täällä */}
             </div>

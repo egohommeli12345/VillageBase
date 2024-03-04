@@ -11,6 +11,7 @@ import ServicePage from "../ServiceComponents/ServicePage";
 import SearchUI from "../SearchComponents/SearchUI";
 import AddCabinPage from "../CottageComponents/AddCabinPage"; // -sale
 import AddRegionPage from "../RegionComponents/AddRegionPage"; // -sale
+import AddServicePage from "../ServiceComponents/AddServicePage"; // -sale
 
 import BillingPage from "../BillingComponents/BillingPage";
 
@@ -45,6 +46,11 @@ function MainCenterBox() {
                                 path="/add-region"
                                 element={<AddRegionPage />}
                             />
+                            <Route
+                                path="/add-service"
+                                element={<AddServicePage />}
+                            />
+
                             <Route path="/varaukset" element={<ReservationPage />} />
                             <Route path="/asiakkaat" element={<CustomerPage />} />
                             <Route path="/laskutus" element={<BillingPage />} />
