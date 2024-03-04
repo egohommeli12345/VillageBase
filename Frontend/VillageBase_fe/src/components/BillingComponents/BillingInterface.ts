@@ -8,5 +8,5 @@ export interface BillingInterface {
     summa: number;
     alv: number;
     viitenumero: string;
-    status: string;
+    maksettu: number;
 }

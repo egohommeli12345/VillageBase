@@ -9,6 +9,7 @@ import { useSearch } from "../SearchComponents/SearchContext";
 import ReservationPage from "../ReservationComponents/ReservationPage";
 import ServicePage from "../ServiceComponents/ServicePage";
 import SearchUI from "../SearchComponents/SearchUI";
+import BillingPage from "../BillingComponents/BillingPage";
 
 function MainCenterBox() {
     const { SearchShowState } = useSearch();
@@ -24,14 +25,9 @@ function MainCenterBox() {
                             <Route path="/alueet" element={<RegionPage />} />
                             <Route path="/mokit" element={<CottagePage />} />
                             <Route path="/palvelut" element={<ServicePage />} />
-                            <Route
-                                path="/varaukset"
-                                element={<ReservationPage />}
-                            />
-                            <Route
-                                path="/asiakkaat"
-                                element={<CustomerPage />}
-                            />
+                            <Route path="/varaukset" element={<ReservationPage />} />
+                            <Route path="/asiakkaat" element={<CustomerPage />} />
+                            <Route path="/laskutus" element={<BillingPage />} />
                         </Routes>
                     </div>
                 </SortTypeProvider>
