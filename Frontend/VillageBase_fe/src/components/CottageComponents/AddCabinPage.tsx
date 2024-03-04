@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./AddCabinPage.module.css";
 
 const AddCabinPage = () => {
     const [cabinName, setCabinName] = useState('');
@@ -15,10 +16,10 @@ const AddCabinPage = () => {
     };
 
     return (
-        <div className="cabinBR">
+        <div className={styles.cabinBR}>
             <div>Lisää uusi mökki</div>
-            <form className="form" onSubmit={handleSubmit}>
-                <div className="contentDiv">
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <div className={styles.contentDiv}>
                     <label htmlFor="cabinName">Mökin nimi:</label>
                     <input
                         id="cabinName"
@@ -27,7 +28,7 @@ const AddCabinPage = () => {
                         onChange={(e) => setCabinName(e.target.value)}
                     />
                 </div>
-                <div className="contentDiv">
+                <div className={styles.contentDiv}>
                     <label htmlFor="location">Sijainti:</label>
                     <input
                         id="location"
@@ -36,7 +37,7 @@ const AddCabinPage = () => {
                         onChange={(e) => setLocation(e.target.value)}
                     />
                 </div>
-                <div className="contentDiv">
+                <div className={styles.contentDiv}>
                     <label htmlFor="description">Kuvaus:</label>
                     <textarea
                         id="description"
@@ -44,7 +45,7 @@ const AddCabinPage = () => {
                         onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
-                <div className="contentDiv">
+                <div className={styles.contentDiv}>
                     <label htmlFor="price">Hinta:</label>
                     <input
                         id="price"
