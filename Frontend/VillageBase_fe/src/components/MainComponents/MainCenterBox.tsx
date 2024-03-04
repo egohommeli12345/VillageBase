@@ -11,6 +11,8 @@ import ServicePage from "../ServiceComponents/ServicePage";
 import SearchUI from "../SearchComponents/SearchUI";
 import AddCabinPage from "../CottageComponents/AddCabinPage"; // -sale
 
+import BillingPage from "../BillingComponents/BillingPage";
+
 
 function MainCenterBox() {
     const { SearchShowState } = useSearch();
@@ -38,6 +40,9 @@ function MainCenterBox() {
                                 path="/add-cabin"
                                 element={<AddCabinPage />} 
                             />
+                            <Route path="/varaukset" element={<ReservationPage />} />
+                            <Route path="/asiakkaat" element={<CustomerPage />} />
+                            <Route path="/laskutus" element={<BillingPage />} />
                         </Routes>
                     </div>
                 </SortTypeProvider>
