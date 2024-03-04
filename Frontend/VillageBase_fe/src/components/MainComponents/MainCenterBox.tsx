@@ -10,6 +10,7 @@ import ReservationPage from "../ReservationComponents/ReservationPage";
 import ServicePage from "../ServiceComponents/ServicePage";
 import SearchUI from "../SearchComponents/SearchUI";
 import AddCabinPage from "../CottageComponents/AddCabinPage"; // -sale
+import AddRegionPage from "../RegionComponents/AddRegionPage"; // -sale
 
 import BillingPage from "../BillingComponents/BillingPage";
 
@@ -39,6 +40,10 @@ function MainCenterBox() {
                             <Route                          // -sale
                                 path="/add-cabin"
                                 element={<AddCabinPage />} 
+                            />
+                            <Route
+                                path="/add-region"
+                                element={<AddRegionPage />}
                             />
                             <Route path="/varaukset" element={<ReservationPage />} />
                             <Route path="/asiakkaat" element={<CustomerPage />} />

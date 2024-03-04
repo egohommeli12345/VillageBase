@@ -76,6 +76,9 @@ const ToolBar = () => {
                 <Link to="/add-cabin" className={styles.addMenuItem}>
                     Mökki
                 </Link>
+                <Link to="/add-region" className={styles.addMenuItem}>
+                    Alue
+                </Link>
                 {/* Lisää muita kohtia täällä */}
             </div>
         );
