@@ -15,10 +15,10 @@ const AddCabinPage = () => {
     };
 
     return (
-        <div>
-            <h1>Lisää uusi mökki</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
+        <div className="cabinBR">
+            <div>Lisää uusi mökki</div>
+            <form className="form" onSubmit={handleSubmit}>
+                <div className="contentDiv">
                     <label htmlFor="cabinName">Mökin nimi:</label>
                     <input
                         id="cabinName"
@@ -27,7 +27,7 @@ const AddCabinPage = () => {
                         onChange={(e) => setCabinName(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="contentDiv">
                     <label htmlFor="location">Sijainti:</label>
                     <input
                         id="location"
@@ -36,7 +36,7 @@ const AddCabinPage = () => {
                         onChange={(e) => setLocation(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="contentDiv">
                     <label htmlFor="description">Kuvaus:</label>
                     <textarea
                         id="description"
@@ -44,7 +44,7 @@ const AddCabinPage = () => {
                         onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className="contentDiv">
                     <label htmlFor="price">Hinta:</label>
                     <input
                         id="price"
