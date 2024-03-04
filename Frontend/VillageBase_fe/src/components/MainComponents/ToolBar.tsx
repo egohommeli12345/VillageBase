@@ -82,6 +82,9 @@ const ToolBar = () => {
                 <Link to="/add-service" className={styles.addMenuItem}>
                     Palvelu
                 </Link>
+                <Link to="/add-reservation" className={styles.addMenuItem}>
+                    Varaus
+                </Link>
                 {/* Lisää muita kohtia täällä */}
             </div>
         );
