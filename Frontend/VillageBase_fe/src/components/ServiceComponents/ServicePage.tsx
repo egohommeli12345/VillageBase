@@ -76,19 +76,6 @@ export default function ServicePage() {
                     </div>
                 ))}
             </div>
-<<<<<<< HEAD
-            <div className={styles.cardBody}>
-              <p><strong>Hinta:</strong> {service.hinta}€</p>
-              <p><strong>Kuvaus:</strong> {service.kuvaus}</p>
-            </div>
-            {/* <button className={styles.cardButton}>Lisätietoja</button> */}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-=======
         </div>
-  );
+    );
 }
