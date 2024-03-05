@@ -10,9 +10,7 @@ const AddCabinPage = () => {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        //  Tässä kohtaa lomakkeen tiedot ovat valmiina lähetettäväksi backendiin
         console.log(cabinName, location, description, price);
-        // Lähetä tiedot backendiin tässä
     };
 
     return (
