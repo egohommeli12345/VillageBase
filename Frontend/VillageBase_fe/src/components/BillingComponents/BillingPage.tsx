@@ -5,7 +5,6 @@ import { BillingInterface } from "./BillingInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 
-
 // Function for BillingPage
 export default function BillingPage() {
     // useContext hook for getting the sortType from the SortTypeContext
@@ -37,43 +36,53 @@ export default function BillingPage() {
     return (
         <div className={styles.billingBG}>
             <div className={styles.billingTitle}>Laskut</div>
-            <div className={styles.billingCardsContainer}>
-                {billings.map((billing) => (
-                    <div
-                        className={`${styles.card} ${
-                            activeContainerId === billing.lasku_id
-                                ? styles.active
-                                : ""
-                        }`}
-                        key={billing.lasku_id}
-                        onClick={() => makeActive(billing.lasku_id)}
-                    >
-                        <div className={styles.cardHeader}>
-                            {billing.lasku_id}
-                        </div>
-                        <div className={styles.cardBody}>
-                            <p>
-                                <strong>Laskun päivämäärä:</strong> {billing.lasku_pvm}
-                            </p>
-                            <p>
-                                <strong>Eräpäivä:</strong> {billing.erapaiva}
-                            </p>
-                            <p>
-                                <strong>Summa:</strong> {billing.summa}€
-                            </p>
-                            <p>
-                                <strong>ALV:</strong> {billing.alv}%
-                            </p>
-                            <p>
-                                <strong>Viitenumero:</strong> {billing.viitenumero}
-                            </p>
-                            <p>
-                                <strong>Status:</strong> {billing.status}
-                            </p>
+            <div className={styles.billingList}>
+                <div className={styles.billingCardsContainer}>
+                    {billings.map((billing) => (
+                        <div
+                            className={`${styles.card} ${
+                                activeContainerId === billing.lasku_id
+                                    ? styles.active
+                                    : ""
+                            }`}
+                            key={billing.lasku_id}
+                            onClick={() => makeActive(billing.lasku_id)}
+                        >
+                            <div className={styles.cardHeader}>
+                                Lasku ID: {billing.lasku_id} | Varaus ID:{" "}
+                                {billing.varaus_id}
+                            </div>
+
+                            <div className={styles.cardBody}>
+                                <p>
+                                    <strong>Laskun päivämäärä:</strong>{" "}
+                                    {billing.lasku_pvm}
+                                </p>
+                                <p>
+                                    <strong>Eräpäivä:</strong>{" "}
+                                    {billing.erapaiva}
+                                </p>
+                                <p>
+                                    <strong>Summa:</strong> {billing.summa}€
+                                </p>
+                                <p>
+                                    <strong>ALV:</strong> {billing.alv}%
+                                </p>
+                                <p>
+                                    <strong>Viitenumero:</strong>{" "}
+                                    {billing.viitenumero}
+                                </p>
+                                <p>
+                                    <strong>Status:</strong>{" "}
+                                    {billing.maksettu === 1
+                                        ? "maksettu"
+                                        : "maksamatta"}
+                                </p>
                             </div>
                             {/* <button className={styles.cardButton}>Lisätietoja</button> */}
                         </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );

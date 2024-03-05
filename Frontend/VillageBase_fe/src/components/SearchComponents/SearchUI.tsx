@@ -8,7 +8,7 @@ export default function SearchUI() {
             <div className={styles.searchUI}>
                 <input
                     className={styles.searchQueryInput}
-                    placeholder="Hae"
+                    placeholder="Hae..."
                     onChange={(e) => {
                         setSearchQuery(e.target.value);
                     }}
