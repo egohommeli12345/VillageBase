@@ -4,7 +4,7 @@ import { RegionFetch } from "./RegionFetch";
 import { RegionInterface } from "./RegionInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
-import { useSearch } from "../SearchComponents/SearchContext";
+import { useSearch } from "../MainComponents/SearchContext";
 
 // Function for RegionPage
 export default function RegionPage() {

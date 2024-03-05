@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ReservationFetch } from "./ReservationFetch";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSortType } from "../SortingComponents/SortTypeContext";
-import { useSearch } from "../SearchComponents/SearchContext";
+import { useSearch } from "../MainComponents/SearchContext";
 
 // Function for ReservationPage
 export default function ReservationPage() {

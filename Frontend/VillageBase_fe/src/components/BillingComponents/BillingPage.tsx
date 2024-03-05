@@ -4,7 +4,7 @@ import { BillingFetch } from "./BillingFetch";
 import { BillingInterface } from "./BillingInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
-import { useSearch } from "../SearchComponents/SearchContext";
+import { useSearch } from "../MainComponents/SearchContext";
 
 // Function for BillingPage
 export default function BillingPage() {

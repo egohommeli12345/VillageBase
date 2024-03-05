@@ -4,7 +4,7 @@ import { ServiceFetch } from "./ServiceFetch";
 import { ServiceInterface } from "./ServiceInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
-import { useSearch } from "../SearchComponents/SearchContext";
+import { useSearch } from "../MainComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
 import AddServicePage from "./AddServicePage";
 

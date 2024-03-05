@@ -2,7 +2,7 @@ import styles from "./CustomerPage.module.css";
 import { CustomerInterface } from "./CustomerInterface";
 import { useEffect, useState } from "react";
 import { CustomerFetch } from "./CustomerFetch";
-import { useSearch } from "../SearchComponents/SearchContext";
+import { useSearch } from "../MainComponents/SearchContext";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 

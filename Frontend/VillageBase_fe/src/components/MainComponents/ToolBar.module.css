@@ -8,7 +8,6 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    height: 5em;
     width: 60%;
     background-color: transparent;
     position: relative; /* -sale */
@@ -132,4 +131,50 @@ sortMenu, addMenu {tyylit on samat} jne*/
 
 .addMenuItem:hover {
     cursor: pointer;
+}
+
+.searchUI {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    top: calc(1em + 40px);
+    z-index: 1;
+    transition: 0.3s ease;
+    overflow: hidden;
+}
+
+.searchUIHidden {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 0px;
+    top: calc(1em + 40px);
+    z-index: 1;
+    transition: 0.3s ease;
+    overflow: hidden;
+}
+
+.inputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 0.5em;
+    font-size: 1em;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.171);
+}
+
+.searchQueryInput {
+    width: 95%;
+    border: none;
+    font-size: 1em;
+}
+
+.searchQueryInput:focus {
+    outline: none;
 }

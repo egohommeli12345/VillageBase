@@ -14,7 +14,7 @@ import java.util.List;
 // a RESTful controller: it is capable of handling the requests of the client
 // @CrossOrigin is used to allow cross-origin requests from the specified client
 // in this case, the client is running on http://localhost:5173 (=frontend)
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173"})
 @RestController
 public class CottageController {
 

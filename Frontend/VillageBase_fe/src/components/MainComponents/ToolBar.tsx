@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react"; // Lisätty useRef -sale
 import styles from "./ToolBar.module.css";
 import { useSortType } from "../SortingComponents/SortTypeContext";
-import { useSearch } from "../SearchComponents/SearchContext";
+import { useSearch } from "./SearchContext";
 import { Link } from "react-router-dom"; // Link to the Add page -sale
 import { useToolState } from "./ToolStateContext";
 
@@ -10,7 +10,7 @@ const ToolBar = () => {
     const { setSortType } = useSortType();
     const [sortClicked, setSortClicked] = useState(false);
     const [addClicked, setAddClicked] = useState(false); // New space for the addClicked state -sale
-    const { setSearchShowState } = useSearch();
+    const { setSearchShowState, SearchShowState, setSearchQuery } = useSearch();
     //const toolBarRef = useRef(null); // Ref for the toolbar-div -sale
     const toolBarRef = useRef<HTMLDivElement>(null); // Tyypitetty ref DOM-elementille -sale
 
@@ -56,9 +56,26 @@ const ToolBar = () => {
                 <div className={styles.tool} onClick={handleSearch}>
                     Hae
                 </div>
+                <div
+                    className={
+                        SearchShowState
+                            ? styles.searchUI
+                            : styles.searchUIHidden
+                    }
+                >
+                    <div className={styles.inputContainer}>
+                        <input
+                            className={styles.searchQueryInput}
+                            placeholder="Hae..."
+                            onChange={(e) => {
+                                setSearchQuery(e.target.value);
+                            }}
+                        ></input>
+                    </div>
+                </div>
 
                 <div className={styles.sort}>
-                    <div className={styles.tool} onClick={ShowSortMenu}>
+                    <div className={styles.tool} onClick={handleSort}>
                         Lajittele
                     </div>
                     <div
@@ -112,12 +129,8 @@ const ToolBar = () => {
         );
     }
 
-    function ShowSortMenu() {
-        if (sortClicked) {
-            setSortClicked(false);
-        } else if (!sortClicked) {
-            setSortClicked(true);
-        }
+    function handleSort() {
+        setSortClicked(!sortClicked);
     }
 
     function handleAdd() {

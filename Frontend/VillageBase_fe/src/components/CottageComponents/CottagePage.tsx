@@ -4,7 +4,7 @@ import { CottageFetch } from "./CottageFetch";
 import { CottageInterface } from "./CottageInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
-import { useSearch } from "../SearchComponents/SearchContext";
+import { useSearch } from "../MainComponents/SearchContext";
 
 // Function for CottagePage
 export default function CottagePage() {

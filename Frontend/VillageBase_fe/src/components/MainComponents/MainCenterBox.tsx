@@ -5,10 +5,8 @@ import ToolBar from "./ToolBar";
 import CottagePage from "../CottageComponents/CottagePage";
 import CustomerPage from "../CustomerComponents/CustomerPage";
 import { SortTypeProvider } from "../SortingComponents/SortTypeContext";
-import { useSearch } from "../SearchComponents/SearchContext";
 import ReservationPage from "../ReservationComponents/ReservationPage";
 import ServicePage from "../ServiceComponents/ServicePage";
-import SearchUI from "../SearchComponents/SearchUI";
 import AddCabinPage from "../CottageComponents/AddCabinPage"; // -sale
 import AddRegionPage from "../RegionComponents/AddRegionPage"; // -sale
 import AddServicePage from "../ServiceComponents/AddServicePage"; // -sale
@@ -18,16 +16,12 @@ import BillingPage from "../BillingComponents/BillingPage";
 import { ToolStateProvider } from "./ToolStateContext";
 
 function MainCenterBox() {
-    const { SearchShowState } = useSearch();
-
     return (
         <div className={styles.mainbar}>
             <div className={styles.page}>
                 <ToolStateProvider>
                     <SortTypeProvider>
                         <ToolBar />
-                        {/* {SearchShowState ? <SearchUI /> : null} */}
-                        <SearchUI />
                         <div className={styles.pageContent}>
                             <Routes>
                                 <Route

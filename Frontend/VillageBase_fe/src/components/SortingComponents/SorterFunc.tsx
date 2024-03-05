@@ -16,6 +16,5 @@ export function SortItems(sortType: string, data: any[], sortBy: any) {
             });
             break;
     }
-    console.log(data);
     return data;
 }
