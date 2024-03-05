@@ -15,7 +15,7 @@ import AddServicePage from "../ServiceComponents/AddServicePage"; // -sale
 import AddReservationPage from "../ReservationComponents/AddReservationPage"; // -sale
 
 import BillingPage from "../BillingComponents/BillingPage";
-
+import { ToolStateProvider } from "./ToolStateContext";
 
 function MainCenterBox() {
     const { SearchShowState } = useSearch();
@@ -23,45 +23,65 @@ function MainCenterBox() {
     return (
         <div className={styles.mainbar}>
             <div className={styles.page}>
-                <SortTypeProvider>
-                    <ToolBar />
-                    {SearchShowState ? <SearchUI /> : null}
-                    <div className={styles.pageContent}>
-                        <Routes>
-                            <Route path="/alueet" element={<RegionPage />} />
-                            <Route path="/mokit" element={<CottagePage />} />
-                            <Route path="/palvelut" element={<ServicePage />} />
-                            <Route
-                                path="/varaukset"
-                                element={<ReservationPage />}
-                            />
-                            <Route
-                                path="/asiakkaat"
-                                element={<CustomerPage />}
-                            />
-                            <Route                          // -sale
-                                path="/add-cabin"
-                                element={<AddCabinPage />} 
-                            />
-                            <Route
-                                path="/add-region"
-                                element={<AddRegionPage />}
-                            />
-                            <Route
-                                path="/add-service"
-                                element={<AddServicePage />}
-                            />
-                            <Route
-                                path="/add-reservation"
-                                element={<AddReservationPage />}
-                            />
+                <ToolStateProvider>
+                    <SortTypeProvider>
+                        <ToolBar />
+                        {SearchShowState ? <SearchUI /> : null}
+                        <div className={styles.pageContent}>
+                            <Routes>
+                                <Route
+                                    path="/alueet"
+                                    element={<RegionPage />}
+                                />
+                                <Route
+                                    path="/mokit"
+                                    element={<CottagePage />}
+                                />
+                                <Route
+                                    path="/palvelut"
+                                    element={<ServicePage />}
+                                />
+                                <Route
+                                    path="/varaukset"
+                                    element={<ReservationPage />}
+                                />
+                                <Route
+                                    path="/asiakkaat"
+                                    element={<CustomerPage />}
+                                />
+                                <Route // -sale
+                                    path="/add-cabin"
+                                    element={<AddCabinPage />}
+                                />
+                                <Route
+                                    path="/add-region"
+                                    element={<AddRegionPage />}
+                                />
+                                <Route
+                                    path="/add-service"
+                                    element={<AddServicePage />}
+                                />
+                                <Route
+                                    path="/add-reservation"
+                                    element={<AddReservationPage />}
+                                />
 
-                            <Route path="/varaukset" element={<ReservationPage />} />
-                            <Route path="/asiakkaat" element={<CustomerPage />} />
-                            <Route path="/laskutus" element={<BillingPage />} />
-                        </Routes>
-                    </div>
-                </SortTypeProvider>
+                                <Route
+                                    path="/varaukset"
+                                    element={<ReservationPage />}
+                                />
+                                <Route
+                                    path="/asiakkaat"
+                                    element={<CustomerPage />}
+                                />
+                                <Route
+                                    path="/laskutus"
+                                    element={<BillingPage />}
+                                />
+                            </Routes>
+                        </div>
+                    </SortTypeProvider>
+                </ToolStateProvider>
             </div>
         </div>
     );

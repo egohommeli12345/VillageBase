@@ -3,10 +3,10 @@ import styles from "./ToolBar.module.css";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { useSearch } from "../SearchComponents/SearchContext";
 import { Link } from "react-router-dom"; // Link to the Add page -sale
-//import AddCabinPage from "../CottageComponents/AddCabinPage";
-
+import { useToolState } from "./ToolStateContext";
 
 const ToolBar = () => {
+    const { deleteBtn, setDeleteBtn, editBtn, setEditBtn } = useToolState();
     const { setSortType } = useSortType();
     const [sortClicked, setSortClicked] = useState(false);
     const [addClicked, setAddClicked] = useState(false); // New space for the addClicked state -sale
@@ -14,14 +14,15 @@ const ToolBar = () => {
     //const toolBarRef = useRef(null); // Ref for the toolbar-div -sale
     const toolBarRef = useRef<HTMLDivElement>(null); // Tyypitetty ref DOM-elementille -sale
 
-
-
     //1. HUOM!! Tarkoitus on luoda tapa, jolla voidaan sulkea dropdown-valikko, kun käyttäjä klikkaa muualle kuin dropdown-valikko tai toolbar-diviin
 
     useEffect(() => {
         // Sulkee dropdown-valikon, jos klikattu elementti ei ole toolbar-divin sisällä
         function handleClickOutside(event: MouseEvent) {
-            if (toolBarRef.current && !toolBarRef.current.contains(event.target as Node)) {
+            if (
+                toolBarRef.current &&
+                !toolBarRef.current.contains(event.target as Node)
+            ) {
                 setAddClicked(false);
                 setSortClicked(false);
             }
@@ -39,17 +40,21 @@ const ToolBar = () => {
     return (
         <div className={styles.toolBarBG} ref={toolBarRef}>
             <div className={styles.toolBar}>
-
-                        
-                <div className={styles.add}>  {/* -sale */}
+                <div className={styles.add}>
+                    {" "}
+                    {/* -sale */}
                     <div className={styles.tool} onClick={toggleAddClicked}>
                         Lisää
                     </div>
-                    {addClicked ? <AddDropDown /> : null} 
+                    {addClicked ? <AddDropDown /> : null}
                 </div>
-                
-                <div className={styles.tool}>Poista</div>
-                <div className={styles.tool}>Muokkaa</div>
+
+                <div className={styles.tool} onClick={handleDelete}>
+                    Poista
+                </div>
+                <div className={styles.tool} onClick={handleEdit}>
+                    Muokkaa
+                </div>
 
                 <div className={styles.tool} onClick={ShowSearch}>
                     Hae
@@ -61,7 +66,6 @@ const ToolBar = () => {
                     </div>
                     {sortClicked ? <SortDropDown /> : null}
                 </div>
-
             </div>
         </div>
     );
@@ -121,6 +125,14 @@ const ToolBar = () => {
                 </div>
             </div>
         );
+    }
+
+    function handleDelete() {
+        setDeleteBtn(!deleteBtn);
+    }
+
+    function handleEdit() {
+        setEditBtn(!editBtn);
     }
 
     function ShowSearch() {

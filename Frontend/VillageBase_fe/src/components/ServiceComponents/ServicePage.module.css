@@ -17,6 +17,10 @@
     align-items: center;
 }
 
+.hidden {
+    display: none;
+}
+
 .addService {
     height: 70vh;
     width: 80vw;
