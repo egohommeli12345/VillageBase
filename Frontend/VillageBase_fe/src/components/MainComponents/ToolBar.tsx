@@ -53,7 +53,7 @@ const ToolBar = () => {
                     Muokkaa
                 </div>
 
-                <div className={styles.tool} onClick={ShowSearch}>
+                <div className={styles.tool} onClick={handleSearch}>
                     Hae
                 </div>
 
@@ -132,7 +132,7 @@ const ToolBar = () => {
         setEditBtn(!editBtn);
     }
 
-    function ShowSearch() {
+    function handleSearch() {
         setSearchShowState((SearchShowState) => !SearchShowState);
     }
 };

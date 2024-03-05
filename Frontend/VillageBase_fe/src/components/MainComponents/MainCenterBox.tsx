@@ -26,7 +26,8 @@ function MainCenterBox() {
                 <ToolStateProvider>
                     <SortTypeProvider>
                         <ToolBar />
-                        {SearchShowState ? <SearchUI /> : null}
+                        {/* {SearchShowState ? <SearchUI /> : null} */}
+                        <SearchUI />
                         <div className={styles.pageContent}>
                             <Routes>
                                 <Route
