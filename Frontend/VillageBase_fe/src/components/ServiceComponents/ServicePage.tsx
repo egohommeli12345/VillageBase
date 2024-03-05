@@ -39,7 +39,6 @@ export default function ServicePage() {
               {service.nimi} {service.palvelu_id}
             </div>
             <div className={styles.cardBody}>
-              <p><strong>Nimi:</strong> {service.nimi}</p>
               <p><strong>Hinta:</strong> {service.hinta}€</p>
               <p><strong>Kuvaus:</strong> {service.kuvaus}</p>
             </div>
