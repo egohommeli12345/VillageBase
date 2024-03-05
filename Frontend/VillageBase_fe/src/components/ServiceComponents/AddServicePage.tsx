@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./AddServicePage.module.css";
 
 const AddServicePage = () => {
     const [serviceName, setServiceName] = useState('');
@@ -15,10 +16,10 @@ const AddServicePage = () => {
 
     return (
         <div>
-            <h1>Lisää uusi palvelu</h1>
+            <div>Lisää uusi palvelu</div>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="serviceName">Palvelun nimi:</label>
+                <div className={styles.inputContainer}>
+                    <label htmlFor="serviceName">Nimi:</label>
                     <input
                         id="serviceName"
                         type="text"
@@ -26,15 +27,8 @@ const AddServicePage = () => {
                         onChange={(e) => setServiceName(e.target.value)}
                     />
                 </div>
-                <div>
-                    <label htmlFor="description">Kuvaus:</label>
-                    <textarea
-                        id="description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </div>
-                <div>
+                <div className={styles.underline}></div>
+                <div className={styles.inputContainer}>
                     <label htmlFor="price">Hinta:</label>
                     <input
                         id="price"
@@ -43,6 +37,25 @@ const AddServicePage = () => {
                         onChange={(e) => setPrice(e.target.value)}
                     />
                 </div>
+                <div className={styles.underline}></div>
+                <div className={styles.inputContainer}>
+                    <label htmlFor="description">Kuvaus:</label>
+                    <input
+                        id="description"
+                        type="text"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                </div>
+                <div className={styles.underline}></div>
+                {/* <div className={styles.inputContainer}>
+                    <label htmlFor="description">Kuvaus:</label>
+                    <textarea
+                        id="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                </div> */}
                 {/* Tarvittaessa lisää kenttiä */}
                 <button type="submit">Lisää palvelu</button>
             </form>
