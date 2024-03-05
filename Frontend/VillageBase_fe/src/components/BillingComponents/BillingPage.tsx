@@ -4,14 +4,17 @@ import { BillingFetch } from "./BillingFetch";
 import { BillingInterface } from "./BillingInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
+import { useSearch } from "../SearchComponents/SearchContext";
 
 // Function for BillingPage
 export default function BillingPage() {
     // useContext hook for getting the sortType from the SortTypeContext
     const { sortType } = useSortType();
+    const { searchQuery } = useSearch();
 
     // useState hook for mapping the billings to BillingInterface objects
     const [billings, setBillings] = useState<BillingInterface[]>([]);
+    const [filteredData, setFilteredData] = useState<BillingInterface[]>([]);
 
     // State to track the active container
     const [activeContainerId, setActiveContainerId] = useState<number | null>(
@@ -33,12 +36,25 @@ export default function BillingPage() {
         });
     }, [sortType]);
 
+    // Search function for filtering the regions
+    useEffect(() => {
+        setFilteredData(
+            billings.filter((item) =>
+                Object.values(item).some((value) =>
+                    String(value)
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase())
+                )
+            )
+        );
+    }, [searchQuery, billings]);
+
     return (
         <div className={styles.billingBG}>
             <div className={styles.billingTitle}>Laskut</div>
             <div className={styles.billingList}>
                 <div className={styles.billingCardsContainer}>
-                    {billings.map((billing) => (
+                    {filteredData.map((billing) => (
                         <div
                             className={`${styles.card} ${
                                 activeContainerId === billing.lasku_id
