@@ -5,11 +5,14 @@ import { ServiceInterface } from "./ServiceInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../SearchComponents/SearchContext";
+import { useToolState } from "../MainComponents/ToolStateContext";
 
 // Function for ServicePage
 export default function ServicePage() {
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
+    const { addBtn, deleteBtn, editBtn, setEditBtn, setAddBtn, setDeleteBtn } =
+        useToolState();
     // useState hook for mapping the services to ServiceInterface objects
     const [services, setServices] = useState<ServiceInterface[]>([]);
     const [filteredData, setFilteredData] = useState<ServiceInterface[]>([]);
@@ -42,11 +45,21 @@ export default function ServicePage() {
         );
     }, [searchQuery, services]);
 
+    const handleCloseBtn = () => {
+        setEditBtn(false);
+        setAddBtn(false);
+        setDeleteBtn(false);
+    };
+
     return (
         <div className={styles.serviceBG}>
-            <div className={styles.addServiceBg}>
+            <div className={editBtn ? styles.addServiceBg : styles.hidden}>
                 <div className={styles.addService}>
-                    <img className={styles.closeAddService} src="/closeX.svg" />
+                    <img
+                        className={styles.closeAddService}
+                        src="/closeX.svg"
+                        onClick={handleCloseBtn}
+                    />
                 </div>
             </div>
             <div className={styles.serviceTitle}>Palvelut</div>
