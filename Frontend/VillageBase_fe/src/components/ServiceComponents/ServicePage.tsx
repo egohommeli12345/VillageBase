@@ -44,6 +44,11 @@ export default function ServicePage() {
 
     return (
         <div className={styles.serviceBG}>
+            <div className={styles.addServiceBg}>
+                <div className={styles.addService}>
+                    <img className={styles.closeAddService} src="/closeX.svg" />
+                </div>
+            </div>
             <div className={styles.serviceTitle}>Palvelut</div>
             <div className={styles.serviceCardsContainer}>
                 {filteredData.map((service) => (
@@ -74,20 +79,6 @@ export default function ServicePage() {
                     </div>
                 ))}
             </div>
-<<<<<<< HEAD
-            <div className={styles.cardBody}>
-              <p><strong>Hinta:</strong> {service.hinta}€</p>
-              <p><strong>Kuvaus:</strong> {service.kuvaus}</p>
-            </div>
-            {/* <button className={styles.cardButton}>Lisätietoja</button> */}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-=======
         </div>
     );
 }
->>>>>>> 4e3d9caa00318d3ebec3bdb954a87d86a12cc196

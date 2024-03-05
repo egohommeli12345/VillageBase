@@ -4,6 +4,37 @@
     overflow: auto; /* Ensures smooth scrolling */
 }
 
+.addServiceBg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addService {
+    height: 70vh;
+    width: 80vw;
+    z-index: 2;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1em;
+}
+
+.closeAddService {
+    align-self: flex-end;
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+    height: 25px;
+    cursor: pointer;
+}
+
 .serviceTitle {
     text-align: center;
     font-size: 1.5em;
