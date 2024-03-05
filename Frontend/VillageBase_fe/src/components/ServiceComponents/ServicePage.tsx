@@ -6,6 +6,7 @@ import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../SearchComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
+import AddServicePage from "./AddServicePage";
 
 // Function for ServicePage
 export default function ServicePage() {
@@ -60,7 +61,9 @@ export default function ServicePage() {
                         src="/closeX.svg"
                         onClick={handleCloseBtn}
                     />
-                    <div className={styles.popUpContent}>Moi</div>
+                    <div className={styles.popUpContent}>
+                        <AddServicePage />
+                    </div>
                 </div>
             </div>
             <div className={styles.serviceTitle}>Palvelut</div>
