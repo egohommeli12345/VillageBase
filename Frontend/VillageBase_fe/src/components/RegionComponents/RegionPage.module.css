@@ -1,8 +1,8 @@
 .regionBG {
+    height: 100%; /* Updated to ensure full viewport height */
+    background-color: transparent;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    align-items: center;
 }
 
 .regionTitle {
@@ -14,56 +14,88 @@
     display: flex;
     flex-direction: column;
     overflow: auto;
-    width: 50%;
 }
 
-.list {
-    list-style: none;
-    padding: 0;
-    margin: 1em;
-}
-
-.listItem {
-    background-color: rgb(240, 240, 240);
-    margin: 1em;
+.regionCardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch; /* This will make sure that all cards stretch to the same height */
+    text-align: start;
     padding: 1em;
-    border-radius: 0.5em;
-    box-shadow: 0 0 10px 0 #000000;
+    gap: 1em; /* Adds space between the cards without having to use margin */
 }
 
-.listItem:hover {
+.card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 #000000;
+    margin: 1em;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 400px; /* Adjust width as necessary */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cardHeader {
+    background: rgb(0, 0, 0);
+    color: #ffffff;
+    padding: 10px 15px;
+    font-size: 1.25rem;
+}
+
+.cardBody {
+    padding: 15px;
+    line-height: 1.5;
+    color: #333; /* Darker text for readability */
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distributes space evenly inside the card */
+    background: rgb(255, 255, 255);
+    box-shadow: 0 0 10px 0 #000000;
+    transition: 0.5s ease-out;
+    overflow: hidden; /* Prevents content from spilling out */
+}
+
+.item:hover {
     background: #ffffff;
     border: 2px solid #ffffff;
     box-shadow: 0 0 10px 0 #000000;
-    transform: scale(1.02);
+    transform: scale(1.05);
+    z-index: 1;
 }
 
-.itemData {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+.active {
+    border: 3px solid #0011ff; /* Highlight with a blue border */
 }
 
-.itemTitle {
-    grid-column: 1;
+/*.cardButton {
+  display: block;
+  width: 80%; 
+  margin: 10px auto 15px;
+  box-shadow: 0 0 5px 0px #000000;
+  background-color: rgb(219, 219, 219);
+  color: #fff;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.regionName {
-    grid-column: 2;
+.cardButton:hover {
+  background-color: rgb(167, 167, 167);
 }
 
-.listBtn {
-    grid-column: 3;
-    grid-row: 1 / span 2;
-    align-self: center;
-    justify-self: right;
-    background-color: rgb(219, 219, 219);
-    padding: 1em;
-    border-radius: 0.5em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.listBtn:hover {
-    background-color: rgb(167, 167, 167);
-    transition: background-color 0.3s ease;
-}
+.item:hover .cardButton {
+  transform: scale(1.02);
+  opacity: 1;
+}//*/

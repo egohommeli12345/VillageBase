@@ -62,7 +62,7 @@
 }
 
 .active {
-  border: 3px solid #0011ff; /* Highlight with a blue border */
+    border: 3px solid #0011ff; /* Highlight with a blue border */
 }
 
 /*.cardButton {
