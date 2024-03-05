@@ -8,11 +8,11 @@ import { useSearch } from "../SearchComponents/SearchContext";
 
 // Function for CottagePage
 export default function CottagePage() {
-    // useContext hook for getting the sortType from the SortTypeContext
+    // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
 
-    // useState hook for searching the regions
+    // useState hook for searching the cottages
     const [filteredData, setFilteredData] = useState<CottageInterface[]>([]);
 
     // useState hook for mapping the cottages to CottageInterface objects
@@ -32,13 +32,14 @@ export default function CottagePage() {
         setActiveContainerId(id);
     };
 
+    // Fetching the cottage data and sorting it by the sortType
     useEffect(() => {
         CottageFetch().then((data) => {
             setCottages(SortItems(sortType, data, "mokki_id"));
         });
     }, [sortType]);
 
-    // Search function for filtering the regions
+    // Search function for filtering the cottages
     useEffect(() => {
         setFilteredData(
             cottages.filter((item) =>
@@ -89,7 +90,6 @@ export default function CottagePage() {
                                     {cottage.varustelu}
                                 </p>
                             </div>
-                            {/* <button className={styles.cardButton}>Lisätietoja</button> */}
                         </div>
                     ))}
                 </div>
