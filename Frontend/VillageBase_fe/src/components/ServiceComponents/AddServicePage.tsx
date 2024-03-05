@@ -27,7 +27,8 @@ const AddServicePage = () => {
                         onChange={(e) => setServiceName(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className={styles.underline}></div>
+                <div className={styles.inputContainer}>
                     <label htmlFor="price">Hinta:</label>
                     <input
                         id="price"
@@ -36,14 +37,25 @@ const AddServicePage = () => {
                         onChange={(e) => setPrice(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className={styles.underline}></div>
+                <div className={styles.inputContainer}>
+                    <label htmlFor="description">Kuvaus:</label>
+                    <input
+                        id="description"
+                        type="text"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                </div>
+                <div className={styles.underline}></div>
+                {/* <div className={styles.inputContainer}>
                     <label htmlFor="description">Kuvaus:</label>
                     <textarea
                         id="description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
-                </div>
+                </div> */}
                 {/* Tarvittaessa lisää kenttiä */}
                 <button type="submit">Lisää palvelu</button>
             </form>
