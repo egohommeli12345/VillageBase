@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./AddServicePage.module.css";
 
 const AddServicePage = () => {
     const [serviceName, setServiceName] = useState('');
@@ -15,9 +16,9 @@ const AddServicePage = () => {
 
     return (
         <div>
-            <h1>Lisää uusi palvelu</h1>
+            <div>Lisää uusi palvelu</div>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className={styles.inputContainer}>
                     <label htmlFor="serviceName">Nimi:</label>
                     <input
                         id="serviceName"
