@@ -63,12 +63,32 @@
     background-color: rgb(255, 255, 255);
     margin-top: 4em;
     border-radius: 1em;
-    padding: 1em;
     box-shadow: #000000 0px 3px 9px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 2;
+    height: 150px;
+    transition: height ease 0.3s;
+    overflow: hidden;
+    justify-content: space-evenly;
+}
+
+.sortMenuHidden {
+    position: absolute;
+    width: 100px;
+    background-color: rgb(255, 255, 255);
+    margin-top: 4em;
+    border-radius: 1em;
+    box-shadow: #000000 0px 3px 9px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    height: 0px;
+    transition: height ease 0.3s;
+    overflow: hidden;
+    justify-content: space-evenly;
 }
 
 .sortMenuItem {
@@ -80,8 +100,6 @@
 .sortMenuItem:hover {
     cursor: pointer;
 }
-
-
 
 /* Lisää */
 
