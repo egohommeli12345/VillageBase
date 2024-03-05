@@ -13,6 +13,8 @@ const ToolBar = () => {
     const { setSearchShowState, SearchShowState, setSearchQuery } = useSearch();
     //const toolBarRef = useRef(null); // Ref for the toolbar-div -sale
     const toolBarRef = useRef<HTMLDivElement>(null); // Tyypitetty ref DOM-elementille -sale
+    // Ref for the input field
+    const inputRef = useRef<HTMLInputElement>(null);
 
     //1. HUOM!! Tarkoitus on luoda tapa, jolla voidaan sulkea dropdown-valikko, kun käyttäjä klikkaa muualle kuin dropdown-valikko tai toolbar-diviin
 
@@ -66,6 +68,7 @@ const ToolBar = () => {
                     <div className={styles.inputContainer}>
                         <input
                             className={styles.searchQueryInput}
+                            ref={inputRef}
                             placeholder="Hae..."
                             onChange={(e) => {
                                 setSearchQuery(e.target.value);
@@ -146,7 +149,14 @@ const ToolBar = () => {
     }
 
     function handleSearch() {
-        setSearchShowState((SearchShowState) => !SearchShowState);
+        setSearchShowState(!SearchShowState);
+        console.log(SearchShowState);
+        if (!SearchShowState) {
+            inputRef.current?.focus();
+            inputRef.current?.select();
+        } else {
+            setSearchQuery("");
+        }
     }
 };
 
