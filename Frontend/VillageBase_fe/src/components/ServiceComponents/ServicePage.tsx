@@ -60,6 +60,7 @@ export default function ServicePage() {
                         src="/closeX.svg"
                         onClick={handleCloseBtn}
                     />
+                    <div className={styles.popUpContent}>Moi</div>
                 </div>
             </div>
             <div className={styles.serviceTitle}>Palvelut</div>
