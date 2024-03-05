@@ -18,26 +18,26 @@ const AddCabinPage = () => {
             <div className={styles.title}>Lisää uusi mökki</div>
             <form className={styles.form} onSubmit={handleSubmit}>
                 {/* <div className={styles.flexDiv}> */}
-                    <label>
-                        <input
-                            id="cabinName"
-                            type="text"
-                            value={cabinName}
-                            onChange={(e) => setCabinName(e.target.value)}
-                        />
-                        <span>Mökin nimi:</span>
-                    </label>
-                    <label>
-                        <input
-                            id="location"
-                            type="text"
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
-                        />
-                        <span>Sijainti:</span>
-                    </label>
+                <label>
+                    <input
+                        id="cabinName"
+                        type="text"
+                        value={cabinName}
+                        onChange={(e) => setCabinName(e.target.value)}
+                    />
+                    <span>Mökin nimi:</span>
+                </label>
+                <label>
+                    <input
+                        id="location"
+                        type="text"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                    />
+                    <span>Sijainti:</span>
+                </label>
                 {/* </div> */}
-                <label> 
+                <label>
                     <textarea
                         id="description"
                         className={styles.descrip}

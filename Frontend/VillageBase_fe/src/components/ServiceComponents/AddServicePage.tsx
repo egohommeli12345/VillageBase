@@ -18,20 +18,12 @@ const AddServicePage = () => {
             <h1>Lisää uusi palvelu</h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="serviceName">Palvelun nimi:</label>
+                    <label htmlFor="serviceName">Nimi:</label>
                     <input
                         id="serviceName"
                         type="text"
                         value={serviceName}
                         onChange={(e) => setServiceName(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="description">Kuvaus:</label>
-                    <textarea
-                        id="description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
                 <div>
@@ -41,6 +33,14 @@ const AddServicePage = () => {
                         type="text"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="description">Kuvaus:</label>
+                    <textarea
+                        id="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
                 {/* Tarvittaessa lisää kenttiä */}
