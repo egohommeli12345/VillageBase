@@ -41,12 +41,9 @@ const ToolBar = () => {
         <div className={styles.toolBarBG} ref={toolBarRef}>
             <div className={styles.toolBar}>
                 <div className={styles.add}>
-                    {" "}
-                    {/* -sale */}
-                    <div className={styles.tool} onClick={toggleAddClicked}>
+                    <div className={styles.tool} onClick={handleAdd}>
                         Lisää
                     </div>
-                    {addClicked ? <AddDropDown /> : null}
                 </div>
 
                 <div className={styles.tool} onClick={handleDelete}>
@@ -56,7 +53,7 @@ const ToolBar = () => {
                     Muokkaa
                 </div>
 
-                <div className={styles.tool} onClick={ShowSearch}>
+                <div className={styles.tool} onClick={handleSearch}>
                     Hae
                 </div>
 
@@ -64,15 +61,36 @@ const ToolBar = () => {
                     <div className={styles.tool} onClick={ShowSortMenu}>
                         Lajittele
                     </div>
-                    {sortClicked ? <SortDropDown /> : null}
+                    <div
+                        className={
+                            sortClicked
+                                ? styles.sortMenu
+                                : styles.sortMenuHidden
+                        }
+                    >
+                        <div
+                            className={styles.sortMenuItem}
+                            onClick={() => setSortType("default")}
+                        >
+                            Alkup.
+                        </div>
+                        <div
+                            className={styles.sortMenuItem}
+                            onClick={() => setSortType("ascending")}
+                        >
+                            Kasvava
+                        </div>
+                        <div
+                            className={styles.sortMenuItem}
+                            onClick={() => setSortType("descending")}
+                        >
+                            Laskeva
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     );
-
-    function toggleAddClicked() {
-        setAddClicked(!addClicked);
-    }
 
     function AddDropDown() {
         return (
@@ -102,29 +120,8 @@ const ToolBar = () => {
         }
     }
 
-    function SortDropDown() {
-        return (
-            <div className={styles.sortMenu}>
-                <div
-                    className={styles.sortMenuItem}
-                    onClick={() => setSortType("default")}
-                >
-                    Alkup.
-                </div>
-                <div
-                    className={styles.sortMenuItem}
-                    onClick={() => setSortType("ascending")}
-                >
-                    Kasvava
-                </div>
-                <div
-                    className={styles.sortMenuItem}
-                    onClick={() => setSortType("descending")}
-                >
-                    Laskeva
-                </div>
-            </div>
-        );
+    function handleAdd() {
+        setAddClicked(!addClicked);
     }
 
     function handleDelete() {
@@ -135,7 +132,7 @@ const ToolBar = () => {
         setEditBtn(!editBtn);
     }
 
-    function ShowSearch() {
+    function handleSearch() {
         setSearchShowState((SearchShowState) => !SearchShowState);
     }
 };

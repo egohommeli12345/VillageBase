@@ -7,6 +7,8 @@ type ToolStateContextType = {
     setEditBtn: React.Dispatch<React.SetStateAction<boolean>>;
     deleteBtn: boolean;
     setDeleteBtn: React.Dispatch<React.SetStateAction<boolean>>;
+    whichSite: string;
+    setWhichSite: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const ToolStateContext = createContext<ToolStateContextType>({
@@ -16,6 +18,8 @@ export const ToolStateContext = createContext<ToolStateContextType>({
     setEditBtn: () => {},
     deleteBtn: false,
     setDeleteBtn: () => {},
+    whichSite: "",
+    setWhichSite: () => {},
 });
 
 export const useToolState = () => useContext(ToolStateContext);
@@ -36,6 +40,8 @@ export const ToolStateProvider: React.FC<{ children: React.ReactNode }> = ({
                 setEditBtn,
                 deleteBtn,
                 setDeleteBtn,
+                whichSite: "",
+                setWhichSite: () => {},
             }}
         >
             {children}
