@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
+import styles from "./AddCabinPage.module.css";
 
 const AddCabinPage = () => {
     const [cabinName, setCabinName] = useState('');
@@ -15,44 +16,47 @@ const AddCabinPage = () => {
     };
 
     return (
-        <div>
-            <h1>Lisää uusi mökki</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="cabinName">Mökin nimi:</label>
-                    <input
-                        id="cabinName"
-                        type="text"
-                        value={cabinName}
-                        onChange={(e) => setCabinName(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="location">Sijainti:</label>
-                    <input
-                        id="location"
-                        type="text"
-                        value={location}
-                        onChange={(e) => setLocation(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="description">Kuvaus:</label>
+        <div className={styles.cabinBR}>
+            <div className={styles.title}>Lisää uusi mökki</div>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                {/* <div className={styles.flexDiv}> */}
+                    <label>
+                        <input
+                            id="cabinName"
+                            type="text"
+                            value={cabinName}
+                            onChange={(e) => setCabinName(e.target.value)}
+                        />
+                        <span>Mökin nimi:</span>
+                    </label>
+                    <label>
+                        <input
+                            id="location"
+                            type="text"
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                        />
+                        <span>Sijainti:</span>
+                    </label>
+                {/* </div> */}
+                <label> 
                     <textarea
                         id="description"
+                        className={styles.descrip}
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
-                </div>
-                <div>
-                    <label htmlFor="price">Hinta:</label>
+                    <span>Kuvaus:</span>
+                </label>
+                <label>
                     <input
                         id="price"
                         type="text"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                     />
-                </div>
+                    <span>Hinta:</span>
+                </label>
                 {/* Tarvittaessa lisää kenttiä */}
                 <button type="submit">Lisää mökki</button>
             </form>
