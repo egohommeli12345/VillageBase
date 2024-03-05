@@ -4,11 +4,16 @@ import { CottageFetch } from "./CottageFetch";
 import { CottageInterface } from "./CottageInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
+import { useSearch } from "../SearchComponents/SearchContext";
 
 // Function for CottagePage
 export default function CottagePage() {
     // useContext hook for getting the sortType from the SortTypeContext
     const { sortType } = useSortType();
+    const { searchQuery } = useSearch();
+
+    // useState hook for searching the regions
+    const [filteredData, setFilteredData] = useState<CottageInterface[]>([]);
 
     // useState hook for mapping the cottages to CottageInterface objects
     const [cottages, setCottages] = useState<CottageInterface[]>([]);
@@ -33,12 +38,25 @@ export default function CottagePage() {
         });
     }, [sortType]);
 
+    // Search function for filtering the regions
+    useEffect(() => {
+        setFilteredData(
+            cottages.filter((item) =>
+                Object.values(item).some((value) =>
+                    String(value)
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase())
+                )
+            )
+        );
+    }, [searchQuery, cottages]);
+
     return (
         <div className={styles.cottageBG}>
             <div className={styles.cottageTitle}>Mökit</div>
             <div className={styles.cottageList}>
                 <div className={styles.cottageCardsContainer}>
-                    {cottages.map((cottage) => (
+                    {filteredData.map((cottage) => (
                         <div
                             className={`${styles.card} ${
                                 activeContainerId === cottage.mokki_id

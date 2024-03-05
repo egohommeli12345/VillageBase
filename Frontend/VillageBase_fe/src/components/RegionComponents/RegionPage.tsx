@@ -30,7 +30,11 @@ export default function RegionPage() {
     useEffect(() => {
         setFilteredData(
             regions.filter((item) =>
-                item.nimi.toLowerCase().includes(searchQuery.toLowerCase())
+                Object.values(item).some((value) =>
+                    String(value)
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase())
+                )
             )
         );
     }, [searchQuery, regions]);
