@@ -24,8 +24,8 @@
     pointer-events: none;
 }
 
-.inputContainer input[type="text"]:focus~label,
-.inputContainer input[type="text"]:valid~label {
+.inputContainer input[type="text"]:focus ~ label,
+.inputContainer input[type="text"]:valid ~ label {
     top: -20px;
     font-size: 16px;
     color: #333;
@@ -42,7 +42,11 @@
     transition: all 0.3s ease;
 }
 
-.inputContainer input[type="text"]:focus~.underline,
-.inputContainer input[type="text"]:valid~.underline {
+.inputContainer input[type="text"]:focus ~ .underline,
+.inputContainer input[type="text"]:valid ~ .underline {
     transform: scaleX(1);
+}
+
+.addBtn {
+    width: 100%;
 }
