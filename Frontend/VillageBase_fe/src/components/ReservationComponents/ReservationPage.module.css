@@ -1,88 +1,77 @@
 .reservationBG {
+    height: 100%; /* Updated to ensure full viewport height */
+    background-color: transparent;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    align-items: center;
-  }
-  
-  .reservationTitle {
+}
+
+.reservationTitle {
     text-align: center;
     font-size: 1.5em;
-  }
-  
-  .reservationList {
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    width: 50%;
-  }
-  
-  .list {
-    list-style: none;
-    padding: 0;
-    margin: 1em;
-  }
-  
-  .listItem {
-    background-color: rgb(240, 240, 240);
-    margin: 1em;
-    padding: 1em;
-    border-radius: 0.5em;
-    box-shadow: 0 0 10px 0 #000000;
-  }
-  
-  .listItem:hover {
-    background: #ffffff;
-    border: 2px solid #ffffff;
-    box-shadow: 0 0 10px 0 #000000;
-    transform: scale(1.02);
-  }
-  
-  .itemData {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-  
-  .itemTitle {
-    grid-column: 1;
-  }
-  
-  .reservationName {
-    grid-column: 2;
-  }
-  
-  .listBtn {
-    grid-column: 3;
-    grid-row: 1 / span 2;
-    align-self: center;
-    justify-self: right;
-    background-color: rgb(219, 219, 219);
-    padding: 1em;
-    border-radius: 0.5em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .listBtn:hover {
-    background-color: rgb(167, 167, 167);
-    transition: background-color 0.3s ease;
-  }
+}
 
-  /* Lisätiedot Btn */
-  .moreBtn {
-    grid-column: 1;
-    grid-row: 5 / span 3;
-    align-self: center;
-    justify-self: left;
-    background-color: rgb(219, 219, 219);
-    margin-top: 0.4em;
-    padding: 0.2em;
-    border-radius: 0.2em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .moreBtn:hover {
-    background-color: rgb(167, 167, 167);
-    transition: background-color 0.3s ease;
-  }
-  
+.reservationList {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.reservationCardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch; /* This will make sure that all cards stretch to the same height */
+  text-align: start;
+  padding: 1em;
+  gap: 1em; /* Adds space between the cards without having to use margin */
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 #000000;
+  margin: 1em;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 400px; /* Adjust width as necessary */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cardHeader {
+  background: rgb(0, 0, 0);
+  color: #ffffff;
+  padding: 10px 15px;
+  font-size: 1.25rem;
+}
+
+.cardBody {
+  padding: 15px;
+  line-height: 1.5;
+  color: #333; /* Darker text for readability */
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distributes space evenly inside the card */
+  background: rgb(255, 255, 255);
+  box-shadow: 0 0 10px 0 #000000;
+  transition: 0.5s ease-out;
+  overflow: hidden; /* Prevents content from spilling out */
+}
+
+.item:hover {
+  background: #ffffff;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 10px 0 #000000;
+  transform: scale(1.05);
+  z-index: 1;
+}
+
+.active {
+  border: 3px solid #0011ff; /* Highlight with a blue border */
+}

@@ -1,8 +1,3 @@
-* {
-    margin: 0;
-    box-sizing: border-box;
-}
-
 .billingBG {
     height: 100vh; /* Updated to ensure full viewport height */
     background-color: transparent;
@@ -11,9 +6,13 @@
 
 .billingTitle {
     text-align: center;
-    font-size: 2em; /* Increased size for better visibility */
-    margin: 20px 0; /* Add some space above and below the title */
-    color: #333; /* Darker text for better readability */
+    font-size: 1.5em;
+}
+
+.billingList {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
 }
 
 .billingCardsContainer {

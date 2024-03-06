@@ -8,47 +8,42 @@ import { useSearch } from "../MainComponents/SearchContext";
 
 // Function for ReservationPage
 export default function ReservationPage() {
-    // useState hook for mapping the reservations to ReservationInterface objects
-    const [reservations, setReservations] = useState<ReservationInterface[]>(
-        []
-    );
+    // Custom hooks for sortType and searchQuery
+    const { sortType } = useSortType();
+    const { searchQuery } = useSearch();
+
+    // useState hook for searching the reservations
     const [filteredData, setFilteredData] = useState<ReservationInterface[]>(
         []
     );
 
-    const { sortType } = useSortType();
-    const { searchQuery } = useSearch();
+    // useState hook for mapping the reservations to ReservationInterface objects
+    const [reservations, setReservations] = useState<ReservationInterface[]>(
+        []
+    );
 
+    // State to track the active container
+    const [activeContainerId, setActiveContainerId] = useState<number | null>(
+        null
+    );
+
+    // Function to toggle the active container
+    const makeActive = (id: number) => {
+        if (id === activeContainerId) {
+            setActiveContainerId(null);
+            return;
+        }
+        setActiveContainerId(id);
+    };
+
+    // Fetching the reservation data and sorting it by the sortType
     useEffect(() => {
-        ReservationFetch().then((fetchedData) => {
-            // Tarkistetaan, että saatu data on oikeassa muodossa ja oletetaan, että se on ReservationInterface[] tyyppiä.
-            if (Array.isArray(fetchedData)) {
-                // Tässä luodaan initialData muuttuja
-                const initialData = fetchedData.map((item) => ({
-                    ...item, // Oletetaan, että item on jo ReservationInterface-tyyppinen objekti.
-                    showDetails: false, // Lisätään showDetails-ominaisuus
-                }));
-                // Nyt initialData on määritelty ja sitä voidaan käyttää SortItems-funktion kanssa
-                setReservations(SortItems(sortType, initialData, "varaus_id"));
-            } else {
-                // Jos saatu data ei ole oikeassa muodossa, voit käsitellä virheen tai asettaa tyhjän taulukon
-                console.error("Data fetched is not an array:", fetchedData);
-                setReservations([]);
-            }
+        ReservationFetch().then((data) => {
+            setReservations(SortItems(sortType, data, "varaus_id"));
         });
     }, [sortType]);
 
-    // This function handles showing or hiding additional information
-    const toggleDetails = (varaus_id: number) => {
-        setReservations(
-            reservations.map((reservation) =>
-                reservation.varaus_id === varaus_id
-                    ? { ...reservation, showDetails: !reservation.showDetails }
-                    : reservation
-            )
-        );
-    };
-
+    // Search function for filtering the reservations
     useEffect(() => {
         setFilteredData(
             reservations.filter((item) =>
@@ -65,79 +60,46 @@ export default function ReservationPage() {
         <div className={styles.reservationBG}>
             <div className={styles.reservationTitle}>Varaukset</div>
             <div className={styles.reservationList}>
-                <ul className={styles.list}>
+                <div className={styles.reservationCardsContainer}>
                     {filteredData.map((reservation) => (
-                        <li
-                            className={styles.listItem}
+                        <div
+                            className={`${styles.card} ${
+                                activeContainerId === reservation.varaus_id
+                                    ? styles.active
+                                    : ""
+                            }`}
                             key={reservation.varaus_id}
+                            onClick={() => makeActive(reservation.varaus_id)}
                         >
-                            <div className={styles.itemData}>
-                                {/* Varaus ID */}
-                                <div className={styles.itemTitle}>
-                                    <p>
-                                        <strong>Varaus ID:</strong>
-                                    </p>
-                                </div>
-                                <div className={styles.reservationId}>
-                                    {reservation.varaus_id}
-                                </div>
-
-                                {/* Asiakas ID */}
-                                <div className={styles.itemTitle}>
-                                    <p>
-                                        <strong>Asiakas:</strong>
-                                    </p>
-                                </div>
-                                <div className={styles.reservationName}>
+                            <div className={styles.cardHeader}>
+                                Varaus {reservation.varaus_id}
+                            </div>
+                            <div className={styles.cardBody}>
+                                <p>
+                                    <strong>Asiakas ID:</strong>{" "}
                                     {reservation.asiakas_id}
-                                </div>
-
-                                {/* Mökki ID */}
-                                <div className={styles.itemTitle}>
-                                    <p>
-                                        <strong>Mökki:</strong>
-                                    </p>
-                                </div>
-                                <div className={styles.reservationCottage}>
-                                    {reservation.mokki_mokki_id}
-                                </div>
-
-                                {/* Ajankohta */}
-                                <div className={styles.itemTitle}>
-                                    <p>
-                                        <strong>Ajankohta:</strong>
-                                    </p>
-                                </div>
-                                <div className={styles.reservationTime}>
+                                </p>
+                                <p>
+                                    <strong>Mökki ID:</strong>{" "}
+                                    {reservation.mokki_mokki_id} 
+                                </p>
+                                <p>
+                                    <strong>Varauspäivä:</strong>{" "}
+                                    {reservation.varattu_pvm}
+                                </p>
+                                <p>
+                                    <strong>Vahvistuspäivä:</strong>{" "}
+                                    {reservation.vahvistus_pvm}
+                                </p>
+                                <p>
+                                    <strong>Ajankohta:</strong>{" "}
                                     {reservation.varattu_alkupvm} -{" "}
                                     {reservation.varattu_loppupvm}
-                                </div>
-
-                                {/* Lisätiedot-painike, joka avaa lisätieto-osion */}
-                                <div
-                                    className={styles.moreBtn}
-                                    onClick={() =>
-                                        toggleDetails(reservation.varaus_id)
-                                    }
-                                >
-                                    Lisätiedot
-                                </div>
-
-                                {/* Lisätietojen osio, joka avautuu, kun moreBtn-painiketta klikataan */}
-                                {reservation.showDetails && (
-                                    <div className={styles.itemTitle}>
-                                        <p>
-                                            <strong>Lisätiedot:</strong>
-                                        </p>
-                                    </div>
-                                )}
-
-                                {/* Valitse-painike */}
-                                <div className={styles.listBtn}>Valitse</div>
+                                </p>
                             </div>
-                        </li>
+                        </div>
                     ))}
-                </ul>
+                </div>
             </div>
         </div>
     );
