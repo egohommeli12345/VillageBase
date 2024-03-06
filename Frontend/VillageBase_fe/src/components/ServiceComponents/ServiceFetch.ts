@@ -4,3 +4,9 @@ export async function ServiceFetch() {
     const service = await response.json();
     return service; // Returns the services as a JSON object
 }
+
+export async function ServiceMAXID() {
+    const response = await fetch("http://localhost:8080/api/services/maxid");
+    const serviceMaxId = await response.json();
+    return serviceMaxId;
+}
