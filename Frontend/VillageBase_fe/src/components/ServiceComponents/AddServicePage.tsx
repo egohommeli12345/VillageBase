@@ -3,12 +3,16 @@ import styles from "./AddServicePage.module.css";
 import { ServiceInterface } from "./ServiceInterface";
 import { ServiceMAXID } from "./ServiceFetch";
 import { useToolState } from "../MainComponents/ToolStateContext";
+import { ServiceAdd } from "./ServiceFetch";
 
 const AddServicePage = () => {
-    const [maxId, setMaxId] = useState<number>(0);
+    const [maxId, setMaxId] = useState("");
     const [serviceName, setServiceName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
+    const [areaId, setAreaId] = useState("");
+    const [type, setType] = useState("");
+    const [vat, setVat] = useState("");
     // Lisätään tarvittaessa lisää
 
     const { addBtn } = useToolState();
@@ -16,18 +20,21 @@ const AddServicePage = () => {
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         //  Tässä kohtaa lomakkeen tiedot ovat valmiina lähetettäväksi backendiin
-        console.log(serviceName, description, price);
         // Lähetä tiedot backendiin tässä
 
         const newService: ServiceInterface = {
-            palvelu_id: maxId,
-            alue_id: 0,
+            palvelu_id: Number(maxId ? maxId : 0),
+            alue_id: Number(areaId ? areaId : 0),
             nimi: serviceName,
-            tyyppi: 0,
+            tyyppi: Number(type ? type : 0),
             kuvaus: description,
-            hinta: Number(price),
-            alv: 0,
+            hinta: Number(price ? price : 0),
+            alv: Number(vat ? vat : 0),
         };
+
+        ServiceAdd(newService).then((data) => {
+            console.log(data);
+        });
     };
 
     useEffect(() => {
@@ -41,7 +48,6 @@ const AddServicePage = () => {
             <div>Lisää uusi palvelu</div>
             <form onSubmit={handleSubmit}>
                 <div className={styles.inputContainer}>
-                    <label htmlFor="serviceName"></label>
                     <input
                         id="serviceMaxId"
                         className={styles.serviceMaxId}
@@ -51,17 +57,15 @@ const AddServicePage = () => {
                     />
                 </div>
                 <div className={styles.inputContainer}>
-                    <label htmlFor="serviceName"></label>
                     <input
-                        id="serviceName"
+                        id="serviceAreaId"
                         type="text"
                         placeholder="Alueen ID:"
-                        value={serviceName}
-                        onChange={(e) => setServiceName(e.target.value)}
+                        value={areaId}
+                        onChange={(e) => setAreaId(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
-                    <label htmlFor="serviceName"></label>
                     <input
                         id="serviceName"
                         type="text"
@@ -70,9 +74,7 @@ const AddServicePage = () => {
                         onChange={(e) => setServiceName(e.target.value)}
                     />
                 </div>
-                <div className={styles.underline}></div>
                 <div className={styles.inputContainer}>
-                    <label htmlFor="price"></label>
                     <input
                         id="price"
                         type="text"
@@ -81,9 +83,7 @@ const AddServicePage = () => {
                         onChange={(e) => setPrice(e.target.value)}
                     />
                 </div>
-                <div className={styles.underline}></div>
                 <div className={styles.inputContainer}>
-                    <label htmlFor="description"></label>
                     <input
                         id="description"
                         type="text"
@@ -92,16 +92,24 @@ const AddServicePage = () => {
                         onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
-                <div className={styles.underline}></div>
-                {/* <div className={styles.inputContainer}>
-                    <label htmlFor="description">Kuvaus:</label>
-                    <textarea
+                <div className={styles.inputContainer}>
+                    <input
                         id="description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                        type="text"
+                        placeholder="Palvelun tyyppi:"
+                        value={type}
+                        onChange={(e) => setType(e.target.value)}
                     />
-                </div> */}
-                {/* Tarvittaessa lisää kenttiä */}
+                </div>
+                <div className={styles.inputContainer}>
+                    <input
+                        id="description"
+                        type="text"
+                        placeholder="Alv (%):"
+                        value={vat}
+                        onChange={(e) => setVat(e.target.value)}
+                    />
+                </div>
                 <button className={styles.addBtn} type="submit">
                     Lisää palvelu
                 </button>
