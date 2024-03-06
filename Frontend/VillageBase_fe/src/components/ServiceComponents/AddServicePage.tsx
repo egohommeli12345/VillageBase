@@ -48,8 +48,7 @@ const AddServicePage = () => {
                         className={styles.serviceMaxId}
                         type="text"
                         disabled={true}
-                        value={maxId}
-                        onChange={(e) => setServiceName(e.target.value)}
+                        value={maxId + 1}
                     />
                 </div>
                 <div className={styles.inputContainer}>
