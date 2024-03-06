@@ -25,4 +25,7 @@ public class ServiceController {
     // @GetMapping is used to map the URL to the function
     @GetMapping("/api/services/all")
     public List<ServiceObject> getAllServices() { return serviceService.getAllServices(); }
+
+    @GetMapping("/api/services/maxid")
+    public int getMaxId() { return serviceService.getMaxId(); }
 }
