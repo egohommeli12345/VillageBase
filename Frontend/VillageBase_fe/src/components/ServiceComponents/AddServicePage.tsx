@@ -19,8 +19,6 @@ const AddServicePage = () => {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        //  Tässä kohtaa lomakkeen tiedot ovat valmiina lähetettäväksi backendiin
-        // Lähetä tiedot backendiin tässä
 
         const newService: ServiceInterface = {
             palvelu_id: Number(maxId ? maxId : 0),
@@ -56,7 +54,6 @@ const AddServicePage = () => {
             <form onSubmit={handleSubmit}>
                 <div className={styles.inputContainer}>
                     <input
-                        id="serviceMaxId"
                         className={styles.serviceMaxId}
                         type="text"
                         disabled={true}
@@ -65,7 +62,6 @@ const AddServicePage = () => {
                 </div>
                 <div className={styles.inputContainer}>
                     <input
-                        id="serviceAreaId"
                         type="text"
                         placeholder="Alueen ID:"
                         value={areaId}
@@ -74,7 +70,6 @@ const AddServicePage = () => {
                 </div>
                 <div className={styles.inputContainer}>
                     <input
-                        id="serviceName"
                         type="text"
                         placeholder="Palvelun nimi:"
                         value={serviceName}
@@ -83,7 +78,6 @@ const AddServicePage = () => {
                 </div>
                 <div className={styles.inputContainer}>
                     <input
-                        id="price"
                         type="text"
                         placeholder="Hinta:"
                         value={price}
@@ -92,7 +86,6 @@ const AddServicePage = () => {
                 </div>
                 <div className={styles.inputContainer}>
                     <input
-                        id="description"
                         type="text"
                         placeholder="Kuvaus:"
                         value={description}
@@ -101,7 +94,6 @@ const AddServicePage = () => {
                 </div>
                 <div className={styles.inputContainer}>
                     <input
-                        id="description"
                         type="text"
                         placeholder="Palvelun tyyppi:"
                         value={type}
@@ -110,7 +102,6 @@ const AddServicePage = () => {
                 </div>
                 <div className={styles.inputContainer}>
                     <input
-                        id="description"
                         type="text"
                         placeholder="Alv (%):"
                         value={vat}
