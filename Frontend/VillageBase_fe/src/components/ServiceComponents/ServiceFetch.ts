@@ -21,5 +21,7 @@ export async function ServiceAdd(newService: ServiceInterface) {
         },
         body: JSON.stringify(newService),
     });
-    return response;
+    if (response.ok) {
+        alert("Palvelu lisätty onnistuneesti");
+    }
 }

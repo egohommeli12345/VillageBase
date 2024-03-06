@@ -15,7 +15,7 @@ const AddServicePage = () => {
     const [vat, setVat] = useState("");
     // Lisätään tarvittaessa lisää
 
-    const { addBtn } = useToolState();
+    const { addBtn, setAddBtn } = useToolState();
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -34,6 +34,13 @@ const AddServicePage = () => {
 
         ServiceAdd(newService).then((data) => {
             console.log(data);
+            setAddBtn(!addBtn);
+            setServiceName("");
+            setDescription("");
+            setPrice("");
+            setAreaId("");
+            setType("");
+            setVat("");
         });
     };
 
