@@ -32,8 +32,7 @@ const AddServicePage = () => {
 
     useEffect(() => {
         ServiceMAXID().then((data) => {
-            setMaxId(data);
-            console.log(maxId);
+            setMaxId(data + 1);
         });
     }, [addBtn]);
 
@@ -48,7 +47,7 @@ const AddServicePage = () => {
                         className={styles.serviceMaxId}
                         type="text"
                         disabled={true}
-                        value={maxId + 1}
+                        value={maxId}
                     />
                 </div>
                 <div className={styles.inputContainer}>
