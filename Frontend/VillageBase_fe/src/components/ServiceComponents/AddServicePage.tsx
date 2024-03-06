@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AddServicePage.module.css";
 import { ServiceInterface } from "./ServiceInterface";
+import { ServiceMAXID } from "./ServiceFetch";
+import { useToolState } from "../MainComponents/ToolStateContext";
 
 const AddServicePage = () => {
+    const [maxId, setMaxId] = useState<number>(0);
     const [serviceName, setServiceName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     // Lisätään tarvittaessa lisää
+
+    const { addBtn } = useToolState();
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -15,7 +20,7 @@ const AddServicePage = () => {
         // Lähetä tiedot backendiin tässä
 
         const newService: ServiceInterface = {
-            palvelu_id: 0,
+            palvelu_id: maxId,
             alue_id: 0,
             nimi: serviceName,
             tyyppi: 0,
@@ -25,6 +30,13 @@ const AddServicePage = () => {
         };
     };
 
+    useEffect(() => {
+        ServiceMAXID().then((data) => {
+            setMaxId(data);
+            console.log(maxId);
+        });
+    }, [addBtn]);
+
     return (
         <div>
             <div>Lisää uusi palvelu</div>
@@ -32,10 +44,11 @@ const AddServicePage = () => {
                 <div className={styles.inputContainer}>
                     <label htmlFor="serviceName"></label>
                     <input
-                        id="serviceName"
+                        id="serviceMaxId"
+                        className={styles.serviceMaxId}
                         type="text"
-                        placeholder="MAX(id_value)"
-                        value={serviceName}
+                        disabled={true}
+                        value={maxId}
                         onChange={(e) => setServiceName(e.target.value)}
                     />
                 </div>
