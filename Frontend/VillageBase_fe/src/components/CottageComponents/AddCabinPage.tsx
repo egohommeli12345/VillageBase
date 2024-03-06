@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import styles from "./AddCabinPage.module.css";
 
 const AddCabinPage = () => {
-    const [cabinName, setCabinName] = useState('');
-    const [location, setLocation] = useState('');
-    const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
+    const [cabinName, setCabinName] = useState("");
+    const [location, setLocation] = useState("");
+    const [description, setDescription] = useState("");
+    const [price, setPrice] = useState("");
     // Lisätään tarvittaessa lisää
 
     const handleSubmit = (event: React.FormEvent) => {
