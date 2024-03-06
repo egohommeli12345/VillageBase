@@ -25,6 +25,10 @@ export default function ServicePage() {
 
     // Function to toggle the active container
     const makeActive = (id: number) => {
+        if (id === activeContainerId) {
+            setActiveContainerId(null);
+            return;
+        }
         setActiveContainerId(id);
     };
 
@@ -54,7 +58,7 @@ export default function ServicePage() {
 
     return (
         <div className={styles.serviceBG}>
-            <div className={editBtn ? styles.addServiceBg : styles.hidden}>
+            <div className={addBtn ? styles.addServiceBg : styles.hidden}>
                 <div className={styles.addService}>
                     <img
                         className={styles.closeAddService}

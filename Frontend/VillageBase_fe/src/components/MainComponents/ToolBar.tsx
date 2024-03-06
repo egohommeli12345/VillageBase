@@ -6,10 +6,10 @@ import { Link } from "react-router-dom"; // Link to the Add page -sale
 import { useToolState } from "./ToolStateContext";
 
 const ToolBar = () => {
-    const { deleteBtn, setDeleteBtn, editBtn, setEditBtn } = useToolState();
+    const { deleteBtn, setDeleteBtn, editBtn, setEditBtn, addBtn, setAddBtn } =
+        useToolState();
     const { setSortType } = useSortType();
     const [sortClicked, setSortClicked] = useState(false);
-    const [addClicked, setAddClicked] = useState(false); // New space for the addClicked state -sale
     const { setSearchShowState, SearchShowState, setSearchQuery } = useSearch();
     //const toolBarRef = useRef(null); // Ref for the toolbar-div -sale
     const toolBarRef = useRef<HTMLDivElement>(null); // Tyypitetty ref DOM-elementille -sale
@@ -25,7 +25,6 @@ const ToolBar = () => {
                 toolBarRef.current &&
                 !toolBarRef.current.contains(event.target as Node)
             ) {
-                setAddClicked(false);
                 setSortClicked(false);
             }
         }
@@ -137,7 +136,7 @@ const ToolBar = () => {
     }
 
     function handleAdd() {
-        setAddClicked(!addClicked);
+        setAddBtn(!addBtn);
     }
 
     function handleDelete() {
