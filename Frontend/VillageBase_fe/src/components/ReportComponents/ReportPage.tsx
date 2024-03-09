@@ -65,8 +65,35 @@ function ReportPage() {
         y += 5;
 
         doc.line(10, y, pageWidth - 10, y);
+        y += 10;
 
-        doc.save("a4.pdf");
+        doc.text("Mökki:", x, y);
+        y += 5;
+        doc.text("Lakeside Haven", x, y);
+        y += 5;
+        doc.text("2024.06.01 14.00 - 2024.06.08 10.00", x, y);
+        doc.text("8", x * 4, y);
+        doc.text("95.50 €", x * 5, y);
+        doc.text("764.00 €", pageWidth - x, y, { align: "right" });
+        y += 10;
+        doc.text("Lisäpalvelu:", x, y);
+        y += 5;
+        doc.text("Lake Excursions", x, y);
+        doc.text("3", x * 4, y);
+        doc.text("40.00 €", x * 5, y);
+        doc.text("120.00 €", pageWidth - x, y, { align: "right" });
+        y += 10;
+
+        doc.line(10, y, pageWidth - 10, y);
+        y += 10;
+
+        doc.text("884.00 €", pageWidth - x, y, { align: "right" });
+
+        y += 10;
+
+        doc.line(10, y, pageWidth - 10, y);
+
+        doc.save("vb_invoice_template.pdf");
     };
 
     const debug = () => {
