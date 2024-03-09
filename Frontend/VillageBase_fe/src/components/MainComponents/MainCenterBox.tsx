@@ -14,6 +14,7 @@ import AddReservationPage from "../ReservationComponents/AddReservationPage"; //
 
 import BillingPage from "../BillingComponents/BillingPage";
 import { ToolStateProvider } from "./ToolStateContext";
+import ReportPage from "../ReportComponents/ReportPage";
 
 function MainCenterBox() {
     return (
@@ -44,6 +45,14 @@ function MainCenterBox() {
                                     path="/asiakkaat"
                                     element={<CustomerPage />}
                                 />
+                                <Route
+                                    path="/laskutus"
+                                    element={<BillingPage />}
+                                />
+                                <Route
+                                    path="/raportit"
+                                    element={<ReportPage />}
+                                />
                                 <Route // -sale
                                     path="/add-cabin"
                                     element={<AddCabinPage />}
@@ -59,19 +68,6 @@ function MainCenterBox() {
                                 <Route
                                     path="/add-reservation"
                                     element={<AddReservationPage />}
-                                />
-
-                                <Route
-                                    path="/varaukset"
-                                    element={<ReservationPage />}
-                                />
-                                <Route
-                                    path="/asiakkaat"
-                                    element={<CustomerPage />}
-                                />
-                                <Route
-                                    path="/laskutus"
-                                    element={<BillingPage />}
                                 />
                             </Routes>
                         </div>
