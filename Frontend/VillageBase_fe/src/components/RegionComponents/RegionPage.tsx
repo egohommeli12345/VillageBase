@@ -55,30 +55,27 @@ export default function RegionPage() {
 
     return (
         <div className={styles.regionBG}>
-            <div className={styles.regionTitle}>Alueet</div>
-            <div className={styles.regionList}>
-                <div className={styles.regionCardsContainer}>
-                    {filteredData.map((region) => (
-                        <div
-                            className={`${styles.card} ${
-                                activeContainerId === region.alue_id
-                                    ? styles.active
-                                    : ""
-                            }`}
-                            key={region.alue_id}
-                            onClick={() => makeActive(region.alue_id)}
-                        >
-                            <div className={styles.cardHeader}>
-                                {region.nimi} {region.alue_id}
-                            </div>
-                            <div className={styles.cardBody}>
-                                <p>
-                                    <strong>Alueen nimi:</strong> {region.nimi}
-                                </p>
-                            </div>
+            <div className={styles.regionCardsContainer}>
+                {filteredData.map((region) => (
+                    <div
+                        className={`${styles.card} ${
+                            activeContainerId === region.alue_id
+                                ? styles.active
+                                : ""
+                        }`}
+                        key={region.alue_id}
+                        onClick={() => makeActive(region.alue_id)}
+                    >
+                        <div className={styles.cardHeader}>
+                            {region.nimi} {region.alue_id}
                         </div>
-                    ))}
-                </div>
+                        <div className={styles.cardBody}>
+                            <p>
+                                <strong>Alueen nimi:</strong> {region.nimi}
+                            </p>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     );

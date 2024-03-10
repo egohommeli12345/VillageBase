@@ -11,10 +11,10 @@ export default function CustomerPage() {
     // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
-    
+
     // useState hook for searching the customers
     const [filteredData, setFilteredData] = useState<CustomerInterface[]>([]);
-    
+
     // useState hook for mapping the customers to CustomerInterface objects
     const [customers, setCustomers] = useState<CustomerInterface[]>([]);
 
@@ -22,7 +22,6 @@ export default function CustomerPage() {
     const [activeContainerId, setActiveContainerId] = useState<number | null>(
         null
     );
-
 
     // Function to toggle the active container
     const makeActive = (id: number) => {
@@ -56,7 +55,6 @@ export default function CustomerPage() {
 
     return (
         <div className={styles.customerBG}>
-            <div className={styles.customerTitle}>Asiakkaat</div>
             <div className={styles.customerCardsContainer}>
                 {filteredData.map((customer) => (
                     <div

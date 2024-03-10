@@ -70,7 +70,6 @@ export default function ServicePage() {
                     </div>
                 </div>
             </div>
-            <div className={styles.serviceTitle}>Palvelut</div>
             <div className={styles.serviceCardsContainer}>
                 {filteredData.map((service) => (
                     <div

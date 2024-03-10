@@ -1,35 +1,36 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 .mainbar {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    background-image: url(cloud.jpg);
-    height: 100%;
-}
-
-.bgImg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    /* background-image: url(cloud.jpg); */
+    /* background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 1) 26%,
+        rgba(224, 239, 255, 1) 100%
+    ); */
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(189, 221, 255, 1) 100%
+    );
+    overflow: auto;
 }
 
 .page {
-    overflow: hidden;
     width: 100%;
-    height: 100%;
+    margin-top: calc(75px + 40px + 2em);
 }
 
 .pageContent {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 90%;
+    height: 100%;
     color: black;
-    overflow: hidden;
 }

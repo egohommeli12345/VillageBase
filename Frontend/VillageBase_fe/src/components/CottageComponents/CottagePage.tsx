@@ -54,45 +54,41 @@ export default function CottagePage() {
 
     return (
         <div className={styles.cottageBG}>
-            <div className={styles.cottageTitle}>Mökit</div>
-            <div className={styles.cottageList}>
-                <div className={styles.cottageCardsContainer}>
-                    {filteredData.map((cottage) => (
-                        <div
-                            className={`${styles.card} ${
-                                activeContainerId === cottage.mokki_id
-                                    ? styles.active
-                                    : ""
-                            }`}
-                            key={cottage.mokki_id}
-                            onClick={() => makeActive(cottage.mokki_id)}
-                        >
-                            <div className={styles.cardHeader}>
-                                {cottage.mokkinimi} {cottage.mokki_id}
-                            </div>
-                            <div className={styles.cardBody}>
-                                <p>
-                                    <strong>Osoite:</strong>{" "}
-                                    {cottage.katuosoite}, {cottage.postinro}
-                                </p>
-                                <p>
-                                    <strong>Hinta:</strong> {cottage.hinta}€/yö
-                                </p>
-                                <p>
-                                    <strong>Kuvaus:</strong> {cottage.kuvaus}
-                                </p>
-                                <p>
-                                    <strong>Henkilömäärä:</strong>{" "}
-                                    {cottage.henkilomaara} henkilöä
-                                </p>
-                                <p>
-                                    <strong>Varustelu:</strong>{" "}
-                                    {cottage.varustelu}
-                                </p>
-                            </div>
+            <div className={styles.cottageCardsContainer}>
+                {filteredData.map((cottage) => (
+                    <div
+                        className={`${styles.card} ${
+                            activeContainerId === cottage.mokki_id
+                                ? styles.active
+                                : ""
+                        }`}
+                        key={cottage.mokki_id}
+                        onClick={() => makeActive(cottage.mokki_id)}
+                    >
+                        <div className={styles.cardHeader}>
+                            {cottage.mokkinimi} {cottage.mokki_id}
                         </div>
-                    ))}
-                </div>
+                        <div className={styles.cardBody}>
+                            <p>
+                                <strong>Osoite:</strong> {cottage.katuosoite},{" "}
+                                {cottage.postinro}
+                            </p>
+                            <p>
+                                <strong>Hinta:</strong> {cottage.hinta}€/yö
+                            </p>
+                            <p>
+                                <strong>Kuvaus:</strong> {cottage.kuvaus}
+                            </p>
+                            <p>
+                                <strong>Henkilömäärä:</strong>{" "}
+                                {cottage.henkilomaara} henkilöä
+                            </p>
+                            <p>
+                                <strong>Varustelu:</strong> {cottage.varustelu}
+                            </p>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     );

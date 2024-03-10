@@ -102,12 +102,10 @@ function ReportPage() {
         console.log(debug.internal.pageSize.getHeight());
     };
     return (
-        <>
-            <div className={styles.reportBg}>
-                <button onClick={generatePDF}>Generate PDF</button>
-                <button onClick={debug}>debug</button>
-            </div>
-        </>
+        <div className={styles.reportBg}>
+            <button onClick={generatePDF}>Generate PDF</button>
+            <button onClick={debug}>debug</button>
+        </div>
     );
 }
 

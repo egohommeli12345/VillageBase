@@ -1,42 +1,26 @@
 .regionBG {
-    height: 100%; /* Updated to ensure full viewport height */
+    height: 100vh; /* Updated to ensure full viewport height */
     background-color: transparent;
-    display: flex;
-    flex-direction: column;
-}
-
-.regionTitle {
-    text-align: center;
-    font-size: 1.5em;
-}
-
-.regionList {
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
 }
 
 .regionCardsContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: stretch; /* This will make sure that all cards stretch to the same height */
     text-align: start;
     padding: 1em;
-    gap: 1em; /* Adds space between the cards without having to use margin */
+    gap: 1em;
 }
 
 .card {
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px 0 #000000;
+    background: transparent;
     margin: 1em;
-    overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 400px; /* Adjust width as necessary */
+    width: 400px;
 }
 
-.card:hover {
+.card:hover .cardHeader,
+.card:hover .cardBody {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
@@ -46,56 +30,21 @@
     color: #ffffff;
     padding: 10px 15px;
     font-size: 1.25rem;
+    border-radius: 0.5em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .cardBody {
     padding: 15px;
     line-height: 1.5;
     color: #333; /* Darker text for readability */
-}
-
-.item {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Distributes space evenly inside the card */
-    background: rgb(255, 255, 255);
-    box-shadow: 0 0 10px 0 #000000;
-    transition: 0.5s ease-out;
-    overflow: hidden; /* Prevents content from spilling out */
-}
-
-.item:hover {
-    background: #ffffff;
-    border: 2px solid #ffffff;
-    box-shadow: 0 0 10px 0 #000000;
-    transform: scale(1.05);
-    z-index: 1;
+    background-color: white;
+    height: fit-content;
+    margin-top: 1em;
+    border-radius: 0.5em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .active {
     border: 3px solid #0011ff; /* Highlight with a blue border */
 }
-
-/*.cardButton {
-  display: block;
-  width: 80%; 
-  margin: 10px auto 15px;
-  box-shadow: 0 0 5px 0px #000000;
-  background-color: rgb(219, 219, 219);
-  color: #fff;
-  font-size: 1em;
-  border: none;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.cardButton:hover {
-  background-color: rgb(167, 167, 167);
-}
-
-.item:hover .cardButton {
-  transform: scale(1.02);
-  opacity: 1;
-}//*/

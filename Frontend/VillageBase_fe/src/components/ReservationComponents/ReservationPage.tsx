@@ -58,7 +58,6 @@ export default function ReservationPage() {
 
     return (
         <div className={styles.reservationBG}>
-            <div className={styles.reservationTitle}>Varaukset</div>
             <div className={styles.reservationList}>
                 <div className={styles.reservationCardsContainer}>
                     {filteredData.map((reservation) => (
@@ -81,7 +80,7 @@ export default function ReservationPage() {
                                 </p>
                                 <p>
                                     <strong>Mökki ID:</strong>{" "}
-                                    {reservation.mokki_mokki_id} 
+                                    {reservation.mokki_mokki_id}
                                 </p>
                                 <p>
                                     <strong>Varauspäivä:</strong>{" "}
