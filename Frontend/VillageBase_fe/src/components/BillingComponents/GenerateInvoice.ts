@@ -1,5 +1,18 @@
 import jsPDF from "jspdf";
 
+// Needs to be refactored to use the data from the database
+/*
+    Data needed:
+    - Invoice ID
+    - Payment amount
+    - Due date
+    - Recipient
+    - Service name
+    - Service price
+    - Timeframe for the reservation
+    - Total amount
+*/
+
 export const generatePdfInvoice = () => {
     const doc = new jsPDF();
 
