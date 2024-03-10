@@ -73,15 +73,17 @@ export default function ServicePage() {
             <div className={styles.serviceCardsContainer}>
                 {filteredData.map((service) => (
                     <div
-                        className={`${styles.card} ${
-                            activeContainerId === service.palvelu_id
-                                ? styles.active
-                                : ""
-                        }`}
+                        className={styles.card}
                         key={service.palvelu_id}
                         onClick={() => makeActive(service.palvelu_id)}
                     >
-                        <div className={styles.cardHeader}>
+                        <div
+                            className={
+                                activeContainerId === service.palvelu_id
+                                    ? styles.cardHeaderActive
+                                    : styles.cardHeader
+                            }
+                        >
                             {service.nimi} {service.palvelu_id}
                         </div>
                         <div className={styles.cardBody}>

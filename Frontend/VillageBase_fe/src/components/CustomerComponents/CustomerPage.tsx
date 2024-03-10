@@ -58,15 +58,17 @@ export default function CustomerPage() {
             <div className={styles.customerCardsContainer}>
                 {filteredData.map((customer) => (
                     <div
-                        className={`${styles.card} ${
-                            activeContainerId === customer.asiakas_id
-                                ? styles.active
-                                : ""
-                        }`}
+                        className={styles.card}
                         key={customer.asiakas_id}
                         onClick={() => makeActive(customer.asiakas_id)}
                     >
-                        <div className={styles.cardHeader}>
+                        <div
+                            className={
+                                activeContainerId === customer.asiakas_id
+                                    ? styles.cardHeaderActive
+                                    : styles.cardHeader
+                            }
+                        >
                             {customer.etunimi} {customer.sukunimi}
                         </div>
                         <div className={styles.cardBody}>

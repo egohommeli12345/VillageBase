@@ -57,15 +57,17 @@ export default function CottagePage() {
             <div className={styles.cottageCardsContainer}>
                 {filteredData.map((cottage) => (
                     <div
-                        className={`${styles.card} ${
-                            activeContainerId === cottage.mokki_id
-                                ? styles.active
-                                : ""
-                        }`}
+                        className={styles.card}
                         key={cottage.mokki_id}
                         onClick={() => makeActive(cottage.mokki_id)}
                     >
-                        <div className={styles.cardHeader}>
+                        <div
+                            className={
+                                activeContainerId === cottage.mokki_id
+                                    ? styles.cardHeaderActive
+                                    : styles.cardHeader
+                            }
+                        >
                             {cottage.mokkinimi} {cottage.mokki_id}
                         </div>
                         <div className={styles.cardBody}>

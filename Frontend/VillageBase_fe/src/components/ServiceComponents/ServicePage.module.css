@@ -80,6 +80,15 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.cardHeaderActive {
+    background: rgb(8, 245, 0);
+    color: #000000;
+    padding: 10px 15px;
+    font-size: 1.25rem;
+    border-radius: 0.5em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .cardBody {
     padding: 15px;
     line-height: 1.5;
@@ -89,8 +98,4 @@
     margin-top: 1em;
     border-radius: 0.5em;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.active {
-    border: 3px solid #0011ff;
 }

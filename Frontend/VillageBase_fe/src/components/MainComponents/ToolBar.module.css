@@ -39,10 +39,8 @@
     width: 0;
     height: 100%;
     position: absolute;
-    /* Aktivointi alla oleva -> bottom menee vasemmalta oikealle */
-    /* left: 0;  */
     z-index: -1;
-    transition: 0.3s ease-in-out;
+    transition: 0.1s ease-in-out;
 }
 
 .tool:hover::before {

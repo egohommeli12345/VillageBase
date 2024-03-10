@@ -20,6 +20,7 @@
 }
 
 .card:hover .cardHeader,
+.card:hover .cardHeaderActive,
 .card:hover .cardBody {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -28,6 +29,15 @@
 .cardHeader {
     background: rgb(0, 0, 0);
     color: #ffffff;
+    padding: 10px 15px;
+    font-size: 1.25rem;
+    border-radius: 0.5em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cardHeaderActive {
+    background: rgb(8, 245, 0);
+    color: #000000;
     padding: 10px 15px;
     font-size: 1.25rem;
     border-radius: 0.5em;
@@ -46,5 +56,5 @@
 }
 
 .active {
-    border: 3px solid #0011ff; /* Highlight with a blue border */
+    border: 3px solid #0011ff;
 }

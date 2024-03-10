@@ -54,15 +54,17 @@ export default function BillingPage() {
             <div className={styles.billingCardsContainer}>
                 {filteredData.map((billing) => (
                     <div
-                        className={`${styles.card} ${
-                            activeContainerId === billing.lasku_id
-                                ? styles.active
-                                : ""
-                        }`}
+                        className={styles.card}
                         key={billing.lasku_id}
                         onClick={() => makeActive(billing.lasku_id)}
                     >
-                        <div className={styles.cardHeader}>
+                        <div
+                            className={
+                                activeContainerId === billing.lasku_id
+                                    ? styles.cardHeaderActive
+                                    : styles.cardHeader
+                            }
+                        >
                             Lasku ID: {billing.lasku_id} | Varaus ID:{" "}
                             {billing.varaus_id}
                         </div>

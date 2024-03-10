@@ -58,15 +58,17 @@ export default function RegionPage() {
             <div className={styles.regionCardsContainer}>
                 {filteredData.map((region) => (
                     <div
-                        className={`${styles.card} ${
-                            activeContainerId === region.alue_id
-                                ? styles.active
-                                : ""
-                        }`}
+                        className={styles.card}
                         key={region.alue_id}
                         onClick={() => makeActive(region.alue_id)}
                     >
-                        <div className={styles.cardHeader}>
+                        <div
+                            className={
+                                activeContainerId === region.alue_id
+                                    ? styles.cardHeaderActive
+                                    : styles.cardHeader
+                            }
+                        >
                             {region.nimi} {region.alue_id}
                         </div>
                         <div className={styles.cardBody}>

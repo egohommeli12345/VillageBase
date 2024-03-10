@@ -62,15 +62,17 @@ export default function ReservationPage() {
                 <div className={styles.reservationCardsContainer}>
                     {filteredData.map((reservation) => (
                         <div
-                            className={`${styles.card} ${
-                                activeContainerId === reservation.varaus_id
-                                    ? styles.active
-                                    : ""
-                            }`}
+                            className={styles.card}
                             key={reservation.varaus_id}
                             onClick={() => makeActive(reservation.varaus_id)}
                         >
-                            <div className={styles.cardHeader}>
+                            <div
+                                className={
+                                    activeContainerId === reservation.varaus_id
+                                        ? styles.cardHeaderActive
+                                        : styles.cardHeader
+                                }
+                            >
                                 Varaus {reservation.varaus_id}
                             </div>
                             <div className={styles.cardBody}>
