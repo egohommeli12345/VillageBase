@@ -1,0 +1,11 @@
+.landingBG {
+    height: 100%;
+    background-color: transparent;
+}
+
+.landingContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}

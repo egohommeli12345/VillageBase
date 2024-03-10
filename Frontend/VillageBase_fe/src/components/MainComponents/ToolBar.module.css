@@ -6,6 +6,19 @@
     height: 40px;
     top: 70px;
     z-index: 3;
+    transition: height 0.3s ease;
+}
+
+.toolBarBGHidden {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 0px;
+    top: 70px;
+    z-index: 3;
+    overflow: hidden;
+    transition: height 0.3s ease;
 }
 
 .toolBar {

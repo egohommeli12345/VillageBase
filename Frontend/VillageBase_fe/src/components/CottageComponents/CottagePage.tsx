@@ -5,12 +5,14 @@ import { CottageInterface } from "./CottageInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../MainComponents/SearchContext";
+import { useToolState } from "../MainComponents/ToolStateContext";
 
 // Function for CottagePage
 export default function CottagePage() {
     // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
+    const { setOnLandingPage, onLandingPage } = useToolState();
 
     // useState hook for searching the cottages
     const [filteredData, setFilteredData] = useState<CottageInterface[]>([]);
@@ -51,6 +53,10 @@ export default function CottagePage() {
             )
         );
     }, [searchQuery, cottages]);
+
+    useEffect(() => {
+        setOnLandingPage(true);
+    }, []);
 
     return (
         <div className={styles.cottageBG}>

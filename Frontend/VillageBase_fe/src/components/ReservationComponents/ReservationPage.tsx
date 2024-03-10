@@ -5,12 +5,14 @@ import { ReservationFetch } from "./ReservationFetch";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { useSearch } from "../MainComponents/SearchContext";
+import { useToolState } from "../MainComponents/ToolStateContext";
 
 // Function for ReservationPage
 export default function ReservationPage() {
     // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
+    const { setOnLandingPage } = useToolState();
 
     // useState hook for searching the reservations
     const [filteredData, setFilteredData] = useState<ReservationInterface[]>(
@@ -55,6 +57,10 @@ export default function ReservationPage() {
             )
         );
     }, [searchQuery, reservations]);
+
+    useEffect(() => {
+        setOnLandingPage(true);
+    }, []);
 
     return (
         <div className={styles.reservationBG}>

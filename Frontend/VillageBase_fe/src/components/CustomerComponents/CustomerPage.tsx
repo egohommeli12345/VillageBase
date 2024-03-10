@@ -5,12 +5,14 @@ import { CustomerInterface } from "./CustomerInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../MainComponents/SearchContext";
+import { useToolState } from "../MainComponents/ToolStateContext";
 
 // Function for CustomerPage
 export default function CustomerPage() {
     // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
+    const { setOnLandingPage } = useToolState();
 
     // useState hook for searching the customers
     const [filteredData, setFilteredData] = useState<CustomerInterface[]>([]);
@@ -52,6 +54,10 @@ export default function CustomerPage() {
             )
         );
     }, [searchQuery, customers]);
+
+    useEffect(() => {
+        setOnLandingPage(true);
+    }, []);
 
     return (
         <div className={styles.customerBG}>

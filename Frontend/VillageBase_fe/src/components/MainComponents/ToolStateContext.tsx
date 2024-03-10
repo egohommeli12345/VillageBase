@@ -9,6 +9,8 @@ type ToolStateContextType = {
     setDeleteBtn: React.Dispatch<React.SetStateAction<boolean>>;
     whichSite: string;
     setWhichSite: React.Dispatch<React.SetStateAction<string>>;
+    onLandingPage: boolean;
+    setOnLandingPage: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const ToolStateContext = createContext<ToolStateContextType>({
@@ -20,6 +22,8 @@ export const ToolStateContext = createContext<ToolStateContextType>({
     setDeleteBtn: () => {},
     whichSite: "",
     setWhichSite: () => {},
+    onLandingPage: false,
+    setOnLandingPage: () => {},
 });
 
 export const useToolState = () => useContext(ToolStateContext);
@@ -30,6 +34,8 @@ export const ToolStateProvider: React.FC<{ children: React.ReactNode }> = ({
     const [addBtn, setAddBtn] = useState(false);
     const [editBtn, setEditBtn] = useState(false);
     const [deleteBtn, setDeleteBtn] = useState(false);
+    const [whichSite, setWhichSite] = useState("");
+    const [onLandingPage, setOnLandingPage] = useState(false);
 
     return (
         <ToolStateContext.Provider
@@ -40,8 +46,10 @@ export const ToolStateProvider: React.FC<{ children: React.ReactNode }> = ({
                 setEditBtn,
                 deleteBtn,
                 setDeleteBtn,
-                whichSite: "",
-                setWhichSite: () => {},
+                whichSite,
+                setWhichSite,
+                onLandingPage,
+                setOnLandingPage,
             }}
         >
             {children}

@@ -11,6 +11,7 @@ import AddServicePage from "../ServiceComponents/AddServicePage"; // -sale
 import AddReservationPage from "../ReservationComponents/AddReservationPage"; // -sale
 import BillingPage from "../BillingComponents/BillingPage";
 import ReportPage from "../ReportComponents/ReportPage";
+import LandingPage from "../LandingComponents/LandingPage";
 
 function MainCenterBox() {
     return (
@@ -18,6 +19,7 @@ function MainCenterBox() {
             <div className={styles.page}>
                 <div className={styles.pageContent}>
                     <Routes>
+                        <Route path="/" element={<LandingPage />} />
                         <Route path="/alueet" element={<RegionPage />} />
                         <Route path="/mokit" element={<CottagePage />} />
                         <Route path="/palvelut" element={<ServicePage />} />

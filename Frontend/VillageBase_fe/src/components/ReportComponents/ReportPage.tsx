@@ -1,10 +1,14 @@
 import jsPDF from "jspdf";
 import styles from "./ReportPage.module.css";
+import { useEffect } from "react";
+import { useToolState } from "../MainComponents/ToolStateContext";
 
 // pdf page is by default A4, units in mm
 // A4 = 210mm x 297mm
 
 function ReportPage() {
+    const { setOnLandingPage } = useToolState();
+
     const generatePDF = () => {
         const doc = new jsPDF();
 
@@ -101,6 +105,11 @@ function ReportPage() {
         debug.text("Hello world!", 25, 25);
         console.log(debug.internal.pageSize.getHeight());
     };
+
+    useEffect(() => {
+        setOnLandingPage(true);
+    }, []);
+
     return (
         <div className={styles.reportBg}>
             <button onClick={generatePDF}>Generate PDF</button>

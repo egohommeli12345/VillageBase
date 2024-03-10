@@ -5,12 +5,14 @@ import { BillingInterface } from "./BillingInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../MainComponents/SearchContext";
+import { useToolState } from "../MainComponents/ToolStateContext";
 
 // Function for BillingPage
 export default function BillingPage() {
     // useContext hook for getting the sortType from the SortTypeContext
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
+    const { setOnLandingPage } = useToolState();
 
     // useState hook for mapping the billings to BillingInterface objects
     const [billings, setBillings] = useState<BillingInterface[]>([]);
@@ -48,6 +50,10 @@ export default function BillingPage() {
             )
         );
     }, [searchQuery, billings]);
+
+    useEffect(() => {
+        setOnLandingPage(true);
+    }, []);
 
     return (
         <div className={styles.billingBG}>

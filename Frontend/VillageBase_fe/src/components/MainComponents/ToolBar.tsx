@@ -6,8 +6,15 @@ import { Link } from "react-router-dom"; // Link to the Add page -sale
 import { useToolState } from "./ToolStateContext";
 
 const ToolBar = () => {
-    const { deleteBtn, setDeleteBtn, editBtn, setEditBtn, addBtn, setAddBtn } =
-        useToolState();
+    const {
+        deleteBtn,
+        setDeleteBtn,
+        editBtn,
+        setEditBtn,
+        addBtn,
+        setAddBtn,
+        onLandingPage,
+    } = useToolState();
     const { setSortType } = useSortType();
     const [sortClicked, setSortClicked] = useState(false);
     const { setSearchShowState, SearchShowState, setSearchQuery } = useSearch();
@@ -40,7 +47,12 @@ const ToolBar = () => {
     }, [toolBarRef]);
 
     return (
-        <div className={styles.toolBarBG} ref={toolBarRef}>
+        <div
+            className={
+                onLandingPage ? styles.toolBarBG : styles.toolBarBGHidden
+            }
+            ref={toolBarRef}
+        >
             <div className={styles.toolBar}>
                 <div className={styles.add}>
                     <div className={styles.tool} onClick={handleAdd}>

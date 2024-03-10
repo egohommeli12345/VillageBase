@@ -12,8 +12,15 @@ import AddServicePage from "./AddServicePage";
 export default function ServicePage() {
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
-    const { addBtn, deleteBtn, editBtn, setEditBtn, setAddBtn, setDeleteBtn } =
-        useToolState();
+    const {
+        addBtn,
+        deleteBtn,
+        editBtn,
+        setEditBtn,
+        setAddBtn,
+        setDeleteBtn,
+        setOnLandingPage,
+    } = useToolState();
     // useState hook for mapping the services to ServiceInterface objects
     const [services, setServices] = useState<ServiceInterface[]>([]);
     const [filteredData, setFilteredData] = useState<ServiceInterface[]>([]);
@@ -55,6 +62,10 @@ export default function ServicePage() {
         setAddBtn(false);
         setDeleteBtn(false);
     };
+
+    useEffect(() => {
+        setOnLandingPage(true);
+    }, []);
 
     return (
         <div className={styles.serviceBG}>

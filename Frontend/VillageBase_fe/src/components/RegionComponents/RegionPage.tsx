@@ -5,12 +5,14 @@ import { RegionInterface } from "./RegionInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../MainComponents/SearchContext";
+import { useToolState } from "../MainComponents/ToolStateContext";
 
 // Function for RegionPage
 export default function RegionPage() {
     // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
+    const { setOnLandingPage } = useToolState();
 
     // useState hook for searching the regions
     const [filteredData, setFilteredData] = useState<RegionInterface[]>([]);
@@ -52,6 +54,10 @@ export default function RegionPage() {
             )
         );
     }, [searchQuery, regions]);
+
+    useEffect(() => {
+        setOnLandingPage(true);
+    }, []);
 
     return (
         <div className={styles.regionBG}>
