@@ -58,10 +58,10 @@ export default function ServicePage() {
 
     return (
         <div className={styles.serviceBG}>
-            <div className={addBtn ? styles.addServiceBg : styles.hidden}>
-                <div className={styles.addService}>
+            <div className={addBtn ? styles.addPageBg : styles.hidden}>
+                <div className={styles.addPage}>
                     <img
-                        className={styles.closeAddService}
+                        className={styles.closeAddPage}
                         src="/closeX.svg"
                         onClick={handleCloseBtn}
                     />
