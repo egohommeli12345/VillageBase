@@ -6,13 +6,22 @@ import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../MainComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
+import AddRegionPage from "./AddRegionPage";
 
 // Function for RegionPage
 export default function RegionPage() {
     // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
-    const { setOnLandingPage } = useToolState();
+    const {
+        addBtn,
+        deleteBtn,
+        editBtn,
+        setEditBtn,
+        setAddBtn,
+        setDeleteBtn,
+        setOnLandingPage, // ALKUP:  const { setOnLandingPage } = useToolState();
+    } = useToolState();
 
     // useState hook for searching the regions
     const [filteredData, setFilteredData] = useState<RegionInterface[]>([]);
@@ -55,12 +64,31 @@ export default function RegionPage() {
         );
     }, [searchQuery, regions]);
 
+    const handleCloseBtn = () => {
+        setEditBtn(false);
+        setAddBtn(false);
+        setDeleteBtn(false);
+    };
+
     useEffect(() => {
         setOnLandingPage(true);
     }, []);
 
     return (
         <div className={styles.regionBG}>
+            <div className={addBtn ? styles.addPageBg : styles.hidden}>
+                <div className={styles.addPage}>
+                    <img
+                        className={styles.closeAddPage}
+                        src="/closeX.svg"
+                        onClick={handleCloseBtn}
+                    />
+                    <div className={styles.popUpContent}>
+                        <AddRegionPage />
+                    </div>
+                </div>
+            </div>
+
             <div className={styles.regionCardsContainer}>
                 {filteredData.map((region) => (
                     <div
