@@ -12,7 +12,15 @@ export default function CustomerPage() {
     // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
-    const { setOnLandingPage } = useToolState();
+    const {
+        setOnLandingPage,
+        addBtn,
+        deleteBtn,
+        editBtn,
+        setEditBtn,
+        setAddBtn,
+        setDeleteBtn,
+    } = useToolState();
 
     // useState hook for searching the customers
     const [filteredData, setFilteredData] = useState<CustomerInterface[]>([]);
@@ -55,12 +63,31 @@ export default function CustomerPage() {
         );
     }, [searchQuery, customers]);
 
+    const handleCloseBtn = () => {
+        setEditBtn(false);
+        setAddBtn(false);
+        setDeleteBtn(false);
+    };
+
     useEffect(() => {
         setOnLandingPage(true);
     }, []);
 
     return (
         <div className={styles.customerBG}>
+            {/* <div className={addBtn ? styles.addPageBg : styles.hidden}>
+                <div className={styles.addPage}>
+                    <img
+                        className={styles.closeAddPage}
+                        src="/closeX.svg"
+                        onClick={handleCloseBtn}
+                    />
+                    <div className={styles.popUpContent}>
+                        <TÄTÄ SIVUA EI OLE VIELÄ />
+                    </div>
+                </div>
+            </div>  */}
+
             <div className={styles.customerCardsContainer}>
                 {filteredData.map((customer) => (
                     <div

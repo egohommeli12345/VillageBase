@@ -6,13 +6,22 @@ import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { useSearch } from "../MainComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
+import AddReservationPage from "./AddReservationPage";
 
 // Function for ReservationPage
 export default function ReservationPage() {
     // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
-    const { setOnLandingPage } = useToolState();
+    const {
+        setOnLandingPage,
+        addBtn,
+        deleteBtn,
+        editBtn,
+        setEditBtn,
+        setAddBtn,
+        setDeleteBtn,
+    } = useToolState();
 
     // useState hook for searching the reservations
     const [filteredData, setFilteredData] = useState<ReservationInterface[]>(
@@ -58,12 +67,31 @@ export default function ReservationPage() {
         );
     }, [searchQuery, reservations]);
 
+    const handleCloseBtn = () => {
+        setEditBtn(false);
+        setAddBtn(false);
+        setDeleteBtn(false);
+    };
+
     useEffect(() => {
         setOnLandingPage(true);
     }, []);
 
     return (
         <div className={styles.reservationBG}>
+            <div className={addBtn ? styles.addPageBg : styles.hidden}>
+                <div className={styles.addPage}>
+                    <img
+                        className={styles.closeAddPage}
+                        src="/closeX.svg"
+                        onClick={handleCloseBtn}
+                    />
+                    <div className={styles.popUpContent}>
+                        <AddReservationPage />
+                    </div>
+                </div>
+            </div>
+
             <div className={styles.reservationList}>
                 <div className={styles.reservationCardsContainer}>
                     {filteredData.map((reservation) => (
