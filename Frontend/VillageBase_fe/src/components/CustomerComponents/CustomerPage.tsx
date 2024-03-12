@@ -6,6 +6,7 @@ import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../MainComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
+import AddCustomerPage from "./AddCustomerPage";
 
 // Function for CustomerPage
 export default function CustomerPage() {
@@ -75,7 +76,7 @@ export default function CustomerPage() {
 
     return (
         <div className={styles.customerBG}>
-            {/* <div className={addBtn ? styles.addPageBg : styles.hidden}>
+            <div className={addBtn ? styles.addPageBg : styles.hidden}>
                 <div className={styles.addPage}>
                     <img
                         className={styles.closeAddPage}
@@ -83,10 +84,10 @@ export default function CustomerPage() {
                         onClick={handleCloseBtn}
                     />
                     <div className={styles.popUpContent}>
-                        <TÄTÄ SIVUA EI OLE VIELÄ />
+                        <AddCustomerPage />
                     </div>
                 </div>
-            </div>  */}
+            </div>
 
             <div className={styles.customerCardsContainer}>
                 {filteredData.map((customer) => (
