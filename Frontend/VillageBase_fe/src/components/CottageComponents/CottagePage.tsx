@@ -6,13 +6,23 @@ import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../MainComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
+import AddCabinPage from "./AddCabinPage";
 
 // Function for CottagePage
 export default function CottagePage() {
     // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
-    const { setOnLandingPage, onLandingPage } = useToolState();
+    const {
+        setOnLandingPage,
+        onLandingPage,
+        addBtn,
+        deleteBtn,
+        editBtn,
+        setEditBtn,
+        setAddBtn,
+        setDeleteBtn,
+    } = useToolState();
 
     // useState hook for searching the cottages
     const [filteredData, setFilteredData] = useState<CottageInterface[]>([]);
@@ -54,12 +64,30 @@ export default function CottagePage() {
         );
     }, [searchQuery, cottages]);
 
+    const handleCloseBtn = () => {
+        setEditBtn(false);
+        setAddBtn(false);
+        setDeleteBtn(false);
+    };
+
     useEffect(() => {
         setOnLandingPage(true);
     }, []);
 
     return (
         <div className={styles.cottageBG}>
+            <div className={addBtn ? styles.addPageBg : styles.hidden}>
+                <div className={styles.addPage}>
+                    <img
+                        className={styles.closeAddPage}
+                        src="/closeX.svg"
+                        onClick={handleCloseBtn}
+                    />
+                    <div className={styles.popUpContent}>
+                        <AddCabinPage />
+                    </div>
+                </div>
+            </div>
             <div className={styles.cottageCardsContainer}>
                 {filteredData.map((cottage) => (
                     <div
