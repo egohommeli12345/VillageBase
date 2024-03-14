@@ -1,16 +1,36 @@
 .toolBarBG {
+    position: absolute;
     display: flex;
+    width: 100%;
     justify-content: center;
-    margin: 1em;
+    height: 40px;
+    top: 70px;
+    z-index: 3;
+    transition: height 0.3s ease;
+}
+
+.toolBarBGHidden {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 0px;
+    top: 70px;
+    z-index: 3;
+    overflow: hidden;
+    transition: height 0.3s ease;
 }
 
 .toolBar {
     display: flex;
-    justify-content: space-evenly;
+    width: fit-content;
+    justify-content: center;
+    column-gap: 2em;
     align-items: center;
-    height: 5em;
-    width: 60%;
-    background-color: transparent;
+    background-color: rgb(255, 255, 255);
+    position: relative; /* -sale */
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
 }
 
 .tool {
@@ -20,39 +40,82 @@
     align-items: center;
     cursor: pointer;
     overflow: hidden;
-    background-image: linear-gradient(#000000, rgb(0, 0, 0));
-    border-radius: 5px;
-    box-shadow: rgb(0, 0, 0) 0px 3px 9px 0px;
-    color: #fff;
+    color: black;
     z-index: 1;
     height: 40px;
     width: 100px;
-    border-top-left-radius: 20px;
-    border-end-end-radius: 20px;
 }
 
 .tool::before {
     content: "";
-    background-image: linear-gradient(180deg, #000000 90%, #007bff 10%); /* Highlight with a blue or with #ff0000 */
+    background-image: linear-gradient(180deg, #ffffff 90%, #007bff 10%);
     width: 0;
     height: 100%;
     position: absolute;
-    /* Aktivointi alla oleva -> bottom menee vasemmalta oikealle */
-    /* left: 0;  */
     z-index: -1;
-    transition: 0.3s ease-in-out;
+    transition: 0.1s ease-in-out;
 }
 
 .tool:hover::before {
-    width: 100%;
+    width: 50%;
 }
 
-.sort {
+.sortMenu {
+    position: absolute;
+    width: 100px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.5em;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.171);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    height: 150px;
+    transition: height ease 0.3s;
+    overflow: hidden;
+    justify-content: space-evenly;
+    right: 0;
+    top: calc(1em + 40px);
+}
+
+.sortMenuHidden {
+    position: absolute;
+    width: 100px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.5em;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.171);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    height: 0px;
+    transition: height ease 0.3s;
+    overflow: hidden;
+    justify-content: space-evenly;
+    right: 0;
+    top: calc(1em + 40px);
+}
+
+.sortMenuItem {
+    border-bottom: #000000 1px solid;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+
+.sortMenuItem:hover {
+    cursor: pointer;
+}
+
+/* Lisää */
+
+/* Nää vois yhistää suoraan "Sort" kohdan kanssa esim. 
+sortMenu, addMenu {tyylit on samat} jne*/
+.add {
     display: flex;
     justify-content: center;
 }
 
-.sortMenu {
+.addMenu {
     position: absolute;
     width: 100px;
     background-color: rgb(255, 255, 255);
@@ -66,12 +129,57 @@
     z-index: 2;
 }
 
-.sortMenuItem {
+.addMenuItem {
     border-bottom: #000000 1px solid;
     margin-bottom: 0.5em;
     margin-top: 0.5em;
 }
 
-.sortMenuItem:hover {
+.addMenuItem:hover {
     cursor: pointer;
+}
+
+.searchUI {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    top: calc(1em + 40px);
+    z-index: 1;
+    transition: 0.3s ease;
+}
+
+.searchUIHidden {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 0px;
+    top: calc(1em + 40px);
+    z-index: 1;
+    transition: 0.3s ease;
+    overflow: hidden;
+}
+
+.inputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 0.5em;
+    font-size: 1em;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.171);
+}
+
+.searchQueryInput {
+    width: 95%;
+    border: none;
+    font-size: 1em;
+}
+
+.searchQueryInput:focus {
+    outline: none;
 }

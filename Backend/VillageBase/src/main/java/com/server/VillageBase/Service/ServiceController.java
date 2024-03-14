@@ -1,9 +1,7 @@
 package com.server.VillageBase.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,4 +23,14 @@ public class ServiceController {
     // @GetMapping is used to map the URL to the function
     @GetMapping("/api/services/all")
     public List<ServiceObject> getAllServices() { return serviceService.getAllServices(); }
+
+    @GetMapping("/api/services/maxid")
+    public int getMaxId() { return serviceService.getMaxId(); }
+
+    @PostMapping("/api/services/add")
+    public String addService(
+        @RequestBody ServiceObject serviceObject) {
+        serviceService.addService(serviceObject);
+        return "Service added";
+    }
 }

@@ -4,11 +4,28 @@ import { CottageFetch } from "./CottageFetch";
 import { CottageInterface } from "./CottageInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
+import { useSearch } from "../MainComponents/SearchContext";
+import { useToolState } from "../MainComponents/ToolStateContext";
+import AddCabinPage from "./AddCabinPage";
 
 // Function for CottagePage
 export default function CottagePage() {
-    // useContext hook for getting the sortType from the SortTypeContext
+    // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
+    const { searchQuery } = useSearch();
+    const {
+        setOnLandingPage,
+        onLandingPage,
+        addBtn,
+        deleteBtn,
+        editBtn,
+        setEditBtn,
+        setAddBtn,
+        setDeleteBtn,
+    } = useToolState();
+
+    // useState hook for searching the cottages
+    const [filteredData, setFilteredData] = useState<CottageInterface[]>([]);
 
     // useState hook for mapping the cottages to CottageInterface objects
     const [cottages, setCottages] = useState<CottageInterface[]>([]);
@@ -27,27 +44,64 @@ export default function CottagePage() {
         setActiveContainerId(id);
     };
 
+    // Fetching the cottage data and sorting it by the sortType
     useEffect(() => {
         CottageFetch().then((data) => {
             setCottages(SortItems(sortType, data, "mokki_id"));
         });
     }, [sortType]);
 
+    // Search function for filtering the cottages
+    useEffect(() => {
+        setFilteredData(
+            cottages.filter((item) =>
+                Object.values(item).some((value) =>
+                    String(value)
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase())
+                )
+            )
+        );
+    }, [searchQuery, cottages]);
+
+    const handleCloseBtn = () => {
+        setEditBtn(false);
+        setAddBtn(false);
+        setDeleteBtn(false);
+    };
+
+    useEffect(() => {
+        setOnLandingPage(true);
+    }, []);
+
     return (
         <div className={styles.cottageBG}>
-            <div className={styles.cottageTitle}>Mökit</div>
+            <div className={addBtn ? styles.addPageBg : styles.hidden}>
+                <div className={styles.addPage}>
+                    <img
+                        className={styles.closeAddPage}
+                        src="/closeX.svg"
+                        onClick={handleCloseBtn}
+                    />
+                    <div className={styles.popUpContent}>
+                        <AddCabinPage />
+                    </div>
+                </div>
+            </div>
             <div className={styles.cottageCardsContainer}>
-                {cottages.map((cottage) => (
+                {filteredData.map((cottage) => (
                     <div
-                        className={`${styles.card} ${
-                            activeContainerId === cottage.mokki_id
-                                ? styles.active
-                                : ""
-                        }`}
+                        className={styles.card}
                         key={cottage.mokki_id}
                         onClick={() => makeActive(cottage.mokki_id)}
                     >
-                        <div className={styles.cardHeader}>
+                        <div
+                            className={
+                                activeContainerId === cottage.mokki_id
+                                    ? styles.cardHeaderActive
+                                    : styles.cardHeader
+                            }
+                        >
                             {cottage.mokkinimi} {cottage.mokki_id}
                         </div>
                         <div className={styles.cardBody}>
@@ -69,7 +123,6 @@ export default function CottagePage() {
                                 <strong>Varustelu:</strong> {cottage.varustelu}
                             </p>
                         </div>
-                        {/* <button className={styles.cardButton}>Lisätietoja</button> */}
                     </div>
                 ))}
             </div>

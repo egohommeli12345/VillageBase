@@ -15,4 +15,10 @@ public class  ServiceService {
     private ServiceRepository serviceRepository;
 
     public List<ServiceObject> getAllServices() { return serviceRepository.findAll(); }
+
+    public int getMaxId() { return serviceRepository.findServiceWithMaxId(); }
+
+    public ServiceObject addService(ServiceObject serviceObject) {
+        return serviceRepository.save(serviceObject);
+    }
 }

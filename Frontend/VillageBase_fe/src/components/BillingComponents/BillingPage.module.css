@@ -1,55 +1,14 @@
-.serviceBG {
-    height: 100vh; /* Updated to ensure full viewport height */
+.billingBG {
+    height: 100vh;
     background-color: transparent;
 }
 
-.addPageBg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.hidden {
-    display: none;
-}
-
-.addPage {
-    height: 70vh;
-    width: 80vw;
-    z-index: 2;
-    background-color: #ffffff;
+.billingList {
     display: flex;
     flex-direction: column;
-    border-radius: 1em;
-    overflow: hidden;
 }
 
-.closeAddPage {
-    align-self: flex-end;
-    margin-top: 0.5em;
-    margin-right: 0.5em;
-    height: 25px;
-    cursor: pointer;
-}
-
-.popUpContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1em;
-    padding: 1em;
-    height: 100%;
-}
-
-.serviceCardsContainer {
+.billingCardsContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -99,4 +58,8 @@
     margin-top: 1em;
     border-radius: 0.5em;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.active {
+    border: 3px solid #0011ff; /* Highlight with a blue border */
 }

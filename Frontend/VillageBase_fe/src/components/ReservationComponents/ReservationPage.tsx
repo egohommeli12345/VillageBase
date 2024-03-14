@@ -4,46 +4,137 @@ import { useEffect, useState } from "react";
 import { ReservationFetch } from "./ReservationFetch";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSortType } from "../SortingComponents/SortTypeContext";
+import { useSearch } from "../MainComponents/SearchContext";
+import { useToolState } from "../MainComponents/ToolStateContext";
+import AddReservationPage from "./AddReservationPage";
 
 // Function for ReservationPage
 export default function ReservationPage() {
-    // useState hook for mapping the reservations to ReservationInterface objects
-    const [reservations, setReservations] = useState<ReservationInterface[]>([]);
+    // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
+    const { searchQuery } = useSearch();
+    const {
+        setOnLandingPage,
+        addBtn,
+        deleteBtn,
+        editBtn,
+        setEditBtn,
+        setAddBtn,
+        setDeleteBtn,
+    } = useToolState();
 
+    // useState hook for searching the reservations
+    const [filteredData, setFilteredData] = useState<ReservationInterface[]>(
+        []
+    );
+
+    // useState hook for mapping the reservations to ReservationInterface objects
+    const [reservations, setReservations] = useState<ReservationInterface[]>(
+        []
+    );
+
+    // State to track the active container
+    const [activeContainerId, setActiveContainerId] = useState<number | null>(
+        null
+    );
+
+    // Function to toggle the active container
+    const makeActive = (id: number) => {
+        if (id === activeContainerId) {
+            setActiveContainerId(null);
+            return;
+        }
+        setActiveContainerId(id);
+    };
+
+    // Fetching the reservation data and sorting it by the sortType
     useEffect(() => {
         ReservationFetch().then((data) => {
-            console.log(data);
             setReservations(SortItems(sortType, data, "varaus_id"));
         });
     }, [sortType]);
 
+    // Search function for filtering the reservations
+    useEffect(() => {
+        setFilteredData(
+            reservations.filter((item) =>
+                Object.values(item).some((value) =>
+                    String(value)
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase())
+                )
+            )
+        );
+    }, [searchQuery, reservations]);
+
+    const handleCloseBtn = () => {
+        setEditBtn(false);
+        setAddBtn(false);
+        setDeleteBtn(false);
+    };
+
+    useEffect(() => {
+        setOnLandingPage(true);
+    }, []);
+
     return (
         <div className={styles.reservationBG}>
-            <div className={styles.reservationTitle}>Varaukset</div>
-            <div className={styles.reservationList}>
-                <ul className={styles.list}>
-                    {reservations.map((reservation) => (
-                        <li className={styles.listItem} key={reservation.varaus_id}>
-                            <div className={styles.itemData}>
-                                <div className={styles.itemTitle}>
-                                    Varaus ID:
-                                </div>
-                                <div className={styles.reservationId}>
-                                    {reservation.varaus_id}
-                                </div>
+            <div className={addBtn ? styles.addPageBg : styles.hidden}>
+                <div className={styles.addPage}>
+                    <img
+                        className={styles.closeAddPage}
+                        src="/closeX.svg"
+                        onClick={handleCloseBtn}
+                    />
+                    <div className={styles.popUpContent}>
+                        <AddReservationPage />
+                    </div>
+                </div>
+            </div>
 
-                                <div className={styles.itemTitle}>
-                                    Asiakkaan nimi:
-                                </div>
-                                <div className={styles.reservationName}>
-                                    {reservation.asiakas_id}
-                                </div>
-                                <div className={styles.listBtn}>Valitse</div>
+            <div className={styles.reservationList}>
+                <div className={styles.reservationCardsContainer}>
+                    {filteredData.map((reservation) => (
+                        <div
+                            className={styles.card}
+                            key={reservation.varaus_id}
+                            onClick={() => makeActive(reservation.varaus_id)}
+                        >
+                            <div
+                                className={
+                                    activeContainerId === reservation.varaus_id
+                                        ? styles.cardHeaderActive
+                                        : styles.cardHeader
+                                }
+                            >
+                                Varaus {reservation.varaus_id}
                             </div>
-                        </li>
+                            <div className={styles.cardBody}>
+                                <p>
+                                    <strong>Asiakas ID:</strong>{" "}
+                                    {reservation.asiakas_id}
+                                </p>
+                                <p>
+                                    <strong>Mökki ID:</strong>{" "}
+                                    {reservation.mokki_mokki_id}
+                                </p>
+                                <p>
+                                    <strong>Varauspäivä:</strong>{" "}
+                                    {reservation.varattu_pvm}
+                                </p>
+                                <p>
+                                    <strong>Vahvistuspäivä:</strong>{" "}
+                                    {reservation.vahvistus_pvm}
+                                </p>
+                                <p>
+                                    <strong>Ajankohta:</strong>{" "}
+                                    {reservation.varattu_alkupvm} -{" "}
+                                    {reservation.varattu_loppupvm}
+                                </p>
+                            </div>
+                        </div>
                     ))}
-                </ul>
+                </div>
             </div>
         </div>
     );

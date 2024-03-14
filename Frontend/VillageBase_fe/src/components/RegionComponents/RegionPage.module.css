@@ -1,69 +1,106 @@
 .regionBG {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  align-items: center;
+    height: 100vh; /* Updated to ensure full viewport height */
+    background-color: transparent;
 }
 
-.regionTitle {
-  text-align: center;
-  font-size: 1.5em;
+.addPageBg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.regionList {
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-  width: 50%;
+.hidden {
+    display: none;
 }
 
-.list {
-  list-style: none;
-  padding: 0;
-  margin: 1em;
+.addPage {
+    height: 70vh;
+    width: 80vw;
+    z-index: 2;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1em;
+    overflow: hidden;
 }
 
-.listItem {
-  background-color: rgb(240, 240, 240);
-  margin: 1em;
-  padding: 1em;
-  border-radius: 0.5em;
-  box-shadow: 0 0 10px 0 #000000;
+.closeAddPage {
+    align-self: flex-end;
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+    height: 25px;
+    cursor: pointer;
 }
 
-.listItem:hover {
-  background: #ffffff;
-  border: 2px solid #ffffff;
-  box-shadow: 0 0 10px 0 #000000;
-  transform: scale(1.02);
+.popUpContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    padding: 1em;
+    height: 100%;
 }
 
-.itemData {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+.regionCardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: start;
+    padding: 1em;
+    gap: 1em;
 }
 
-.itemTitle {
-  grid-column: 1;
+.card {
+    background: transparent;
+    margin: 1em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 400px;
 }
 
-.regionName {
-  grid-column: 2;
+.card:hover .cardHeader,
+.card:hover .cardHeaderActive,
+.card:hover .cardBody {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.listBtn {
-  grid-column: 3;
-  grid-row: 1 / span 2;
-  align-self: center;
-  justify-self: right;
-  background-color: rgb(219, 219, 219);
-  padding: 1em;
-  border-radius: 0.5em;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.cardHeader {
+    background: rgb(0, 0, 0);
+    color: #ffffff;
+    padding: 10px 15px;
+    font-size: 1.25rem;
+    border-radius: 0.5em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.listBtn:hover {
-  background-color: rgb(167, 167, 167);
-  transition: background-color 0.3s ease;
+.cardHeaderActive {
+    background: rgb(8, 245, 0);
+    color: #000000;
+    padding: 10px 15px;
+    font-size: 1.25rem;
+    border-radius: 0.5em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cardBody {
+    padding: 15px;
+    line-height: 1.5;
+    color: #333; /* Darker text for readability */
+    background-color: white;
+    height: fit-content;
+    margin-top: 1em;
+    border-radius: 0.5em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.active {
+    border: 3px solid #0011ff;
 }
