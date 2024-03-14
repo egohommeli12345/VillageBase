@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class  ServiceService {
 
-    //will allow the use of CottageRepository without the need to instantiate it
+    //will allow the use of ServiceRepository without the need to instantiate it
     @Autowired
     private ServiceRepository serviceRepository;
 
