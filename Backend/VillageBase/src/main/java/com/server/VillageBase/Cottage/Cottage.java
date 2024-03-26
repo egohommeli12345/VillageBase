@@ -15,7 +15,7 @@ public class Cottage {
     @Id
     private int mokki_id;
     private int alue_id;
-    private int postinro;
+    private String postinro;
     private int henkilomaara;
     private double hinta;
     private String mokkinimi;
@@ -26,7 +26,7 @@ public class Cottage {
     public Cottage() {
     }
 
-public Cottage(int mokki_id, int alue_id, int postinro, int henkilomaara, double hinta, String mokkinimi, String katuosoite, String kuvaus, String varustelu) {
+public Cottage(int mokki_id, int alue_id, String postinro, int henkilomaara, double hinta, String mokkinimi, String katuosoite, String kuvaus, String varustelu) {
     this.mokki_id = mokki_id;
     this.alue_id = alue_id;
     this.postinro = postinro;
@@ -54,11 +54,11 @@ public Cottage(int mokki_id, int alue_id, int postinro, int henkilomaara, double
         this.alue_id = alue_id;
     }
 
-    public int getPostinro() {
+    public String getPostinro() {
         return postinro;
     }
 
-    public void setPostinro(int postinro) {
+    public void setPostinro(String postinro) {
         this.postinro = postinro;
     }
 

@@ -32,8 +32,9 @@ public class CottageController {
     public int getMaxId() { return cottageService.getMaxId(); }
 
     @PostMapping("/api/cottages/add")
-    public String addService(
+    public String addCottage(
             @RequestBody Cottage cottageObject) {
+        System.out.println(cottageObject);
         cottageService.addCottage(cottageObject);
         return "Service added";
     }

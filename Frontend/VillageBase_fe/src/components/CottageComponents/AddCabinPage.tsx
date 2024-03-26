@@ -1,58 +1,131 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AddCabinPage.module.css";
+import { AddCottage, CottageMAXID } from "./CottageFetch";
+import { CottageInterface } from "./CottageInterface";
+import { useToolState } from "../MainComponents/ToolStateContext";
 
 const AddCabinPage = () => {
-    const [cabinName, setCabinName] = useState("");
-    const [location, setLocation] = useState("");
-    const [description, setDescription] = useState("");
+    const [maxId, setMaxId] = useState("");
+    const [regionId, setRegionId] = useState("");
+    const [zipCode, setZipCode] = useState("");
+    const [cottageName, setCottageName] = useState("");
+    const [address, setAddress] = useState("");
     const [price, setPrice] = useState("");
-    // Lisätään tarvittaessa lisää
+    const [description, setDescription] = useState("");
+    const [maxPersons, setMaxPersons] = useState("");
+    const [equipment, setEquipment] = useState("");
+
+    const { addBtn, setAddBtn } = useToolState();
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        console.log(cabinName, location, description, price);
+
+        const newCottage: CottageInterface = {
+            mokki_id: Number(maxId ? maxId : 0),
+            alue_id: Number(regionId ? regionId : 0),
+            postinro: zipCode,
+            mokkinimi: cottageName,
+            katuosoite: address,
+            hinta: Number(price ? price : 0),
+            kuvaus: description,
+            henkilomaara: Number(maxPersons ? maxPersons : 0),
+            varustelu: equipment,
+        };
+
+        AddCottage(newCottage).then((data) => {
+            console.log(data);
+            setAddBtn(!addBtn);
+            setMaxId("");
+            setRegionId("");
+            setZipCode("");
+            setCottageName("");
+            setAddress("");
+            setPrice("");
+            setDescription("");
+            setMaxPersons("");
+            setEquipment("");
+        });
     };
+
+    useEffect(() => {
+        CottageMAXID().then((data) => {
+            setMaxId(data + 1);
+        });
+    }, []);
 
     return (
         <div className={styles.formTemplate}>
             <h1> Lisää uusi mökki</h1>
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.inputContainer}>
-                    <label htmlFor="cabinName">Mökin nimi:</label>
+                    <label>Mökin ID:</label>
+                    <input type="text" value={maxId} disabled />
+                </div>
+                <div className={styles.inputContainer}>
+                    <label>Alue</label>
                     <input
-                        id="cabinName"
                         type="text"
-                        value={cabinName}
-                        onChange={(e) => setCabinName(e.target.value)}
+                        value={regionId}
+                        onChange={(e) => setRegionId(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
-                    <label htmlFor="location">Sijainti:</label>
+                    <label>Postinumero</label>
                     <input
-                        id="location"
                         type="text"
-                        value={location}
-                        onChange={(e) => setLocation(e.target.value)}
+                        value={zipCode}
+                        onChange={(e) => setZipCode(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
-                    <label htmlFor="description">Kuvaus:</label>
+                    <label>Mökin nimi</label>
                     <input
-                        id="description"
+                        type="text"
+                        value={cottageName}
+                        onChange={(e) => setCottageName(e.target.value)}
+                    />
+                </div>
+                <div className={styles.inputContainer}>
+                    <label>Osoite</label>
+                    <input
+                        type="text"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                    />
+                </div>
+                <div className={styles.inputContainer}>
+                    <label>Hinta</label>
+                    <input
+                        type="text"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                    />
+                </div>
+                <div className={styles.inputContainer}>
+                    <label>Kuvaus</label>
+                    <input
                         type="text"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
-                    <label htmlFor="price">Hinta:</label>
+                    <label>Henkilömäärä</label>
                     <input
-                        id="price"
                         type="text"
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
+                        value={maxPersons}
+                        onChange={(e) => setMaxPersons(e.target.value)}
                     />
                 </div>
+                <div className={styles.inputContainer}>
+                    <label>Varustelu</label>
+                    <input
+                        type="text"
+                        value={equipment}
+                        onChange={(e) => setEquipment(e.target.value)}
+                    />
+                </div>
+
                 <button type="submit">Lisää mökki</button>
             </form>
         </div>
