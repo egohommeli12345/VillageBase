@@ -16,10 +16,10 @@ const AddReservationPage = () => {
     };
 
     return (
-        <div className={styles.addReservationBg}>
+        <div className={styles.formTemplate}>
             <h1>Lisää uusi varaus</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.dateContainer}>
                     <label htmlFor="startDate">Varauksen alkupäivä:</label>
                     <input
                         id="startDate"
@@ -28,7 +28,7 @@ const AddReservationPage = () => {
                         onChange={(e) => setStartDate(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className={styles.dateContainer}>
                     <label htmlFor="endDate">Varauksen loppupäivä:</label>
                     <input
                         id="endDate"
@@ -37,7 +37,7 @@ const AddReservationPage = () => {
                         onChange={(e) => setEndDate(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className={styles.inputContainer}>
                     <label htmlFor="cottage">Mökki:</label>
                     <input
                         id="cottage"
@@ -46,7 +46,7 @@ const AddReservationPage = () => {
                         onChange={(e) => setCottage(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className={styles.inputContainer}>
                     <label htmlFor="customer">Asiakas:</label>
                     <input
                         id="customer"
@@ -55,7 +55,7 @@ const AddReservationPage = () => {
                         onChange={(e) => setCustomer(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className={styles.inputContainer}>
                     <label htmlFor="services">Palvelut:</label>
                     <input
                         id="services"
