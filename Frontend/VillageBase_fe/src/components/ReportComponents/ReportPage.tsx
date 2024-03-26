@@ -7,14 +7,40 @@ import { useToolState } from "../MainComponents/ToolStateContext";
 // A4 = 210mm x 297mm
 
 function ReportPage() {
-    const { setOnLandingPage } = useToolState();
-
     useEffect(() => {
         setOnLandingPage(true);
     }, []);
 
+    const {
+        addBtn,
+        deleteBtn,
+        editBtn,
+        setEditBtn,
+        setAddBtn,
+        setDeleteBtn,
+        setOnLandingPage,
+    } = useToolState();
+
+    const handleCloseBtn = () => {
+        setEditBtn(false);
+        setAddBtn(false);
+        setDeleteBtn(false);
+    };
+
     return (
         <div className={styles.reportBG}>
+            <div className={addBtn ? styles.addPageBg : styles.hidden}>
+                <div className={styles.addPage}>
+                    <img
+                        className={styles.closeAddPage}
+                        src="/closeX.svg"
+                        onClick={handleCloseBtn}
+                    />
+                    <div className={styles.popUpContent}>
+                        {/* <AddServicePage /> */}
+                    </div>
+                </div>
+            </div>
             <div>KONTSAA</div>
         </div>
     );

@@ -12,7 +12,6 @@ export default function ReservationPage() {
     // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
-    const { setOnLandingPage } = useToolState();
 
     // useState hook for searching the reservations
     const [filteredData, setFilteredData] = useState<ReservationInterface[]>(
@@ -62,8 +61,36 @@ export default function ReservationPage() {
         setOnLandingPage(true);
     }, []);
 
+    const {
+        addBtn,
+        deleteBtn,
+        editBtn,
+        setEditBtn,
+        setAddBtn,
+        setDeleteBtn,
+        setOnLandingPage,
+    } = useToolState();
+
+    const handleCloseBtn = () => {
+        setEditBtn(false);
+        setAddBtn(false);
+        setDeleteBtn(false);
+    };
+
     return (
         <div className={styles.reservationBG}>
+            <div className={addBtn ? styles.addPageBg : styles.hidden}>
+                <div className={styles.addPage}>
+                    <img
+                        className={styles.closeAddPage}
+                        src="/closeX.svg"
+                        onClick={handleCloseBtn}
+                    />
+                    <div className={styles.popUpContent}>
+                        {/* <AddServicePage /> */}
+                    </div>
+                </div>
+            </div>
             <div className={styles.reservationList}>
                 <div className={styles.reservationCardsContainer}>
                     {filteredData.map((reservation) => (

@@ -3,6 +3,52 @@
     background-color: transparent;
 }
 
+.hidden {
+    display: none;
+}
+
+.addPageBg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addPage {
+    height: 70vh;
+    width: 80vw;
+    z-index: 2;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1em;
+    overflow: hidden;
+}
+
+.closeAddPage {
+    align-self: flex-end;
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+    height: 25px;
+    cursor: pointer;
+}
+
+.popUpContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    padding: 1em;
+    height: 100%;
+}
+
 .regionCardsContainer {
     display: flex;
     flex-wrap: wrap;

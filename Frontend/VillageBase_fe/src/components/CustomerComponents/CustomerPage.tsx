@@ -12,7 +12,6 @@ export default function CustomerPage() {
     // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
-    const { setOnLandingPage } = useToolState();
 
     // useState hook for searching the customers
     const [filteredData, setFilteredData] = useState<CustomerInterface[]>([]);
@@ -59,8 +58,36 @@ export default function CustomerPage() {
         setOnLandingPage(true);
     }, []);
 
+    const {
+        addBtn,
+        deleteBtn,
+        editBtn,
+        setEditBtn,
+        setAddBtn,
+        setDeleteBtn,
+        setOnLandingPage,
+    } = useToolState();
+
+    const handleCloseBtn = () => {
+        setEditBtn(false);
+        setAddBtn(false);
+        setDeleteBtn(false);
+    };
+
     return (
         <div className={styles.customerBG}>
+            <div className={addBtn ? styles.addPageBg : styles.hidden}>
+                <div className={styles.addPage}>
+                    <img
+                        className={styles.closeAddPage}
+                        src="/closeX.svg"
+                        onClick={handleCloseBtn}
+                    />
+                    <div className={styles.popUpContent}>
+                        {/* <AddServicePage /> */}
+                    </div>
+                </div>
+            </div>
             <div className={styles.customerCardsContainer}>
                 {filteredData.map((customer) => (
                     <div

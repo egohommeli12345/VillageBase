@@ -12,7 +12,6 @@ export default function BillingPage() {
     // useContext hook for getting the sortType from the SortTypeContext
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
-    const { setOnLandingPage } = useToolState();
 
     // useState hook for mapping the billings to BillingInterface objects
     const [billings, setBillings] = useState<BillingInterface[]>([]);
@@ -55,8 +54,36 @@ export default function BillingPage() {
         setOnLandingPage(true);
     }, []);
 
+    const {
+        addBtn,
+        deleteBtn,
+        editBtn,
+        setEditBtn,
+        setAddBtn,
+        setDeleteBtn,
+        setOnLandingPage,
+    } = useToolState();
+
+    const handleCloseBtn = () => {
+        setEditBtn(false);
+        setAddBtn(false);
+        setDeleteBtn(false);
+    };
+
     return (
         <div className={styles.billingBG}>
+            <div className={addBtn ? styles.addPageBg : styles.hidden}>
+                <div className={styles.addPage}>
+                    <img
+                        className={styles.closeAddPage}
+                        src="/closeX.svg"
+                        onClick={handleCloseBtn}
+                    />
+                    <div className={styles.popUpContent}>
+                        {/* <AddServicePage /> */}
+                    </div>
+                </div>
+            </div>
             <div className={styles.billingCardsContainer}>
                 {filteredData.map((billing) => (
                     <div
