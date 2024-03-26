@@ -49,7 +49,7 @@ const AddServicePage = () => {
     }, [addBtn]);
 
     return (
-        <div>
+        <div className="formTemplate">
             <div>Lisää uusi palvelu</div>
             <form onSubmit={handleSubmit}>
                 <div className={styles.inputContainer}>
