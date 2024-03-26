@@ -7,7 +7,6 @@ import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../MainComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
 import AddRegionPage from "./AddRegionPage";
-import AddRegionPage from "./AddRegionPage";
 
 // Function for RegionPage
 export default function RegionPage() {
@@ -64,12 +63,6 @@ export default function RegionPage() {
             )
         );
     }, [searchQuery, regions]);
-
-    const handleCloseBtn = () => {
-        setEditBtn(false);
-        setAddBtn(false);
-        setDeleteBtn(false);
-    };
 
     useEffect(() => {
         setOnLandingPage(true);

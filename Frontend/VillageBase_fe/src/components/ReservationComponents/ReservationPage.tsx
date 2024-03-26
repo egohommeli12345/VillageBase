@@ -58,12 +58,6 @@ export default function ReservationPage() {
         );
     }, [searchQuery, reservations]);
 
-    const handleCloseBtn = () => {
-        setEditBtn(false);
-        setAddBtn(false);
-        setDeleteBtn(false);
-    };
-
     useEffect(() => {
         setOnLandingPage(true);
     }, []);
