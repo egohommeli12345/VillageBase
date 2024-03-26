@@ -51,9 +51,9 @@ const AddCustomerPage = () => {
     // }, [addBtn]);
 
     return (
-        <div className={styles.customerBR}>
-            <div className={styles.title}>Lisää uusi asiakas</div>
-            <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.formTemplate}>
+            <h1>Lisää uusi asiakas</h1>
+            <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.inputContainer}>
                     <input
                         className={styles.customerMaxId}
@@ -71,24 +71,24 @@ const AddCustomerPage = () => {
                     />
                 </div> */}
                 <div className={styles.inputContainer}>
+                    <label htmlFor="customerName">Asiakkaan nimi:</label>
                     <input
                         type="text"
-                        placeholder="Asiakkaan nimi:"
                         value={customerName}
                         onChange={(e) => setCustomerName(e.target.value)}
                     />
                 </div>
-
                 <div className={styles.inputContainer}>
+                    <label htmlFor="address">Osoite:</label>
                     <input
                         id="address"
-                        placeholder="Osoite:"
                         type="text"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
+                    <label htmlFor="phone">Puhelin:</label>
                     <input
                         id="phone"
                         type="text"
@@ -97,6 +97,7 @@ const AddCustomerPage = () => {
                     />
                 </div>
                 <div className={styles.inputContainer}>
+                    <label htmlFor="email">Sähköposti:</label>
                     <input
                         id="email"
                         type="text"
@@ -105,6 +106,7 @@ const AddCustomerPage = () => {
                     />
                 </div>
                 <div className={styles.inputContainer}>
+                    <label htmlFor="birthDate">Syntymäaika:</label>
                     <input
                         id="birthDate"
                         type="text"
@@ -112,7 +114,6 @@ const AddCustomerPage = () => {
                         onChange={(e) => setBirthDate(e.target.value)}
                     />
                 </div>
-                {/* Tarvittaessa lisää kenttiä */}
                 <button type="submit">Lisää asiakas</button>
             </form>
         </div>
