@@ -14,48 +14,45 @@ const AddCabinPage = () => {
     };
 
     return (
-        <div className={styles.cabinBR}>
-            <div className={styles.title}>Lisää uusi mökki</div>
-            <form className={styles.form} onSubmit={handleSubmit}>
-                {/* <div className={styles.flexDiv}> */}
-                <label>
+        <div className={styles.formTemplate}>
+            <h1> Lisää uusi mökki</h1>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.inputContainer}>
+                    <label htmlFor="cabinName">Mökin nimi:</label>
                     <input
                         id="cabinName"
                         type="text"
                         value={cabinName}
                         onChange={(e) => setCabinName(e.target.value)}
                     />
-                    <span>Mökin nimi:</span>
-                </label>
-                <label>
+                </div>
+                <div className={styles.inputContainer}>
+                    <label htmlFor="location">Sijainti:</label>
                     <input
                         id="location"
                         type="text"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                     />
-                    <span>Sijainti:</span>
-                </label>
-                {/* </div> */}
-                <label>
-                    <textarea
+                </div>
+                <div className={styles.inputContainer}>
+                    <label htmlFor="description">Kuvaus:</label>
+                    <input
                         id="description"
-                        className={styles.descrip}
+                        type="text"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
-                    <span>Kuvaus:</span>
-                </label>
-                <label>
+                </div>
+                <div className={styles.inputContainer}>
+                    <label htmlFor="price">Hinta:</label>
                     <input
                         id="price"
                         type="text"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                     />
-                    <span>Hinta:</span>
-                </label>
-                {/* Tarvittaessa lisää kenttiä */}
+                </div>
                 <button type="submit">Lisää mökki</button>
             </form>
         </div>

@@ -1,104 +1,68 @@
-* {
-    font-family: Arial, Helvetica, sans-serif;
-}
-.cabinBR {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 500px;
-    background-color: transparent;
-    /* background-color: #cc3b3b; */
-    padding: 20px;
-    border-radius: 20px;
-    position: relative;
-    border: 2px solid rgb(0, 0, 0);
-}
-
-.title {
-    font-size: 28px;
-    color: rgb(255, 255, 255);
-    font-weight: 600;
-    letter-spacing: 0px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: 0px;
+.formTemplate {
+    overflow: auto;
 }
 
 .form {
-    border: 2px solid rgb(0, 0, 0);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
     max-width: 500px;
-    background-color: rgba(0, 26, 255, 0.253);
+    margin: 20px auto;
     padding: 20px;
-    border-radius: 20px;
-    position: relative;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.form label {
+/* Input-containerin tyylit */
+.inputContainer {
     position: relative;
-}
-
-.form label input,
-.form label textarea {
+    margin: 50px auto;
     width: 100%;
-    padding: 20px 10px 20px 10px;
-    outline: 0;
-    border: 2px solid rgba(0, 0, 0, 0.397);
-    border-radius: 10px;
-    font-size: 16px;
 }
 
-.form label input + span,
-.form label textarea + span {
-    position: absolute;
-    left: 10px;
-    top: 2px;
-    font-size: 1em;
-    cursor: text;
-    transition: 0.3s ease;
-    font-weight: 500;
-}
-
-.form label input:focus + span,
-.form label .input:valid + span {
-    top: 45px;
-    font-size: 0.7em;
-    font-weight: 600;
-}
-
-.form label textarea:focus + span,
-.form label textarea:valid + span {
-    top: 0px;
-    font-size: 0.7em;
-    font-weight: 600;
-}
-
-.form label input:valid + span,
-.form label textarea:valid + span {
-    color: rgb(0, 0, 0);
-}
-
-button {
+.inputContainer input[type="text"] {
+    font-size: 20px;
+    width: 100%;
     border: none;
+    border-bottom: 2px solid #ccc;
+    padding: 5px 0;
+    transition: border-color 0.3s;
     outline: none;
-    background-color: royalblue;
-    padding: 10px;
-    border-radius: 10px;
-    color: #ffffff;
-    font-size: 16px;
-    transform: 0.3s ease;
 }
 
-button:hover {
-    background-color: rgb(56, 90, 194);
+.inputContainer input[type="text"]:focus {
+    border-color: #007bff;
 }
 
-/* .flexDiv {
-    display: flex;
-    width: 100%;
-    gap: 6px;
-} */
+.inputContainer label {
+    /*display: absolute;*/ /* ALKUP. */
+    display: block;
+    top: 0;
+    left: 0;
+    margin-bottom: 5px;
+    font-weight: bold; /* LISÄTTY */
+    color: #333; /* ALKUP. #ccc */
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Btn tyylit */
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Responsiivisuus */
+@media (max-width: 600px) {
+    form {
+        padding: 15px;
+    }
+}

@@ -1,4 +1,7 @@
 /* Lomakkeen yleiset tyylit */
+.formTemplate {
+    overflow: auto;
+}
 .form {
     max-width: 500px;
     margin: 20px auto;
@@ -13,7 +16,6 @@
     position: relative;
     margin: 50px auto;
     width: 100%;
-    background-color: transparent; /*HUOM!*/
 }
 
 .inputContainer input[type="text"] {
