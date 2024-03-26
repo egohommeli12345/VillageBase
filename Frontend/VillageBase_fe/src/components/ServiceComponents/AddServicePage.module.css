@@ -1,4 +1,6 @@
 .formTemplate {
+    overflow: auto;
+    /* height: 100%; */
 }
 
 .inputContainer {

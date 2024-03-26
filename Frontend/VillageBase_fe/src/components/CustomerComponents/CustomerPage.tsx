@@ -85,7 +85,7 @@ export default function CustomerPage() {
                         onClick={handleCloseBtn}
                     />
                     <div className={styles.popUpContent}>
-                        {/* <AddServicePage /> */}
+                        <AddCustomerPage />
                     </div>
                 </div>
             </div>

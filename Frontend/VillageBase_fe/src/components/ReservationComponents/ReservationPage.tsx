@@ -88,7 +88,7 @@ export default function ReservationPage() {
                         onClick={handleCloseBtn}
                     />
                     <div className={styles.popUpContent}>
-                        {/* <AddServicePage /> */}
+                        <AddReservationPage />
                     </div>
                 </div>
             </div>
