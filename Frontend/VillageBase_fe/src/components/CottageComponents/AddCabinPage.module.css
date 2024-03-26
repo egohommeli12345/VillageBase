@@ -52,8 +52,8 @@
     font-size: 16px;
 }
 
-.form label input+span,
-.form label textarea+span {
+.form label input + span,
+.form label textarea + span {
     position: absolute;
     left: 10px;
     top: 2px;
@@ -63,22 +63,22 @@
     font-weight: 500;
 }
 
-.form label input:focus+span,
-.form label .input:valid+span {
+.form label input:focus + span,
+.form label .input:valid + span {
     top: 45px;
     font-size: 0.7em;
     font-weight: 600;
 }
 
-.form label textarea:focus+span,
-.form label textarea:valid+span {
+.form label textarea:focus + span,
+.form label textarea:valid + span {
     top: 0px;
     font-size: 0.7em;
     font-weight: 600;
 }
 
-.form label input:valid+span,
-.form label textarea:valid+span {
+.form label input:valid + span,
+.form label textarea:valid + span {
     color: rgb(0, 0, 0);
 }
 
@@ -90,7 +90,7 @@ button {
     border-radius: 10px;
     color: #ffffff;
     font-size: 16px;
-    transform: .3s ease;
+    transform: 0.3s ease;
 }
 
 button:hover {

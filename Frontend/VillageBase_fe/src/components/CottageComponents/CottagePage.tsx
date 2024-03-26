@@ -84,7 +84,7 @@ export default function CottagePage() {
                         onClick={handleCloseBtn}
                     />
                     <div className={styles.popUpContent}>
-                        {/* <AddServicePage /> */}
+                        <AddCabinPage />
                     </div>
                 </div>
             </div>

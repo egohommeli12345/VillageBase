@@ -1,0 +1,66 @@
+/* Lomakkeen yleiset tyylit */
+.form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Input-containerin tyylit */
+.inputContainer {
+    position: relative;
+    margin: 50px auto;
+    width: 100%;
+    background-color: transparent; /*HUOM!*/
+}
+
+.inputContainer input[type="text"] {
+    font-size: 20px;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    padding: 5px 0;
+    transition: border-color 0.3s;
+    outline: none;
+}
+
+.inputContainer input[type="text"]:focus {
+    border-color: #007bff;
+}
+
+.inputContainer label {
+    /*display: absolute;*/ /* ALKUP. */
+    display: block;
+    top: 0;
+    left: 0;
+    margin-bottom: 5px;
+    font-weight: bold; /* LISÄTTY */
+    color: #333; /* ALKUP. #ccc */
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Btn tyylit */
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Responsiivisuus */
+@media (max-width: 600px) {
+    form {
+        padding: 15px;
+    }
+}

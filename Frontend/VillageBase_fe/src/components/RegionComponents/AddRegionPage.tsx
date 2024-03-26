@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import styles from "./AddRegionPage.module.css";
 
 const AddRegionPage = () => {
-    const [regionName, setRegionName] = useState('');
-    const [location, setLocation] = useState('');
+    const [regionName, setRegionName] = useState("");
+    const [location, setLocation] = useState("");
     // Lisätään tarvittaessa lisää
 
     const handleSubmit = (event: React.FormEvent) => {
@@ -15,8 +16,8 @@ const AddRegionPage = () => {
     return (
         <div>
             <h1>Lisää uusi alue</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.inputContainer}>
                     <label htmlFor="regionName">Alueen nimi:</label>
                     <input
                         id="regionName"
@@ -25,7 +26,7 @@ const AddRegionPage = () => {
                         onChange={(e) => setRegionName(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className={styles.inputContainer}>
                     <label htmlFor="location">Sijainti:</label>
                     <input
                         id="location"

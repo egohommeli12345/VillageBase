@@ -1,11 +1,12 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
+import styles from "./AddReservationPage.module.css";
 
 const AddReservationPage = () => {
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [cottage, setCottage] = useState('');
-    const [customer, setCustomer] = useState('');
-    const [services, setServices] = useState('');
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [cottage, setCottage] = useState("");
+    const [customer, setCustomer] = useState("");
+    const [services, setServices] = useState("");
     // Lisätään tarvittaessa lisää
 
     const handleSubmit = (event: React.FormEvent) => {
@@ -15,7 +16,7 @@ const AddReservationPage = () => {
     };
 
     return (
-        <div>
+        <div className={styles.addReservationBg}>
             <h1>Lisää uusi varaus</h1>
             <form onSubmit={handleSubmit}>
                 <div>

@@ -1,7 +1,12 @@
+.formTemplate {
+    overflow: auto;
+    /* height: 100%; */
+}
+
 .inputContainer {
     position: relative;
     margin: 50px auto;
-    width: 200px;
+    width: 100%; /*ALKUP. 200px*/
     /* background-color: #f11a1a; */
 }
 
@@ -11,8 +16,12 @@
     border: none;
     border-bottom: 2px solid #ccc;
     padding: 5px 0;
-    /* background-color: transparent; */
+    transition: border-color 0.3s;
     outline: none;
+}
+
+.inputContainer input[type="text"]:focus {
+    border-color: #007bff;
 }
 
 .inputContainer label {
