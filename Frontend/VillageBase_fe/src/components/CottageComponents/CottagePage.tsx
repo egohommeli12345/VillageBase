@@ -6,6 +6,7 @@ import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../MainComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
+import AddCabinPage from "./AddCabinPage";
 
 // Function for CottagePage
 export default function CottagePage() {

@@ -6,6 +6,7 @@ import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { useSearch } from "../MainComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
+import AddReservationPage from "./AddReservationPage";
 
 // Function for ReservationPage
 export default function ReservationPage() {
@@ -56,6 +57,12 @@ export default function ReservationPage() {
             )
         );
     }, [searchQuery, reservations]);
+
+    const handleCloseBtn = () => {
+        setEditBtn(false);
+        setAddBtn(false);
+        setDeleteBtn(false);
+    };
 
     useEffect(() => {
         setOnLandingPage(true);
