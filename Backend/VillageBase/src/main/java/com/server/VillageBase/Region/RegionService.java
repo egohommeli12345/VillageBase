@@ -18,4 +18,10 @@ public class RegionService {
     public List<Region> getAllRegions() {
         return regionRepository.findAll();
     }
+
+    public int getMaxId() { return regionRepository.findRegionWithMaxId(); }
+
+    public Region addRegion(Region region) {
+        return regionRepository.save(region);
+    }
 }

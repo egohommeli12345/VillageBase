@@ -1,7 +1,9 @@
 package com.server.VillageBase.Cottage;
 
+import com.server.VillageBase.Service.ServiceObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -18,4 +20,13 @@ public class CottageService {
         public List<Cottage> getAllCottages() {
             return cottageRepository.findAll();
         }
+
+        public int getMaxId() {
+            return cottageRepository.findCottageWithMaxId();
+        }
+
+        public Cottage addCottage(Cottage cottage) {
+                return cottageRepository.save(cottage);
+        }
+
 }

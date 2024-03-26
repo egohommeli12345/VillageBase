@@ -1,22 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AddRegionPage.module.css";
+import { RegionAdd, RegionMAXID } from "./RegionFetch";
+import { useToolState } from "../MainComponents/ToolStateContext";
+import { RegionInterface } from "./RegionInterface";
 
 const AddRegionPage = () => {
     const [regionName, setRegionName] = useState("");
-    const [location, setLocation] = useState("");
+    const [regionMaxId, setRegionMaxId] = useState("");
     // Lisätään tarvittaessa lisää
+
+    const { addBtn, setAddBtn } = useToolState();
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         //  Tässä kohtaa lomakkeen tiedot ovat valmiina lähetettäväksi backendiin
-        console.log(regionName, location);
         // Lähetä tiedot backendiin tässä
+        const newRegion: RegionInterface = {
+            alue_id: Number(regionMaxId ? regionMaxId : 0),
+            nimi: regionName,
+        };
+
+        RegionAdd(newRegion).then((data) => {
+            console.log(data);
+            setAddBtn(!addBtn);
+            setRegionMaxId("");
+            setRegionName("");
+        });
     };
+
+    useEffect(() => {
+        RegionMAXID().then((data) => {
+            setRegionMaxId(data + 1);
+        });
+    }, [addBtn]);
 
     return (
         <div>
             <h1>Lisää uusi alue</h1>
             <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.inputContainer}>
+                    <label htmlFor="regionId">Alueen ID:</label>
+                    <input
+                        id="regionId"
+                        type="text"
+                        value={regionMaxId}
+                        disabled
+                    />
+                </div>
                 <div className={styles.inputContainer}>
                     <label htmlFor="regionName">Alueen nimi:</label>
                     <input
@@ -24,15 +54,6 @@ const AddRegionPage = () => {
                         type="text"
                         value={regionName}
                         onChange={(e) => setRegionName(e.target.value)}
-                    />
-                </div>
-                <div className={styles.inputContainer}>
-                    <label htmlFor="location">Sijainti:</label>
-                    <input
-                        id="location"
-                        type="text"
-                        value={location}
-                        onChange={(e) => setLocation(e.target.value)}
                     />
                 </div>
                 {/* Tarvittaessa lisää kenttiä */}

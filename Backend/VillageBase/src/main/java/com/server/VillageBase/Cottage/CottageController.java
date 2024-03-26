@@ -1,9 +1,8 @@
 package com.server.VillageBase.Cottage;
 
+import com.server.VillageBase.Region.Region;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +26,15 @@ public class CottageController {
     @GetMapping("/api/cottages/all")
     public List<Cottage> getAllCottages() {
         return cottageService.getAllCottages();
+    }
+
+    @GetMapping("/api/cottages/maxid")
+    public int getMaxId() { return cottageService.getMaxId(); }
+
+    @PostMapping("/api/cottages/add")
+    public String addService(
+            @RequestBody Cottage cottageObject) {
+        cottageService.addCottage(cottageObject);
+        return "Service added";
     }
 }

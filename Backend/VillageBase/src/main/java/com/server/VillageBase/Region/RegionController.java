@@ -1,9 +1,8 @@
 package com.server.VillageBase.Region;
 
+import com.server.VillageBase.Service.ServiceObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +26,15 @@ public class RegionController {
     @GetMapping("/api/regions/all")
     public List<Region> getAllRegions() {
         return regionService.getAllRegions();
+    }
+
+    @GetMapping("/api/regions/maxid")
+    public int getMaxId() { return regionService.getMaxId(); }
+
+    @PostMapping("/api/regions/add")
+    public String addService(
+            @RequestBody Region regionObject) {
+        regionService.addRegion(regionObject);
+        return "Service added";
     }
 }

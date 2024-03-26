@@ -2,6 +2,7 @@ package com.server.VillageBase.Region;
 
 import com.server.VillageBase.Region.Region;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 // JpaRepository is an interface that allows the use of CRUD operations
 // It is used to handle the database operations of the application
@@ -9,4 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 // EntityRepository needs to extend JpaRepository (it contains the CRUD logic)
 public interface RegionRepository extends JpaRepository<Region, String>{
+
+    @Query("SELECT MAX(alue_id) FROM Region") int findRegionWithMaxId();
 }
