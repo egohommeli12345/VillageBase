@@ -13,7 +13,6 @@
 
 /* Input-containerin tyylit */
 .inputContainer {
-    position: relative;
     margin: 50px auto;
     width: 100%;
 }
@@ -33,13 +32,12 @@
 }
 
 .inputContainer label {
-    /*display: absolute;*/ /* ALKUP. */
     display: block;
     top: 0;
     left: 0;
     margin-bottom: 5px;
-    font-weight: bold; /* LISÄTTY */
-    color: #333; /* ALKUP. #ccc */
+    font-weight: bold;
+    color: #333;
     transition: all 0.3s ease;
     pointer-events: none;
 }
