@@ -41,6 +41,7 @@ export default function RegionPage() {
             return;
         }
         setActiveContainerId(id);
+        console.log(id);
     };
 
     // Fetching the region data and sorting it by the sortType

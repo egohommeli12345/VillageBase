@@ -6,7 +6,6 @@ import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { useSearch } from "../MainComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
-import AddReservationPage from "./AddReservationPage";
 
 // Function for ReservationPage
 export default function ReservationPage() {
@@ -36,6 +35,7 @@ export default function ReservationPage() {
             return;
         }
         setActiveContainerId(id);
+        console.log(id);
     };
 
     // Fetching the reservation data and sorting it by the sortType
