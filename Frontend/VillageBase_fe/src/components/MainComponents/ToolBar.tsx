@@ -56,7 +56,7 @@ const ToolBar = () => {
             <div className={styles.toolBar}>
                 <div className={styles.add}>
                     <div className={styles.tool} onClick={handleAdd}>
-                        Lisää
+                        Uusi
                     </div>
                 </div>
 

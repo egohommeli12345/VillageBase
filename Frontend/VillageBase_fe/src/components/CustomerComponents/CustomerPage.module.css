@@ -3,6 +3,13 @@
     background-color: transparent;
 }
 
+<<<<<<< HEAD
+.hidden {
+    display: none;
+}
+
+=======
+>>>>>>> refs/remotes/origin/main
 .addPageBg {
     position: fixed;
     top: 0;
@@ -16,10 +23,13 @@
     align-items: center;
 }
 
+<<<<<<< HEAD
+=======
 .hidden {
     display: none;
 }
 
+>>>>>>> refs/remotes/origin/main
 .addPage {
     height: 70vh;
     width: 80vw;

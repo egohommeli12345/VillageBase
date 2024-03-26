@@ -20,7 +20,7 @@ export default function RegionPage() {
         setEditBtn,
         setAddBtn,
         setDeleteBtn,
-        setOnLandingPage, // ALKUP:  const { setOnLandingPage } = useToolState();
+        setOnLandingPage,
     } = useToolState();
 
     // useState hook for searching the regions
@@ -64,15 +64,15 @@ export default function RegionPage() {
         );
     }, [searchQuery, regions]);
 
+    useEffect(() => {
+        setOnLandingPage(true);
+    }, []);
+
     const handleCloseBtn = () => {
         setEditBtn(false);
         setAddBtn(false);
         setDeleteBtn(false);
     };
-
-    useEffect(() => {
-        setOnLandingPage(true);
-    }, []);
 
     return (
         <div className={styles.regionBG}>
@@ -88,7 +88,6 @@ export default function RegionPage() {
                     </div>
                 </div>
             </div>
-
             <div className={styles.regionCardsContainer}>
                 {filteredData.map((region) => (
                     <div

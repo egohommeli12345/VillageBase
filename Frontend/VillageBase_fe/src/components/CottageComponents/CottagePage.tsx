@@ -13,16 +13,6 @@ export default function CottagePage() {
     // Custom hooks for sortType and searchQuery
     const { sortType } = useSortType();
     const { searchQuery } = useSearch();
-    const {
-        setOnLandingPage,
-        onLandingPage,
-        addBtn,
-        deleteBtn,
-        editBtn,
-        setEditBtn,
-        setAddBtn,
-        setDeleteBtn,
-    } = useToolState();
 
     // useState hook for searching the cottages
     const [filteredData, setFilteredData] = useState<CottageInterface[]>([]);
@@ -64,15 +54,25 @@ export default function CottagePage() {
         );
     }, [searchQuery, cottages]);
 
+    useEffect(() => {
+        setOnLandingPage(true);
+    }, []);
+
+    const {
+        addBtn,
+        deleteBtn,
+        editBtn,
+        setEditBtn,
+        setAddBtn,
+        setDeleteBtn,
+        setOnLandingPage,
+    } = useToolState();
+
     const handleCloseBtn = () => {
         setEditBtn(false);
         setAddBtn(false);
         setDeleteBtn(false);
     };
-
-    useEffect(() => {
-        setOnLandingPage(true);
-    }, []);
 
     return (
         <div className={styles.cottageBG}>
@@ -84,7 +84,7 @@ export default function CottagePage() {
                         onClick={handleCloseBtn}
                     />
                     <div className={styles.popUpContent}>
-                        <AddCabinPage />
+                        {/* <AddServicePage /> */}
                     </div>
                 </div>
             </div>
