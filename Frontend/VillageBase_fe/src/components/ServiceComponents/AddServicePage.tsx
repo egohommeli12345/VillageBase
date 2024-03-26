@@ -50,8 +50,8 @@ const AddServicePage = () => {
 
     return (
         <div className={styles.formTemplate}>
-            <div>Lisää uusi palvelu</div>
-            <form onSubmit={handleSubmit}>
+            <h1>Lisää uusi palvelu</h1>
+            <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.inputContainer}>
                     <input
                         className={styles.serviceMaxId}
