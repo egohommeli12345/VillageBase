@@ -53,6 +53,7 @@ const AddServicePage = () => {
             <h1>Lisää uusi palvelu</h1>
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.inputContainer}>
+                    <label htmlFor="serviceMaxId">Palvelun ID:</label>
                     <input
                         className={styles.serviceMaxId}
                         type="text"
@@ -61,49 +62,49 @@ const AddServicePage = () => {
                     />
                 </div>
                 <div className={styles.inputContainer}>
+                    <label htmlFor="areaId">Alueen ID:</label>
                     <input
                         type="text"
-                        placeholder="Alueen ID:"
                         value={areaId}
                         onChange={(e) => setAreaId(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
+                    <label htmlFor="serviceName">Palvelun tiedot:</label>
                     <input
                         type="text"
-                        placeholder="Palvelun nimi:"
                         value={serviceName}
                         onChange={(e) => setServiceName(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
+                    <label htmlFor="price">Hinta:</label>
                     <input
                         type="text"
-                        placeholder="Hinta:"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
+                    <label htmlFor="description">Kuvaus:</label>
                     <input
                         type="text"
-                        placeholder="Kuvaus:"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
+                    <label htmlFor="type">Tyyppi:</label>
                     <input
                         type="text"
-                        placeholder="Palvelun tyyppi:"
                         value={type}
                         onChange={(e) => setType(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
+                    <label htmlFor="vat">ALV %:</label>
                     <input
                         type="text"
-                        placeholder="Alv (%):"
                         value={vat}
                         onChange={(e) => setVat(e.target.value)}
                     />

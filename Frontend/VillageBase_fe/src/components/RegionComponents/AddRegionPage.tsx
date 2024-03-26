@@ -14,7 +14,7 @@ const AddRegionPage = () => {
     };
 
     return (
-        <div>
+        <div className={styles.formTemplate}>
             <h1>Lisää uusi alue</h1>
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.inputContainer}>

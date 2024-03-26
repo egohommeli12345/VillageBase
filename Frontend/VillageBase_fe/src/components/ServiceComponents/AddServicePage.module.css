@@ -1,6 +1,5 @@
 .formTemplate {
     overflow: auto;
-    /* height: 100%; */
 }
 
 .form {
@@ -12,11 +11,11 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Input-containerin tyylit */
 .inputContainer {
     position: relative;
     margin: 50px auto;
-    width: 100%; /*ALKUP. 200px*/
-    /* background-color: #f11a1a; */
+    width: 100%;
 }
 
 .inputContainer input[type="text"] {
