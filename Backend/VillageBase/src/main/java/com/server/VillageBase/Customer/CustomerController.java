@@ -1,9 +1,8 @@
 package com.server.VillageBase.Customer;
 
+import com.server.VillageBase.Cottage.Cottage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,4 +27,16 @@ public class CustomerController {
     public List<Customer> getAllCustomers() {
         return customerService.getAllCustomers();
     }
+
+    @GetMapping("/api/customers/maxid")
+    public int getMaxId() { return customerService.getMaxId(); }
+
+    @PostMapping("/api/customers/add")
+    public String addCustomer(
+            @RequestBody Customer customerObject) {
+        System.out.println(customerObject);
+        customerService.addCustomer(customerObject);
+        return "Customer added";
+    }
 }
+

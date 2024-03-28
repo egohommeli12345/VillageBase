@@ -1,54 +1,49 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./AddCustomerPage.module.css";
-//import { CustomerInterface } from "./CustomerInterface";
+import {useToolState} from "../MainComponents/ToolStateContext.tsx";
+import {CustomerInterface} from "./CustomerInterface.ts";
+import {AddCustomer, CustomerMAXID} from "./CustomerFetch.ts";
 
 const AddCustomerPage = () => {
-    const [maxId, setMaxId] = useState("");
-    const [customerName, setCustomerName] = useState("");
+    const [maxId, setMaxId] = useState();
+    const [zipCode, setZipCode] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
-    const [birthDate, setBirthDate] = useState("");
     // Tarvittaessa lisää kenttiä
 
-    // const { addBtn, setAddBtn } = useToolState();
+    const { addBtn, setAddBtn } = useToolState();
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
 
-        // const newCustomer: CustomerInterface = {
-        //     asiakas_id: Number(maxId ? maxId : 0),
-        //     nimi: customerName,
-        //     osoite: address,
-        //     puhelin: phone,
-        //     email: email,
-        //     syntymaaika: birthDate,
-        // };
+        const newCustomer: CustomerInterface = {
+            asiakas_id: Number(maxId ? maxId : 0),
+            postinro: zipCode,
+            etunimi: firstName,
+            sukunimi: lastName,
+            lahiosoite: address,
+            email: email,
+            puhelinnro: phone,
+        };
 
-        // asiakas_id: number;
-        // postinro: string;
-        // etunimi: string;
-        // sukunimi: string;
-        // lahiosoite: string;
-        // email: string;
-        // puhelinnro: string;
-
-        // CustomerAdd(newCustomer).then((data) => {
-        //     console.log(data);
-        //     setAddBtn(!addBtn);
-        //     setCustomerName("");
-        //     setAddress("");
-        //     setPhone("");
-        //     setEmail("");
-        //     setBirthDate("");
-        // });
+        AddCustomer(newCustomer).then(() => {
+            setAddBtn(!addBtn);
+            setFirstName("");
+            setLastName("");
+            setAddress("");
+            setZipCode("");
+            setPhone("");
+            setEmail("");
+        });
     };
 
-    // useEffect(() => {
-    //     CustomerMAXID().then((data) => {
-    //         setMaxId(data + 1);
-    //     });
-    // }, [addBtn]);
+    useEffect(() => {
+         CustomerMAXID().then((data) => {
+             setMaxId(data + 1);
+         });}, [addBtn]);
 
     return (
         <div className={styles.formTemplate}>
@@ -56,62 +51,57 @@ const AddCustomerPage = () => {
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.inputContainer}>
                     <input
-                        className={styles.customerMaxId}
                         type="text"
-                        disabled={true}
+                        disabled
                         value={maxId}
                     />
                 </div>
-                {/* <div className={styles.inputContainer}>
-                    <input
-                        type="text"
-                        placeholder="Asiakkaan ID"
-                        value={areaId}
-                        onChange={(e) => setAreaId(e.target.value)}
-                    />
-                </div> */}
                 <div className={styles.inputContainer}>
-                    <label htmlFor="customerName">Asiakkaan nimi:</label>
+                    <label>Asiakkaan etunimi:</label>
                     <input
                         type="text"
-                        value={customerName}
-                        onChange={(e) => setCustomerName(e.target.value)}
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
-                    <label htmlFor="address">Osoite:</label>
+                    <label>Asiakkaan sukunimi:</label>
                     <input
-                        id="address"
+                        type="text"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                    />
+                </div>
+                <div className={styles.inputContainer}>
+                    <label>Osoite:</label>
+                    <input
                         type="text"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
-                    <label htmlFor="phone">Puhelin:</label>
+                    <label>Postinumero:</label>
                     <input
-                        id="phone"
+                        type="text"
+                        value={zipCode}
+                        onChange={(e) => setZipCode(e.target.value)}
+                    />
+                </div>
+                <div className={styles.inputContainer}>
+                    <label>Puhelin:</label>
+                    <input
                         type="text"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
-                    <label htmlFor="email">Sähköposti:</label>
+                    <label>Sähköposti:</label>
                     <input
-                        id="email"
                         type="text"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div className={styles.inputContainer}>
-                    <label htmlFor="birthDate">Syntymäaika:</label>
-                    <input
-                        id="birthDate"
-                        type="text"
-                        value={birthDate}
-                        onChange={(e) => setBirthDate(e.target.value)}
                     />
                 </div>
                 <button type="submit">Lisää asiakas</button>

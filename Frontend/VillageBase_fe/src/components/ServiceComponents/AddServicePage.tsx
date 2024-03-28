@@ -55,9 +55,8 @@ const AddServicePage = () => {
                 <div className={styles.inputContainer}>
                     <label htmlFor="serviceMaxId">Palvelun ID:</label>
                     <input
-                        className={styles.serviceMaxId}
                         type="text"
-                        disabled={true}
+                        disabled
                         value={maxId}
                     />
                 </div>
