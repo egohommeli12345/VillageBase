@@ -3,6 +3,7 @@ package com.server.VillageBase.Reservation;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 
 // @Entity is used to map this class as a data entity
 // It matches the datamodel in the database
@@ -92,3 +93,4 @@ public class Reservation<R, S> {
         this.varattu_loppupvm = varattu_loppupvm;
     }
 }
+

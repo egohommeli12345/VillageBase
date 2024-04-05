@@ -1,9 +1,10 @@
 package com.server.VillageBase.Reservation;
 
+import com.server.VillageBase.Cottage.Cottage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +30,15 @@ public class ReservationController {
     @GetMapping("/api/reservations/all")
     public List<Reservation> getAllReservations() {
         return reservationService.getAllReservations();
+    }
+
+    @PostMapping("/api/reservations/available-cottages")
+    public ResponseEntity<List<Cottage>> getAvailableCottages(@RequestBody DateRangeDTO dateRange) {
+        try {
+            List<Cottage> availableCottages = reservationService.getAvailableCottages(dateRange);
+            return new ResponseEntity<>(availableCottages, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
