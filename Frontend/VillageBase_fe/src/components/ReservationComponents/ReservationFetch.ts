@@ -15,7 +15,7 @@ export async function DeleteReservation(id: number) {
 export async function GetAvaibleCottages(startDate: string, endDate: string) {
     // Fetches all available cottages from the backend
     const response = await fetch(
-        "http://localhost:8080/api/reservations/avaible-cottages",
+        "http://localhost:8080/api/reservations/available-cottages",
         {
             method: "POST",
             headers: {
