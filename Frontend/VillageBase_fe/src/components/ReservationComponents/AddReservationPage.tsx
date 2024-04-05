@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./AddReservationPage.module.css";
+import { GetAvaibleCottages, GetAvaibleServices } from "./ReservationFetch.ts";
 
 const AddReservationPage = () => {
     // Reservation
@@ -21,6 +22,33 @@ const AddReservationPage = () => {
         console.log(startDate, endDate, cottage, customer, services);
         // Lähetä tiedot backendiin tässä
     };
+
+    const avaibleCottages = () => {
+        GetAvaibleCottages(startDate, endDate).then((data) => {
+            console.log(data);
+        });
+    };
+
+    /*const avaibleServices = () => {
+        GetAvaibleServices(cottage).then((data) => {
+            console.log(data);
+        });
+    };*/
+
+    const cottages = [
+        {
+            mokki_id: 1,
+            mokkinimi: "Mökki 1",
+        },
+        {
+            mokki_id: 2,
+            mokkinimi: "Mökki 2",
+        },
+        {
+            mokki_id: 3,
+            mokkinimi: "Mökki 3",
+        },
+    ];
 
     return (
         <div className={styles.formTemplate}>
@@ -45,14 +73,20 @@ const AddReservationPage = () => {
                             onChange={(e) => setEndDate(e.target.value)}
                         />
                     </div>
+                    <button onClick={avaibleCottages}>Hae vapaat mökit</button>
                     <div className={styles.inputContainer}>
                         <label htmlFor="cottage">Mökki:</label>
-                        <input
-                            id="cottage"
-                            type="text"
-                            value={cottage}
-                            onChange={(e) => setCottage(e.target.value)}
-                        />
+                        <select name="cottages" id="cottage">
+                            <option value="">Valitse mökki</option>
+                            {cottages.map((cottage) => (
+                                <option
+                                    key={cottage.mokki_id}
+                                    value={cottage.mokki_id}
+                                >
+                                    {cottage.mokkinimi}, ID: {cottage.mokki_id}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div className={styles.inputContainer}>
                         <label htmlFor="customer">Asiakas:</label>
