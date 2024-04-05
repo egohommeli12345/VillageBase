@@ -16,4 +16,10 @@ public class CustomerService {
 
     // This returns all the customers from the database (through the repository layer)
     public List<Customer> getAllCustomers() { return customerRepository.findAll(); }
+
+    public int getMaxId() { return customerRepository.findCustomerWithMaxId(); }
+
+    public Customer addCustomer(Customer customer) {
+        return customerRepository.save(customer);
+    }
 }

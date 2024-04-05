@@ -85,7 +85,3 @@ button[type="submit"]:hover {
 .addBtn {
     width: 100%;
 }
-
-.serviceMaxId:disabled {
-    color: black;
-}
