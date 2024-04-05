@@ -31,7 +31,7 @@ export async function GetAvaibleCottages(startDate: string, endDate: string) {
     return cottages;
 }
 
-export async function GetAvaibleServices(mokki_id: number) {
+export async function GetAvailableServices(mokki_id: number) {
     const response = await fetch(
         `http://localhost:8080/api/services/cottage?id=${mokki_id}`,
     );

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styles from "./AddReservationPage.module.css";
-import { GetAvaibleCottages, GetAvaibleServices } from "./ReservationFetch.ts";
+import {
+    GetAvaibleCottages,
+    GetAvailableServices,
+} from "./ReservationFetch.ts";
 
 const AddReservationPage = () => {
     // Reservation
@@ -29,8 +32,8 @@ const AddReservationPage = () => {
         });
     };
 
-    /*const avaibleServices = () => {
-        GetAvaibleServices(cottage).then((data) => {
+    /*const availableServices = () => {
+        GetAvailableServices(cottage).then((data) => {
             console.log(data);
         });
     };*/
