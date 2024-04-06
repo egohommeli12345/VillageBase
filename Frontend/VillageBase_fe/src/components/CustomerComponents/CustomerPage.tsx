@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./CustomerPage.module.css";
-import { CustomerFetch } from "./CustomerFetch";
+import { CustomerFetch, DeleteCustomer } from "./CustomerFetch";
 import { CustomerInterface } from "./CustomerInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
@@ -22,7 +22,7 @@ export default function CustomerPage() {
 
     // State to track the active customer card
     const [activeContainerId, setActiveContainerId] = useState<number | null>(
-        null
+        null,
     );
 
     // Function to toggle the active container
@@ -49,9 +49,9 @@ export default function CustomerPage() {
                 Object.values(item).some((value) =>
                     String(value)
                         .toLowerCase()
-                        .includes(searchQuery.toLowerCase())
-                )
-            )
+                        .includes(searchQuery.toLowerCase()),
+                ),
+            ),
         );
     }, [searchQuery, customers]);
 
@@ -74,6 +74,12 @@ export default function CustomerPage() {
         setAddBtn(false);
         setDeleteBtn(false);
     };
+
+    useEffect(() => {
+        if (deleteBtn && activeContainerId !== null) {
+            DeleteCustomer(activeContainerId);
+        }
+    }, [deleteBtn]);
 
     return (
         <div className={styles.customerBG}>

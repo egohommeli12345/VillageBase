@@ -38,5 +38,12 @@ public class CustomerController {
         customerService.addCustomer(customerObject);
         return "Customer added";
     }
+
+    @GetMapping("/api/customers/delete")
+    public String deleteCustomer(@RequestParam int id) {
+        System.out.println(id);
+        customerService.deleteCustomer(id);
+        return "Customer deleted";
+    }
 }
 

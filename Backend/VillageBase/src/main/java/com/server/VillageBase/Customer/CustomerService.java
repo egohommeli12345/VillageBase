@@ -22,4 +22,8 @@ public class CustomerService {
     public Customer addCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
+
+    public void deleteCustomer(int id) {
+        customerRepository.deleteById(id);
+    }
 }

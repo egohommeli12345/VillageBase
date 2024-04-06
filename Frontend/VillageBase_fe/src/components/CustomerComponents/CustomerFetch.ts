@@ -1,4 +1,4 @@
-import {CustomerInterface} from "./CustomerInterface.ts";
+import { CustomerInterface } from "./CustomerInterface.ts";
 
 export async function CustomerFetch() {
     // Fetches all regions from the backend
@@ -25,5 +25,14 @@ export async function AddCustomer(customer: CustomerInterface) {
     });
     if (response.ok) {
         alert("Asiakas lisätty onnistuneesti");
+    }
+}
+
+export async function DeleteCustomer(id: number) {
+    const response = await fetch(
+        `http://localhost:8080/api/customers/delete?id=${id}`,
+    );
+    if (response.ok) {
+        alert("Asiakas poistettu onnistuneesti");
     }
 }
