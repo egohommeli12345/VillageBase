@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react"; // Lisätty useRef -sale
 import styles from "./ToolBar.module.css";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { useSearch } from "./SearchContext";
-import { Link } from "react-router-dom"; // Link to the Add page -sale
 import { useToolState } from "./ToolStateContext";
 
 const ToolBar = () => {
@@ -119,26 +118,6 @@ const ToolBar = () => {
             </div>
         </div>
     );
-
-    function AddDropDown() {
-        return (
-            <div className={styles.addMenu}>
-                <Link to="/add-region" className={styles.addMenuItem}>
-                    Alue
-                </Link>
-                <Link to="/add-cabin" className={styles.addMenuItem}>
-                    Mökki
-                </Link>
-                <Link to="/add-service" className={styles.addMenuItem}>
-                    Palvelu
-                </Link>
-                <Link to="/add-reservation" className={styles.addMenuItem}>
-                    Varaus
-                </Link>
-                {/* Lisää muita kohtia täällä */}
-            </div>
-        );
-    }
 
     function handleSort() {
         setSortClicked(!sortClicked);

@@ -1,29 +1,37 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./MenuBar.module.css";
 import ToolBar from "./ToolBar";
-
+import { useSearch } from "./SearchContext";
 export default function MenuBar() {
     const navigate = useNavigate();
 
+    const { setSearchQuery } = useSearch();
     const goToRegionsPage = () => {
+        setSearchQuery("");
         navigate("/alueet");
     };
     const goToCottagesPage = () => {
+        setSearchQuery("");
         navigate("/mokit");
     };
     const goToServicesPage = () => {
+        setSearchQuery("");
         navigate("/palvelut");
     };
     const goToReservationsPage = () => {
+        setSearchQuery("");
         navigate("/varaukset");
     };
     const goToCustomersPage = () => {
+        setSearchQuery("");
         navigate("/asiakkaat");
     };
     const goToBillingPage = () => {
+        setSearchQuery("");
         navigate("/laskutus");
     };
     const goToReportsPage = () => {
+        setSearchQuery("");
         navigate("/raportit");
     };
 
