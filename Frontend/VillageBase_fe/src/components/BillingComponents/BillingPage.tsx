@@ -10,7 +10,7 @@ import { useToolState } from "../MainComponents/ToolStateContext";
 // Function for BillingPage
 export default function BillingPage() {
     // useContext hook for getting the sortType from the SortTypeContext
-    const { sortType } = useSortType();
+    const { sortType, setSortKeys, sortBy } = useSortType();
     const { searchQuery } = useSearch();
 
     // useState hook for mapping the billings to BillingInterface objects
@@ -19,7 +19,7 @@ export default function BillingPage() {
 
     // State to track the active container
     const [activeContainerId, setActiveContainerId] = useState<number | null>(
-        null
+        null,
     );
 
     // Function to toggle the active container
@@ -33,9 +33,11 @@ export default function BillingPage() {
 
     useEffect(() => {
         BillingFetch().then((data) => {
-            setBillings(SortItems(sortType, data, "lasku_id"));
+            const sortedData = SortItems(sortType, data, sortBy);
+            setBillings(sortedData);
+            setSortKeys(Object.keys(sortedData[0]));
         });
-    }, [sortType]);
+    }, [sortType, sortBy]);
 
     // Search function for filtering the regions
     useEffect(() => {
@@ -44,9 +46,9 @@ export default function BillingPage() {
                 Object.values(item).some((value) =>
                     String(value)
                         .toLowerCase()
-                        .includes(searchQuery.toLowerCase())
-                )
-            )
+                        .includes(searchQuery.toLowerCase()),
+                ),
+            ),
         );
     }, [searchQuery, billings]);
 

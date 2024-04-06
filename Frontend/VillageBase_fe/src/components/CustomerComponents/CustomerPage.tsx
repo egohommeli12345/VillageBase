@@ -11,7 +11,7 @@ import AddCustomerPage from "./AddCustomerPage";
 // Function for CustomerPage
 export default function CustomerPage() {
     // Custom hooks for sortType and searchQuery
-    const { sortType } = useSortType();
+    const { sortType, setSortKeys, sortBy } = useSortType();
     const { searchQuery } = useSearch();
 
     // useState hook for searching the customers
@@ -37,10 +37,11 @@ export default function CustomerPage() {
     // Fetching the region data and sorting it by the sortType
     useEffect(() => {
         CustomerFetch().then((data) => {
-            const sortedData = SortItems(sortType, data, "asiakas_id");
+            const sortedData = SortItems(sortType, data, sortBy);
             setCustomers(sortedData);
+            setSortKeys(Object.keys(sortedData[0]));
         });
-    }, [sortType]);
+    }, [sortType, sortBy]);
 
     // Search function for filtering the customers
     useEffect(() => {

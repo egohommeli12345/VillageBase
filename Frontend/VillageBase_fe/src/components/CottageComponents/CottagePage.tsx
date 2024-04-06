@@ -11,7 +11,7 @@ import AddCabinPage from "./AddCabinPage";
 // Function for CottagePage
 export default function CottagePage() {
     // Custom hooks for sortType and searchQuery
-    const { sortType } = useSortType();
+    const { sortType, setSortKeys, sortBy } = useSortType();
     const { searchQuery } = useSearch();
 
     // useState hook for searching the cottages
@@ -22,7 +22,7 @@ export default function CottagePage() {
 
     // State to track the active container
     const [activeContainerId, setActiveContainerId] = useState<number | null>(
-        null
+        null,
     );
 
     // Function to toggle the active container
@@ -37,9 +37,11 @@ export default function CottagePage() {
     // Fetching the cottage data and sorting it by the sortType
     useEffect(() => {
         CottageFetch().then((data) => {
-            setCottages(SortItems(sortType, data, "mokki_id"));
+            const sortedData = SortItems(sortType, data, sortBy);
+            setCottages(sortedData);
+            setSortKeys(Object.keys(sortedData[0]));
         });
-    }, [sortType]);
+    }, [sortType, sortBy]);
 
     // Search function for filtering the cottages
     useEffect(() => {
@@ -48,9 +50,9 @@ export default function CottagePage() {
                 Object.values(item).some((value) =>
                     String(value)
                         .toLowerCase()
-                        .includes(searchQuery.toLowerCase())
-                )
-            )
+                        .includes(searchQuery.toLowerCase()),
+                ),
+            ),
         );
     }, [searchQuery, cottages]);
 

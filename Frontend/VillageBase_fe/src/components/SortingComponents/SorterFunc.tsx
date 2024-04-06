@@ -1,18 +1,31 @@
-export function SortItems(sortType: string, data: any[], sortBy: any) {
+export function SortItems(sortType: string, data: any[], sortBy: string) {
     switch (sortType) {
         case "default":
-            console.log("default");
             break;
         case "ascending":
-            console.log("ascending");
             data.sort((a, b) => {
-                return a[sortBy] - b[sortBy];
+                const valA = +a[sortBy];
+                const valB = +b[sortBy];
+                if (!isNaN(valA) && !isNaN(valB)) {
+                    // Both values are effectively numbers, sort numerically.
+                    return valA - valB;
+                } else {
+                    // At least one value isn't a valid number, sort as strings.
+                    return a[sortBy].localeCompare(b[sortBy]);
+                }
             });
             break;
         case "descending":
-            console.log("descending");
             data.sort((a, b) => {
-                return b[sortBy] - a[sortBy];
+                const valA = +a[sortBy];
+                const valB = +b[sortBy];
+                if (!isNaN(valA) && !isNaN(valB)) {
+                    // Both values are effectively numbers, sort numerically.
+                    return valB - valA;
+                } else {
+                    // At least one value isn't a valid number, sort as strings.
+                    return b[sortBy].localeCompare(a[sortBy]);
+                }
             });
             break;
     }

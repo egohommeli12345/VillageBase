@@ -14,7 +14,7 @@ const ToolBar = () => {
         setAddBtn,
         onLandingPage,
     } = useToolState();
-    const { setSortType } = useSortType();
+    const { setSortType, sortKeys, setSortBy } = useSortType();
     const [sortClicked, setSortClicked] = useState(false);
     const { setSearchShowState, SearchShowState, setSearchQuery } = useSearch();
     //const toolBarRef = useRef(null); // Ref for the toolbar-div -sale
@@ -96,23 +96,36 @@ const ToolBar = () => {
                         sortClicked ? styles.sortMenu : styles.sortMenuHidden
                     }
                 >
-                    <div
-                        className={styles.sortMenuItem}
-                        onClick={() => setSortType("default")}
-                    >
-                        Alkup.
+                    <div className={styles.sortColumn}>
+                        {sortKeys.map((key) => (
+                            <div
+                                className={styles.sortMenuItem}
+                                key={key}
+                                onClick={() => setSortBy(key)}
+                            >
+                                {key}
+                            </div>
+                        ))}
                     </div>
-                    <div
-                        className={styles.sortMenuItem}
-                        onClick={() => setSortType("ascending")}
-                    >
-                        Kasvava
-                    </div>
-                    <div
-                        className={styles.sortMenuItem}
-                        onClick={() => setSortType("descending")}
-                    >
-                        Laskeva
+                    <div className={styles.sortColumn}>
+                        <div
+                            className={styles.sortMenuItem}
+                            onClick={() => setSortType("default")}
+                        >
+                            Alkup.
+                        </div>
+                        <div
+                            className={styles.sortMenuItem}
+                            onClick={() => setSortType("ascending")}
+                        >
+                            Kasvava
+                        </div>
+                        <div
+                            className={styles.sortMenuItem}
+                            onClick={() => setSortType("descending")}
+                        >
+                            Laskeva
+                        </div>
                     </div>
                 </div>
             </div>
