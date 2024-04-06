@@ -3,6 +3,7 @@ export function SortItems(sortType: string, data: any[], sortBy: string) {
         case "default":
             break;
         case "ascending":
+            if (sortBy == "") break;
             data.sort((a, b) => {
                 const valA = +a[sortBy];
                 const valB = +b[sortBy];
@@ -16,6 +17,7 @@ export function SortItems(sortType: string, data: any[], sortBy: string) {
             });
             break;
         case "descending":
+            if (sortBy == "") break;
             data.sort((a, b) => {
                 const valA = +a[sortBy];
                 const valB = +b[sortBy];

@@ -2,36 +2,52 @@ import { useNavigate } from "react-router-dom";
 import styles from "./MenuBar.module.css";
 import ToolBar from "./ToolBar";
 import { useSearch } from "./SearchContext";
+import { useSortType } from "../SortingComponents/SortTypeContext.tsx";
 export default function MenuBar() {
     const navigate = useNavigate();
 
     const { setSearchQuery } = useSearch();
+    const { setSortBy, setSortType, sortBy } = useSortType();
     const goToRegionsPage = () => {
         setSearchQuery("");
+        setSortBy("");
+        setSortType("default");
         navigate("/alueet");
     };
     const goToCottagesPage = () => {
         setSearchQuery("");
+        setSortBy("");
+        setSortType("default");
         navigate("/mokit");
     };
     const goToServicesPage = () => {
         setSearchQuery("");
+        setSortBy("");
+        setSortType("default");
         navigate("/palvelut");
     };
     const goToReservationsPage = () => {
         setSearchQuery("");
+        setSortBy("");
+        setSortType("default");
         navigate("/varaukset");
     };
     const goToCustomersPage = () => {
         setSearchQuery("");
+        setSortBy("");
+        setSortType("default");
         navigate("/asiakkaat");
     };
     const goToBillingPage = () => {
         setSearchQuery("");
+        setSortBy("");
+        setSortType("default");
         navigate("/laskutus");
     };
     const goToReportsPage = () => {
         setSearchQuery("");
+        setSortBy("");
+        setSortType("default");
         navigate("/raportit");
     };
 
