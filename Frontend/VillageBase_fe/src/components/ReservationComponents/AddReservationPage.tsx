@@ -4,17 +4,20 @@ import {
     GetAvailableCottages,
     GetAvailableServices,
 } from "./ReservationFetch.ts";
+import { CustomerFetch } from "../CustomerComponents/CustomerFetch.ts";
 import { CottageInterface } from "../CottageComponents/CottageInterface.ts";
+import { CustomerInterface } from "../CustomerComponents/CustomerInterface.ts";
 
 const AddReservationPage = () => {
     // Reservation
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [cottage, setCottage] = useState("default");
-    const [customer, setCustomer] = useState("");
+    const [customer, setCustomer] = useState("default");
     const [services, setServices] = useState("");
     // Customer
     const [zipCode, setZipCode] = useState("");
+    const [city, setCity] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [address, setAddress] = useState("");
@@ -22,6 +25,8 @@ const AddReservationPage = () => {
     const [email, setEmail] = useState("");
 
     const [cottages, setCottages] = useState<CottageInterface[]>([]);
+    const [customers, setCustomers] = useState<CustomerInterface[]>([]);
+    const [disabled, setDisabled] = useState(true);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -42,10 +47,22 @@ const AddReservationPage = () => {
         });
     };*/
 
-    // For development purposes, logs the selected cottage
+    const getCustomers = () => {
+        CustomerFetch().then((data) => {
+            setCustomers(data);
+        });
+        setCustomer("default");
+    };
+
+    // For development purposes, logs the selected option
     useEffect(() => {
-        console.log(cottage);
-    }, [cottage]);
+        console.log(customer);
+        if (customer != "default") {
+            setDisabled(true);
+        } else {
+            setDisabled(false);
+        }
+    }, [customer]);
 
     return (
         <div className={styles.formTemplate}>
@@ -114,19 +131,32 @@ const AddReservationPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className={styles.inputs}>
+                <div className={styles.inputs} id={"customerForm"}>
                     <h2>Asiakas</h2>
                     {/*<div className={styles.inputContainer}>
                         <input type="text" disabled value={maxId} />
                     </div>*/}
                     <div className={styles.inputContainer}>
-                        <label>Valitse asiakas:</label>
+                        <label>Valitse olemassa oleva asiakas:</label>
+                        <button type="button" onClick={getCustomers}>
+                            Hae asiakkaat
+                        </button>
                         {/* Haetaan asiakkaat tietokannasta ja listataan ne tähän */}
-                        <select name="cars" id="cars">
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
+                        <select
+                            name="customers"
+                            id="customers"
+                            onChange={(e) => setCustomer(e.target.value)}
+                        >
+                            <option value="default">Valitse asiakas</option>
+                            {customers.map((customer) => (
+                                <option
+                                    key={customer.asiakas_id}
+                                    value={customer.asiakas_id}
+                                >
+                                    {customer.etunimi} {customer.sukunimi}, ID:{" "}
+                                    {customer.asiakas_id}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     <div className={styles.inputContainer}>
@@ -135,6 +165,7 @@ const AddReservationPage = () => {
                             type="text"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
+                            disabled={disabled}
                         />
                     </div>
                     <div className={styles.inputContainer}>
@@ -143,6 +174,7 @@ const AddReservationPage = () => {
                             type="text"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
+                            disabled={disabled}
                         />
                     </div>
                     <div className={styles.inputContainer}>
@@ -151,6 +183,7 @@ const AddReservationPage = () => {
                             type="text"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
+                            disabled={disabled}
                         />
                     </div>
                     <div className={styles.inputContainer}>
@@ -159,6 +192,16 @@ const AddReservationPage = () => {
                             type="text"
                             value={zipCode}
                             onChange={(e) => setZipCode(e.target.value)}
+                            disabled={disabled}
+                        />
+                    </div>
+                    <div className={styles.inputContainer}>
+                        <label>Kaupunki:</label>
+                        <input
+                            type="text"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                            disabled={disabled}
                         />
                     </div>
                     <div className={styles.inputContainer}>
@@ -167,6 +210,7 @@ const AddReservationPage = () => {
                             type="text"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
+                            disabled={disabled}
                         />
                     </div>
                     <div className={styles.inputContainer}>
@@ -175,6 +219,7 @@ const AddReservationPage = () => {
                             type="text"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            disabled={disabled}
                         />
                     </div>
                     {/* Tarvittaessa lisää kenttiä */}
