@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./CustomerPage.module.css";
-import { CustomerFetch, DeleteCustomer } from "./CustomerFetch";
+import { CustomerFetch, CustomerDelete } from "./CustomerFetch";
 import { CustomerInterface } from "./CustomerInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
@@ -73,12 +73,11 @@ export default function CustomerPage() {
     const handleCloseBtn = () => {
         setEditBtn(false);
         setAddBtn(false);
-        setDeleteBtn(false);
     };
 
     useEffect(() => {
-        if (deleteBtn && activeContainerId !== null) {
-            DeleteCustomer(activeContainerId);
+        if (activeContainerId !== null) {
+            CustomerDelete(activeContainerId);
         }
     }, [deleteBtn]);
 

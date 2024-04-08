@@ -73,7 +73,6 @@ export default function CottagePage() {
     const handleCloseBtn = () => {
         setEditBtn(false);
         setAddBtn(false);
-        setDeleteBtn(false);
     };
 
     return (

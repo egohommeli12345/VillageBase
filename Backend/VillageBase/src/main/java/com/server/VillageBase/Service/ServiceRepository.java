@@ -1,6 +1,7 @@
 package com.server.VillageBase.Service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
@@ -15,4 +16,7 @@ public interface ServiceRepository extends JpaRepository<ServiceObject, Integer>
     // This function is used to find the service with the maximum id
     @Query("SELECT MAX(palvelu_id) FROM ServiceObject")
     int findServiceWithMaxId();
+
+    @Modifying
+    @Query("DELETE FROM ServiceObject WHERE alue_id = ?1") void deleteById(int id);
 }

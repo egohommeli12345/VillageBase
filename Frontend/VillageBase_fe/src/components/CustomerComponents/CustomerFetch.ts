@@ -28,7 +28,7 @@ export async function AddCustomer(customer: CustomerInterface) {
     }
 }
 
-export async function DeleteCustomer(id: number) {
+export async function CustomerDelete(id: number) {
     const response = await fetch(
         `http://localhost:8080/api/customers/delete?id=${id}`,
     );

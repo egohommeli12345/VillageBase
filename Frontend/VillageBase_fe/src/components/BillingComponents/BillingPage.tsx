@@ -69,7 +69,6 @@ export default function BillingPage() {
     const handleCloseBtn = () => {
         setEditBtn(false);
         setAddBtn(false);
-        setDeleteBtn(false);
     };
 
     return (

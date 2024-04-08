@@ -37,4 +37,10 @@ public class RegionController {
         regionService.addRegion(regionObject);
         return "Service added";
     }
+
+    @GetMapping("/api/regions/delete")
+    public String deleteService(@RequestParam int id) {
+        regionService.deleteRegion(id);
+        return "Service deleted";
+    }
 }

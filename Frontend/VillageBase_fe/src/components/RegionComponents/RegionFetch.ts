@@ -25,3 +25,14 @@ export async function RegionAdd(newRegion: RegionInterface) {
         alert("Palvelu lisätty onnistuneesti");
     }
 }
+
+export async function RegionDelete(id: number) {
+    const response = await fetch(
+        `http://localhost:8080/api/regions/delete?id=${id}`,
+    );
+    if (response.ok) {
+        alert("Alue poistettu onnistuneesti");
+    } else {
+        alert("Alueen poisto epäonnistui");
+    }
+}

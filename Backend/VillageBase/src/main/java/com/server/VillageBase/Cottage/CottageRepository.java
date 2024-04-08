@@ -1,6 +1,7 @@
 package com.server.VillageBase.Cottage;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -25,5 +26,8 @@ public interface CottageRepository extends JpaRepository<Cottage, Integer> {
             @Param("startDate") String startDate,
             @Param("endDate") String endDate
     );
+
+    @Modifying
+    @Query("DELETE FROM Cottage WHERE alue_id = ?1") void deleteById(int id);
 }
 

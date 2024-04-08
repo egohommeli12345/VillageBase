@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import styles from "./RegionPage.module.css";
-import { RegionFetch } from "./RegionFetch";
+import { RegionDelete, RegionFetch } from "./RegionFetch";
 import { RegionInterface } from "./RegionInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../MainComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
 import AddRegionPage from "./AddRegionPage";
+import { DeleteCustomer } from "../CustomerComponents/CustomerFetch.ts";
 
 // Function for RegionPage
 export default function RegionPage() {
@@ -72,8 +73,13 @@ export default function RegionPage() {
     const handleCloseBtn = () => {
         setEditBtn(false);
         setAddBtn(false);
-        setDeleteBtn(false);
     };
+
+    useEffect(() => {
+        if (activeContainerId !== null) {
+            RegionDelete(activeContainerId);
+        }
+    }, [deleteBtn]);
 
     return (
         <div className={styles.regionBG}>
