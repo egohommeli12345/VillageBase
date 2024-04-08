@@ -11,7 +11,7 @@ import AddRegionPage from "./AddRegionPage";
 // Function for RegionPage
 export default function RegionPage() {
     // Custom hooks for sortType and searchQuery
-    const { sortType } = useSortType();
+    const { sortType, setSortKeys, sortBy } = useSortType();
     const { searchQuery } = useSearch();
     const {
         addBtn,
@@ -31,7 +31,7 @@ export default function RegionPage() {
 
     // State to track the active container
     const [activeContainerId, setActiveContainerId] = useState<number | null>(
-        null
+        null,
     );
 
     // Function to toggle the active container
@@ -41,16 +41,16 @@ export default function RegionPage() {
             return;
         }
         setActiveContainerId(id);
-        console.log(id);
     };
 
     // Fetching the region data and sorting it by the sortType
     useEffect(() => {
-        RegionFetch().then((data) => {
-            const sortedData = SortItems(sortType, data, "alue_id");
+        RegionFetch().then((data: RegionInterface[]) => {
+            const sortedData = SortItems(sortType, data, sortBy);
             setRegions(sortedData);
+            setSortKeys(Object.keys(sortedData[0]));
         });
-    }, [sortType]);
+    }, [sortType, sortBy]);
 
     // Search function for filtering the regions
     useEffect(() => {
@@ -59,9 +59,9 @@ export default function RegionPage() {
                 Object.values(item).some((value) =>
                     String(value)
                         .toLowerCase()
-                        .includes(searchQuery.toLowerCase())
-                )
-            )
+                        .includes(searchQuery.toLowerCase()),
+                ),
+            ),
         );
     }, [searchQuery, regions]);
 

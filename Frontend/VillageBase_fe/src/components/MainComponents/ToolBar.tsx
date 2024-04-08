@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react"; // Lisätty useRef -sale
 import styles from "./ToolBar.module.css";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { useSearch } from "./SearchContext";
-import { Link } from "react-router-dom"; // Link to the Add page -sale
 import { useToolState } from "./ToolStateContext";
 
 const ToolBar = () => {
@@ -15,7 +14,7 @@ const ToolBar = () => {
         setAddBtn,
         onLandingPage,
     } = useToolState();
-    const { setSortType } = useSortType();
+    const { setSortType, sortKeys, setSortBy } = useSortType();
     const [sortClicked, setSortClicked] = useState(false);
     const { setSearchShowState, SearchShowState, setSearchQuery } = useSearch();
     //const toolBarRef = useRef(null); // Ref for the toolbar-div -sale
@@ -97,48 +96,41 @@ const ToolBar = () => {
                         sortClicked ? styles.sortMenu : styles.sortMenuHidden
                     }
                 >
-                    <div
-                        className={styles.sortMenuItem}
-                        onClick={() => setSortType("default")}
-                    >
-                        Alkup.
+                    <div className={styles.sortColumn}>
+                        {sortKeys.map((key) => (
+                            <div
+                                className={styles.sortMenuItem}
+                                key={key}
+                                onClick={() => setSortBy(key)}
+                            >
+                                {key}
+                            </div>
+                        ))}
                     </div>
-                    <div
-                        className={styles.sortMenuItem}
-                        onClick={() => setSortType("ascending")}
-                    >
-                        Kasvava
-                    </div>
-                    <div
-                        className={styles.sortMenuItem}
-                        onClick={() => setSortType("descending")}
-                    >
-                        Laskeva
+                    <div className={styles.sortColumn}>
+                        <div
+                            className={styles.sortMenuItem}
+                            onClick={() => setSortType("default")}
+                        >
+                            Alkup.
+                        </div>
+                        <div
+                            className={styles.sortMenuItem}
+                            onClick={() => setSortType("ascending")}
+                        >
+                            Kasvava
+                        </div>
+                        <div
+                            className={styles.sortMenuItem}
+                            onClick={() => setSortType("descending")}
+                        >
+                            Laskeva
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     );
-
-    function AddDropDown() {
-        return (
-            <div className={styles.addMenu}>
-                <Link to="/add-region" className={styles.addMenuItem}>
-                    Alue
-                </Link>
-                <Link to="/add-cabin" className={styles.addMenuItem}>
-                    Mökki
-                </Link>
-                <Link to="/add-service" className={styles.addMenuItem}>
-                    Palvelu
-                </Link>
-                <Link to="/add-reservation" className={styles.addMenuItem}>
-                    Varaus
-                </Link>
-                {/* Lisää muita kohtia täällä */}
-            </div>
-        );
-    }
 
     function handleSort() {
         setSortClicked(!sortClicked);

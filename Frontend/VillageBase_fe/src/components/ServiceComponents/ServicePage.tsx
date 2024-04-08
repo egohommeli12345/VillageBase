@@ -10,7 +10,7 @@ import AddServicePage from "./AddServicePage";
 
 // Function for ServicePage
 export default function ServicePage() {
-    const { sortType } = useSortType();
+    const { sortType, setSortKeys, sortBy } = useSortType();
     const { searchQuery } = useSearch();
     const {
         addBtn,
@@ -27,7 +27,7 @@ export default function ServicePage() {
 
     // State to track the active container
     const [activeContainerId, setActiveContainerId] = useState<number | null>(
-        null
+        null,
     );
 
     // Function to toggle the active container
@@ -41,9 +41,11 @@ export default function ServicePage() {
 
     useEffect(() => {
         ServiceFetch().then((data) => {
-            setServices(SortItems(sortType, data, "palvelu_id"));
+            const sortedData = SortItems(sortType, data, sortBy);
+            setServices(sortedData);
+            setSortKeys(Object.keys(sortedData[0]));
         });
-    }, [sortType]);
+    }, [sortType, sortBy]);
 
     useEffect(() => {
         setFilteredData(
@@ -51,9 +53,9 @@ export default function ServicePage() {
                 Object.values(item).some((value) =>
                     String(value)
                         .toLowerCase()
-                        .includes(searchQuery.toLowerCase())
-                )
-            )
+                        .includes(searchQuery.toLowerCase()),
+                ),
+            ),
         );
     }, [searchQuery, services]);
 

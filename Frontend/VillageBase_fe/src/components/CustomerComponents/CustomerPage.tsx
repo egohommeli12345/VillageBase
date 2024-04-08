@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./CustomerPage.module.css";
-import { CustomerFetch } from "./CustomerFetch";
+import { CustomerFetch, DeleteCustomer } from "./CustomerFetch";
 import { CustomerInterface } from "./CustomerInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
@@ -11,7 +11,7 @@ import AddCustomerPage from "./AddCustomerPage";
 // Function for CustomerPage
 export default function CustomerPage() {
     // Custom hooks for sortType and searchQuery
-    const { sortType } = useSortType();
+    const { sortType, setSortKeys, sortBy } = useSortType();
     const { searchQuery } = useSearch();
 
     // useState hook for searching the customers
@@ -22,7 +22,7 @@ export default function CustomerPage() {
 
     // State to track the active customer card
     const [activeContainerId, setActiveContainerId] = useState<number | null>(
-        null
+        null,
     );
 
     // Function to toggle the active container
@@ -37,10 +37,11 @@ export default function CustomerPage() {
     // Fetching the region data and sorting it by the sortType
     useEffect(() => {
         CustomerFetch().then((data) => {
-            const sortedData = SortItems(sortType, data, "asiakas_id");
+            const sortedData = SortItems(sortType, data, sortBy);
             setCustomers(sortedData);
+            setSortKeys(Object.keys(sortedData[0]));
         });
-    }, [sortType]);
+    }, [sortType, sortBy]);
 
     // Search function for filtering the customers
     useEffect(() => {
@@ -49,9 +50,9 @@ export default function CustomerPage() {
                 Object.values(item).some((value) =>
                     String(value)
                         .toLowerCase()
-                        .includes(searchQuery.toLowerCase())
-                )
-            )
+                        .includes(searchQuery.toLowerCase()),
+                ),
+            ),
         );
     }, [searchQuery, customers]);
 
@@ -74,6 +75,12 @@ export default function CustomerPage() {
         setAddBtn(false);
         setDeleteBtn(false);
     };
+
+    useEffect(() => {
+        if (deleteBtn && activeContainerId !== null) {
+            DeleteCustomer(activeContainerId);
+        }
+    }, [deleteBtn]);
 
     return (
         <div className={styles.customerBG}>

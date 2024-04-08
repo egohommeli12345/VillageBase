@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AddReservationPage.module.css";
-import { GetAvailableCottages, GetAvailableServices } from "./ReservationFetch.ts";
+import {
+    GetAvaibleCottages,
+    GetAvailableServices,
+} from "./ReservationFetch.ts";
+import { CottageInterface } from "../CottageComponents/CottageInterface.ts";
 
 const AddReservationPage = () => {
     // Reservation
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const [cottage, setCottage] = useState("");
+    const [cottage, setCottage] = useState("default");
     const [customer, setCustomer] = useState("");
     const [services, setServices] = useState("");
     // Customer
@@ -17,19 +21,19 @@ const AddReservationPage = () => {
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
 
+    const [cottages, setCottages] = useState<CottageInterface[]>([]);
+
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        console.log(startDate, endDate, cottage, customer, services);
+        console.log("handleSubmit called");
         // Lähetä tiedot backendiin tässä
     };
 
-    const availableCottages = () => {
-        GetAvailableCottages(startDate, endDate).then((data) => {
-            console.log(data);
-        }).catch((error) => {
-            // Always have a catch for potential errors
-            console.error('An error occurred while fetching available cottages:', error);
+    const avaibleCottages = () => {
+        GetAvaibleCottages(startDate, endDate).then((data) => {
+            setCottages(data);
         });
+        setCottage("default");
     };
 
     /*const availableServices = () => {
@@ -38,20 +42,10 @@ const AddReservationPage = () => {
         });
     };*/
 
-    const cottages = [
-        {
-            mokki_id: 1,
-            mokkinimi: "Mökki 1",
-        },
-        {
-            mokki_id: 2,
-            mokkinimi: "Mökki 2",
-        },
-        {
-            mokki_id: 3,
-            mokkinimi: "Mökki 3",
-        },
-    ];
+    // For development purposes, logs the selected cottage
+    useEffect(() => {
+        console.log(cottage);
+    }, [cottage]);
 
     return (
         <div className={styles.formTemplate}>
@@ -76,11 +70,18 @@ const AddReservationPage = () => {
                             onChange={(e) => setEndDate(e.target.value)}
                         />
                     </div>
-                    <button onClick={availableCottages}>Hae vapaat mökit</button>
+                    <button type={"button"} onClick={avaibleCottages}>
+                        Hae vapaat mökit
+                    </button>
                     <div className={styles.inputContainer}>
-                        <label htmlFor="cottage">Mökki:</label>
-                        <select name="cottages" id="cottage">
-                            <option value="">Valitse mökki</option>
+                        <label htmlFor="cottages">Mökki:</label>
+                        <select
+                            name="cottages"
+                            id="cottages"
+                            value={cottage}
+                            onChange={(e) => setCottage(e.target.value)}
+                        >
+                            <option value="default">Valitse mökki</option>
                             {cottages.map((cottage) => (
                                 <option
                                     key={cottage.mokki_id}
@@ -91,25 +92,6 @@ const AddReservationPage = () => {
                             ))}
                         </select>
                     </div>
-                    <div className={styles.inputContainer}>
-                        <label htmlFor="customer">Asiakas:</label>
-                        <input
-                            id="customer"
-                            type="text"
-                            value={customer}
-                            onChange={(e) => setCustomer(e.target.value)}
-                        />
-                    </div>
-                    <div className={styles.inputContainer}>
-                        <label htmlFor="services">Palvelut:</label>
-                        <input
-                            id="services"
-                            type="text"
-                            value={services}
-                            onChange={(e) => setServices(e.target.value)}
-                        />
-                    </div>
-                    {/* Tarvittaessa lisää kenttiä */}
                 </div>
                 <div className={styles.inputs}>
                     <h2>Palvelut</h2>

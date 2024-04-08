@@ -11,22 +11,22 @@ import AddReservationPage from "./AddReservationPage";
 // Function for ReservationPage
 export default function ReservationPage() {
     // Custom hooks for sortType and searchQuery
-    const { sortType } = useSortType();
+    const { sortType, setSortKeys, sortBy } = useSortType();
     const { searchQuery } = useSearch();
 
     // useState hook for searching the reservations
     const [filteredData, setFilteredData] = useState<ReservationInterface[]>(
-        []
+        [],
     );
 
     // useState hook for mapping the reservations to ReservationInterface objects
     const [reservations, setReservations] = useState<ReservationInterface[]>(
-        []
+        [],
     );
 
     // State to track the active container
     const [activeContainerId, setActiveContainerId] = useState<number | null>(
-        null
+        null,
     );
 
     // Function to toggle the active container
@@ -42,9 +42,11 @@ export default function ReservationPage() {
     // Fetching the reservation data and sorting it by the sortType
     useEffect(() => {
         ReservationFetch().then((data) => {
-            setReservations(SortItems(sortType, data, "varaus_id"));
+            const sortedData = SortItems(sortType, data, sortBy);
+            setReservations(sortedData);
+            setSortKeys(Object.keys(sortedData[0]));
         });
-    }, [sortType]);
+    }, [sortType, sortBy]);
 
     // Search function for filtering the reservations
     useEffect(() => {
@@ -53,9 +55,9 @@ export default function ReservationPage() {
                 Object.values(item).some((value) =>
                     String(value)
                         .toLowerCase()
-                        .includes(searchQuery.toLowerCase())
-                )
-            )
+                        .includes(searchQuery.toLowerCase()),
+                ),
+            ),
         );
     }, [searchQuery, reservations]);
 
