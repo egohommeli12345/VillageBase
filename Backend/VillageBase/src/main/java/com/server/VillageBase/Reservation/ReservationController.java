@@ -1,12 +1,14 @@
 package com.server.VillageBase.Reservation;
 
 import com.server.VillageBase.Cottage.Cottage;
+import com.server.VillageBase.Cottage.CottageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 // Controller layer is created for each entity
 // It servers the purpose of handling the requests from the client (=frontend)
@@ -33,12 +35,9 @@ public class ReservationController {
     }
 
     @PostMapping("/api/reservations/available-cottages")
-    public ResponseEntity<List<Cottage>> getAvailableCottages(@RequestBody DateRangeDTO dateRange) {
-        try {
-            List<Cottage> availableCottages = reservationService.getAvailableCottages(dateRange);
-            return new ResponseEntity<>(availableCottages, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public List<Cottage> getAvailableCottages(
+            @RequestBody Map<String, String> dates) {
+            System.out.println(dates);
+        return reservationService.getAvailableCottages(dates.get("startDate"), dates.get("endDate"));
     }
 }

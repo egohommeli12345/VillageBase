@@ -12,7 +12,7 @@ export async function DeleteReservation(id: number) {
     });
 }
 
-export async function GetAvaibleCottages(startDate: string, endDate: string) {
+export async function GetAvailableCottages(startDate: string, endDate: string) {
     // Fetches all available cottages from the backend
     const response = await fetch(
         "http://localhost:8080/api/reservations/available-cottages",
@@ -24,14 +24,15 @@ export async function GetAvaibleCottages(startDate: string, endDate: string) {
             body: JSON.stringify({ startDate, endDate }),
         },
     );
-    const cottages = await response.json();
     if (!response.ok) {
-        alert("Virhe haettaessa mökkejä");
+        alert("Virhe haettaessa mökkejä: " + response.statusText);
+        return null;
     }
+    const cottages = await response.json();
     return cottages;
 }
 
-export async function GetAvaibleServices(mokki_id: number) {
+export async function GetAvailableServices(mokki_id: number) {
     const response = await fetch(
         `http://localhost:8080/api/services/cottage?id=${mokki_id}`,
     );

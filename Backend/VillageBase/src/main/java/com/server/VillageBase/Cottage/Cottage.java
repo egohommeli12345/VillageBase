@@ -109,5 +109,6 @@ public Cottage(int mokki_id, int alue_id, String postinro, int henkilomaara, dou
     public void setVarustelu(String varustelu) {
         this.varustelu = varustelu;
     }
-}
+    }
+
 

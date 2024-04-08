@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./AddReservationPage.module.css";
-import { GetAvaibleCottages, GetAvaibleServices } from "./ReservationFetch.ts";
+import { GetAvailableCottages, GetAvailableServices } from "./ReservationFetch.ts";
 
 const AddReservationPage = () => {
     // Reservation
@@ -23,14 +23,17 @@ const AddReservationPage = () => {
         // Lähetä tiedot backendiin tässä
     };
 
-    const avaibleCottages = () => {
-        GetAvaibleCottages(startDate, endDate).then((data) => {
+    const availableCottages = () => {
+        GetAvailableCottages(startDate, endDate).then((data) => {
             console.log(data);
+        }).catch((error) => {
+            // Always have a catch for potential errors
+            console.error('An error occurred while fetching available cottages:', error);
         });
     };
 
-    /*const avaibleServices = () => {
-        GetAvaibleServices(cottage).then((data) => {
+    /*const availableServices = () => {
+        GetAvailableServices(cottage).then((data) => {
             console.log(data);
         });
     };*/
@@ -73,7 +76,7 @@ const AddReservationPage = () => {
                             onChange={(e) => setEndDate(e.target.value)}
                         />
                     </div>
-                    <button onClick={avaibleCottages}>Hae vapaat mökit</button>
+                    <button onClick={availableCottages}>Hae vapaat mökit</button>
                     <div className={styles.inputContainer}>
                         <label htmlFor="cottage">Mökki:</label>
                         <select name="cottages" id="cottage">
