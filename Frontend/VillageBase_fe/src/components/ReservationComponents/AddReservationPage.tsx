@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AddReservationPage.module.css";
 import {
-    GetAvaibleCottages,
+    GetAvailableCottages,
     GetAvailableServices,
 } from "./ReservationFetch.ts";
 import { CottageInterface } from "../CottageComponents/CottageInterface.ts";
@@ -30,7 +30,7 @@ const AddReservationPage = () => {
     };
 
     const avaibleCottages = () => {
-        GetAvaibleCottages(startDate, endDate).then((data) => {
+        GetAvailableCottages(startDate, endDate).then((data) => {
             setCottages(data);
         });
         setCottage("default");
