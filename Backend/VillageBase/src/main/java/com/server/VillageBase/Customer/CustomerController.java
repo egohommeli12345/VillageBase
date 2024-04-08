@@ -42,7 +42,7 @@ public class CustomerController {
     @GetMapping("/api/customers/delete")
     public String deleteCustomer(@RequestParam int id) {
         System.out.println(id);
-        customerService.deleteCustomer(id);
+        customerService.deleteCustomerInfo(id);
         return "Customer deleted";
     }
 }
