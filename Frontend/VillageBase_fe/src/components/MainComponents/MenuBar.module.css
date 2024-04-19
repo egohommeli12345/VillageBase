@@ -34,3 +34,9 @@
     /* border-left: 0.2em solid #ffffff; */
     border-bottom: 0.5em solid #007bff; /* Highlight with a blue border or with #ff0000 */
 }
+
+.btn.active, .btn:active {
+    background-color: #f1f1f1; /* tai mikä tahansa aktiivisen nappulan taustaväri */
+    border-bottom: 0.5em solid #007bff; /* Sininen alaviiva aktiiviselle nappulalle */
+    /* Lisää muita tyylejä tarpeen mukaan */
+  }
