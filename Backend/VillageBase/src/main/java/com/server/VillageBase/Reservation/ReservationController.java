@@ -40,4 +40,10 @@ public class ReservationController {
             System.out.println(dates);
         return reservationService.getAvailableCottages(dates.get("startDate"), dates.get("endDate"));
     }
+
+    @GetMapping("/api/reservations/delete")
+    public String deleteCottage(@RequestParam int id) {
+        reservationService.deleteReservation(id);
+        return "Reservation deleted";
+    }
 }

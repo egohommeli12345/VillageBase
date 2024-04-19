@@ -39,3 +39,14 @@ export async function GetAvailableServices(mokki_id: number) {
     const services = await response.json();
     return services;
 }
+
+export async function ReservationDelete(id: number) {
+    const response = await fetch(
+        `http://localhost:8080/api/reservations/delete?id=${id}`,
+    );
+    if (response.ok) {
+        alert("Varaus poistettu onnistuneesti");
+    } else {
+        alert("Varauksen poisto epäonnistui");
+    }
+}

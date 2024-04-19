@@ -1,9 +1,11 @@
 package com.server.VillageBase.Reservation;
 
+import com.server.VillageBase.Billing.BillingRepository;
 import com.server.VillageBase.Cottage.Cottage;
 import com.server.VillageBase.Cottage.CottageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
@@ -17,9 +19,12 @@ public class ReservationService {
     //will allow the use of ReservationRepository without the need to instantiate it
     @Autowired
     private ReservationRepository reservationRepository;
-
+    @Autowired
+    private ReservationServicesRepository reservationServicesRepository;
     @Autowired
     private CottageRepository cottageRepository;
+    @Autowired
+    private BillingRepository billingRepository;
 
     // This returns all the Reservations from the database (through the repository layer)
     public List<Reservation> getAllReservations() {
@@ -28,5 +33,12 @@ public class ReservationService {
 
     public List<Cottage> getAvailableCottages(String startDate, String endDate) {
         return cottageRepository.findAvailableCottages(startDate, endDate);
+    }
+
+    @Transactional
+    public void deleteReservation(int id) {
+        billingRepository.deleteByReservationId(id);
+        reservationServicesRepository.deleteByReservationId(id);
+        reservationRepository.deleteByReservationId(id);
     }
 }

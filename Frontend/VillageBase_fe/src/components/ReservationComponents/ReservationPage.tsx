@@ -1,7 +1,7 @@
 import styles from "./ReservationPage.module.css";
 import { ReservationInterface } from "./ReservationInterface";
 import { useEffect, useState } from "react";
-import { ReservationFetch, ServiceDelete } from "./ReservationFetch";
+import { ReservationDelete, ReservationFetch } from "./ReservationFetch";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { useSearch } from "../MainComponents/SearchContext";
@@ -80,6 +80,12 @@ export default function ReservationPage() {
         setAddBtn(false);
         setDeleteBtn(false);
     };
+
+    useEffect(() => {
+        if (activeContainerId !== null) {
+            ReservationDelete(activeContainerId);
+        }
+    }, [deleteBtn]);
 
     return (
         <div className={styles.reservationBG}>

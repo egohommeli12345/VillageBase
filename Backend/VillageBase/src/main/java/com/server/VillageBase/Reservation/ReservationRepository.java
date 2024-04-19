@@ -26,6 +26,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     @Modifying
     @Query("DELETE FROM Reservation WHERE mokki_mokki_id = ?1") void deleteByCottageId(int id);
 
+    @Modifying
+    @Query("DELETE FROM Reservation WHERE varaus_id = ?1") void deleteByReservationId(int id);
+
     /*@Modifying
     @Query("DELETE FROM Reservation WHERE varaus_id IN " +
             "(SELECT id.varaus_id FROM ReservationServices WHERE id" +
