@@ -18,5 +18,5 @@ public interface ServiceRepository extends JpaRepository<ServiceObject, Integer>
     int findServiceWithMaxId();
 
     @Modifying
-    @Query("DELETE FROM ServiceObject WHERE alue_id = ?1") void deleteById(int id);
+    @Query("DELETE FROM ServiceObject WHERE alue_id = ?1") void deleteByRegionId(int id);
 }

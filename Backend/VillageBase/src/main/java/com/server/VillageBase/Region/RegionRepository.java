@@ -15,5 +15,5 @@ public interface RegionRepository extends JpaRepository<Region, String>{
     @Query("SELECT MAX(alue_id) FROM Region") int findRegionWithMaxId();
 
     @Modifying
-    @Query("DELETE FROM Region WHERE alue_id = ?1") void deleteById(int id);
+    @Query("DELETE FROM Region WHERE alue_id = ?1") void deleteByRegionId(int id);
 }

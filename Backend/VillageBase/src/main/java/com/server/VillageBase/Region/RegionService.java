@@ -1,6 +1,9 @@
 package com.server.VillageBase.Region;
 
+import com.server.VillageBase.Billing.BillingRepository;
 import com.server.VillageBase.Cottage.CottageRepository;
+import com.server.VillageBase.Reservation.ReservationRepository;
+import com.server.VillageBase.Reservation.ReservationServicesRepository;
 import com.server.VillageBase.Service.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,12 @@ public class RegionService {
     private CottageRepository cottageRepository;
     @Autowired
     private ServiceRepository serviceRepository;
+    @Autowired
+    private ReservationServicesRepository reservationServicesRepository;
+    @Autowired
+    private BillingRepository billingRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     // This returns all the regions from the database (through the repository layer)
     public List<Region> getAllRegions() {
@@ -37,8 +46,11 @@ public class RegionService {
         // NOT READY
         // Deleting cottage will need to delete reservations and related
         // information from the database
-        cottageRepository.deleteById(id);
-        serviceRepository.deleteById(id);
-        regionRepository.deleteById(id);
+        reservationServicesRepository.deleteByRegionId(id);
+        billingRepository.deleteByRegionId(id);
+        reservationRepository.deleteByRegionId(id);
+        cottageRepository.deleteByRegionId(id);
+        serviceRepository.deleteByRegionId(id);
+        regionRepository.deleteByRegionId(id);
     }
 }

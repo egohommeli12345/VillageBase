@@ -11,5 +11,10 @@ import org.springframework.data.jpa.repository.Query;
 // EntityRepository needs to extend JpaRepository (it contains the CRUD logic)
 public interface BillingRepository extends JpaRepository<Billing, Integer>{
     @Modifying
-    @Query("DELETE FROM Billing WHERE varaus_id = ?1") void deleteById(int id);
+    @Query("DELETE FROM Billing WHERE varaus_id = ?1") void deleteByReservationId(int id);
+
+    @Modifying
+    @Query("DELETE FROM Billing WHERE varaus_id IN" +
+            "(SELECT varaus_id FROM Reservation WHERE mokki_mokki_id IN" +
+            "(SELECT mokki_id FROM Cottage WHERE alue_id = ?1))") void deleteByRegionId(int id);
 }

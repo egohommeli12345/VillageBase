@@ -15,7 +15,11 @@ import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
     @Modifying
-    @Query("DELETE FROM Reservation WHERE asiakas_id = ?1") void deleteById(int id);
+    @Query("DELETE FROM Reservation WHERE asiakas_id = ?1") void deleteByCustomerId(int id);
+
+    @Modifying
+    @Query("DELETE FROM Reservation WHERE mokki_mokki_id IN" +
+            "(SELECT mokki_id FROM Cottage WHERE alue_id = ?1)") void deleteByRegionId(int id);
 
     @Query("SELECT varaus_id FROM Reservation WHERE asiakas_id = ?1") List<Integer> findReservationIdsByCustomerId(int id);
 }

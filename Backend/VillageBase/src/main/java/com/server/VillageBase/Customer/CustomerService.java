@@ -39,10 +39,10 @@ public class CustomerService {
         List<Integer> reservationIds =
                 reservationRepository.findReservationIdsByCustomerId(asiakas_id);
         for(int varaus_id: reservationIds) {
-            billingRepository.deleteById(varaus_id);
+            billingRepository.deleteByReservationId(varaus_id);
             reservationServicesRepository.deleteById(varaus_id);
         }
-        reservationRepository.deleteById(asiakas_id);
+        reservationRepository.deleteByCustomerId(asiakas_id);
         customerRepository.deleteById(asiakas_id);
     }
 }
