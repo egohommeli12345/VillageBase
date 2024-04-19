@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./BillingPage.module.css";
-import { BillingFetch } from "./BillingFetch";
+import { BillingDelete, BillingFetch } from "./BillingFetch";
 import { BillingInterface } from "./BillingInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
@@ -70,6 +70,12 @@ export default function BillingPage() {
         setEditBtn(false);
         setAddBtn(false);
     };
+
+    useEffect(() => {
+        if (activeContainerId !== null) {
+            BillingDelete(activeContainerId);
+        }
+    }, [deleteBtn]);
 
     return (
         <div className={styles.billingBG}>
