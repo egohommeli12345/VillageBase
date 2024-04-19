@@ -43,9 +43,6 @@ public class RegionService {
 
     @Transactional
     public void deleteRegion(int id) {
-        // NOT READY
-        // Deleting cottage will need to delete reservations and related
-        // information from the database
         reservationServicesRepository.deleteByRegionId(id);
         billingRepository.deleteByRegionId(id);
         reservationRepository.deleteByRegionId(id);

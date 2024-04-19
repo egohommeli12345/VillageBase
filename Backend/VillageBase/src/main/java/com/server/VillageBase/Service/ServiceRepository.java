@@ -19,4 +19,7 @@ public interface ServiceRepository extends JpaRepository<ServiceObject, Integer>
 
     @Modifying
     @Query("DELETE FROM ServiceObject WHERE alue_id = ?1") void deleteByRegionId(int id);
+
+    @Modifying
+    @Query("DELETE FROM ServiceObject WHERE palvelu_id = ?1") void deleteByServiceId(int id);
 }

@@ -31,5 +31,8 @@ public interface CottageRepository extends JpaRepository<Cottage, Integer> {
     @Query("DELETE FROM Cottage WHERE alue_id = ?1") void deleteByRegionId(int id);
 
     @Query("SELECT mokki_id FROM Cottage WHERE alue_id = ?1") List<Integer> findCottageIdsByRegionId(int id);
+
+    @Modifying
+    @Query("DELETE FROM Cottage WHERE mokki_id = ?1") void deleteByCottageId(int id);
 }
 

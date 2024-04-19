@@ -1,7 +1,7 @@
 import styles from "./ReservationPage.module.css";
 import { ReservationInterface } from "./ReservationInterface";
 import { useEffect, useState } from "react";
-import { ReservationFetch } from "./ReservationFetch";
+import { ReservationFetch, ServiceDelete } from "./ReservationFetch";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { useSearch } from "../MainComponents/SearchContext";

@@ -27,3 +27,14 @@ export async function AddCottage(cottage: CottageInterface) {
         alert("Mökki lisätty onnistuneesti");
     }
 }
+
+export async function CottageDelete(id: number) {
+    const response = await fetch(
+        `http://localhost:8080/api/cottages/delete?id=${id}`,
+    );
+    if (response.ok) {
+        alert("Mökki poistettu onnistuneesti");
+    } else {
+        alert("Mökin poisto epäonnistui");
+    }
+}

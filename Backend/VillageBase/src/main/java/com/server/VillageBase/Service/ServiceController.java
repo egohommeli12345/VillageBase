@@ -33,4 +33,10 @@ public class ServiceController {
         serviceService.addService(serviceObject);
         return "Service added";
     }
+
+    @GetMapping("/api/services/delete")
+    public String deleteService(@RequestParam int id) {
+        serviceService.deleteService(id);
+        return "Service deleted";
+    }
 }

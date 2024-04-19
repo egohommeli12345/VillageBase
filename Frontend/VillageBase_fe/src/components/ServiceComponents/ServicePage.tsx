@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./ServicePage.module.css";
-import { ServiceFetch } from "./ServiceFetch";
+import { ServiceDelete, ServiceFetch } from "./ServiceFetch";
 import { ServiceInterface } from "./ServiceInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
@@ -68,6 +68,12 @@ export default function ServicePage() {
     useEffect(() => {
         setOnLandingPage(true);
     }, []);
+
+    useEffect(() => {
+        if (activeContainerId !== null) {
+            ServiceDelete(activeContainerId);
+        }
+    }, [deleteBtn]);
 
     return (
         <div className={styles.serviceBG}>

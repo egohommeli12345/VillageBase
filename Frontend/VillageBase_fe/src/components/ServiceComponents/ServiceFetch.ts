@@ -25,3 +25,14 @@ export async function ServiceAdd(newService: ServiceInterface) {
         alert("Palvelu lisätty onnistuneesti");
     }
 }
+
+export async function ServiceDelete(id: number) {
+    const response = await fetch(
+        `http://localhost:8080/api/services/delete?id=${id}`,
+    );
+    if (response.ok) {
+        alert("Palvelu poistettu onnistuneesti");
+    } else {
+        alert("Palvelun poisto epäonnistui");
+    }
+}

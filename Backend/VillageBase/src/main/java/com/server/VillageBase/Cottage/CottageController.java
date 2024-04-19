@@ -38,4 +38,10 @@ public class CottageController {
         cottageService.addCottage(cottageObject);
         return "Service added";
     }
+
+    @GetMapping("/api/cottages/delete")
+    public String deleteCottage(@RequestParam int id) {
+        cottageService.deleteCottage(id);
+        return "Cottage deleted";
+    }
 }

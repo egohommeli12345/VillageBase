@@ -22,4 +22,12 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
             "(SELECT mokki_id FROM Cottage WHERE alue_id = ?1)") void deleteByRegionId(int id);
 
     @Query("SELECT varaus_id FROM Reservation WHERE asiakas_id = ?1") List<Integer> findReservationIdsByCustomerId(int id);
+
+    @Modifying
+    @Query("DELETE FROM Reservation WHERE mokki_mokki_id = ?1") void deleteByCottageId(int id);
+
+    /*@Modifying
+    @Query("DELETE FROM Reservation WHERE varaus_id IN " +
+            "(SELECT id.varaus_id FROM ReservationServices WHERE id" +
+            ".palvelu_id = ?1)") void deleteByServiceId(int id);*/
 }

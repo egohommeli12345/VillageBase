@@ -1,8 +1,12 @@
 package com.server.VillageBase.Cottage;
 
+import com.server.VillageBase.Billing.BillingRepository;
+import com.server.VillageBase.Reservation.ReservationRepository;
+import com.server.VillageBase.Reservation.ReservationServicesRepository;
 import com.server.VillageBase.Service.ServiceObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -12,9 +16,16 @@ import java.util.List;
 @Service
 public class CottageService {
 
-        //will allow the use of CottageRepository without the need to instantiate it
+        //@Autowired will allow the use of CottageRepository without the need
+        // to instantiate it
         @Autowired
         private CottageRepository cottageRepository;
+        @Autowired
+        private BillingRepository billingRepository;
+        @Autowired
+        private ReservationServicesRepository reservationServicesRepository;
+        @Autowired
+        private ReservationRepository reservationRepository;
 
         // This returns all the cottages from the database (through the repository layer)
         public List<Cottage> getAllCottages() {
@@ -27,6 +38,14 @@ public class CottageService {
 
         public Cottage addCottage(Cottage cottage) {
                 return cottageRepository.save(cottage);
+        }
+
+        @Transactional
+        public void deleteCottage(int id) {
+                reservationServicesRepository.deleteByCottageId(id);
+                billingRepository.deleteByCottageId(id);
+                reservationRepository.deleteByCottageId(id);
+                cottageRepository.deleteByCottageId(id);
         }
 
 }

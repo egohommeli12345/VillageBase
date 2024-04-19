@@ -34,14 +34,12 @@ public class CustomerController {
     @PostMapping("/api/customers/add")
     public String addCustomer(
             @RequestBody Customer customerObject) {
-        System.out.println(customerObject);
         customerService.addCustomer(customerObject);
         return "Customer added";
     }
 
     @GetMapping("/api/customers/delete")
     public String deleteCustomer(@RequestParam int id) {
-        System.out.println(id);
         customerService.deleteCustomerInfo(id);
         return "Customer deleted";
     }

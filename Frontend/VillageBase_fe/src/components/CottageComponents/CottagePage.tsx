@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import styles from "./CottagePage.module.css";
-import { CottageFetch } from "./CottageFetch";
+import { CottageDelete, CottageFetch } from "./CottageFetch";
 import { CottageInterface } from "./CottageInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../MainComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
 import AddCabinPage from "./AddCabinPage";
+import { CustomerDelete } from "../CustomerComponents/CustomerFetch.ts";
 
 // Function for CottagePage
 export default function CottagePage() {
@@ -74,6 +75,12 @@ export default function CottagePage() {
         setEditBtn(false);
         setAddBtn(false);
     };
+
+    useEffect(() => {
+        if (activeContainerId !== null) {
+            CottageDelete(activeContainerId);
+        }
+    }, [deleteBtn]);
 
     return (
         <div className={styles.cottageBG}>
