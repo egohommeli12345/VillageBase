@@ -7,7 +7,7 @@ import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../MainComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
 import AddRegionPage from "./AddRegionPage";
-import { DeleteCustomer } from "../CustomerComponents/CustomerFetch.ts";
+//import { DeleteCustomer } from "../CustomerComponents/CustomerFetch.ts";
 
 // Function for RegionPage
 export default function RegionPage() {
@@ -46,7 +46,7 @@ export default function RegionPage() {
 
     // Fetching the region data and sorting it by the sortType
     useEffect(() => {
-        RegionFetch().then((data: RegionInterface[]) => {
+        RegionFetch(setRegions).then((data: RegionInterface[]) => {
             const sortedData = SortItems(sortType, data, sortBy);
             setRegions(sortedData);
             setSortKeys(Object.keys(sortedData[0]));
@@ -77,7 +77,7 @@ export default function RegionPage() {
 
     useEffect(() => {
         if (activeContainerId !== null) {
-            RegionDelete(activeContainerId);
+            RegionDelete(activeContainerId, setRegions);        
         }
     }, [deleteBtn]);
 
@@ -91,7 +91,7 @@ export default function RegionPage() {
                         onClick={handleCloseBtn}
                     />
                     <div className={styles.popUpContent}>
-                        <AddRegionPage />
+                        <AddRegionPage setRegions={setRegions} />
                     </div>
                 </div>
             </div>
