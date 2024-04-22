@@ -4,7 +4,7 @@ import { RegionAdd, RegionMAXID } from "./RegionFetch";
 import { useToolState } from "../MainComponents/ToolStateContext";
 import { RegionInterface } from "./RegionInterface";
 
-const AddRegionPage = () => {
+const AddRegionPage = ({setRegions}: { setRegions: React.Dispatch<React.SetStateAction<RegionInterface[]>> }) => {
     const [regionName, setRegionName] = useState("");
     const [regionMaxId, setRegionMaxId] = useState("");
     // Lisätään tarvittaessa lisää
@@ -20,7 +20,7 @@ const AddRegionPage = () => {
             nimi: regionName,
         };
 
-        RegionAdd(newRegion).then((data) => {
+        RegionAdd(newRegion, setRegions).then((data) => {
             console.log(data);
             setAddBtn(!addBtn);
             setRegionMaxId("");
