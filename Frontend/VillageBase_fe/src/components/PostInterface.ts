@@ -1,5 +1,5 @@
 export interface PostInterface {
     // typed variables
-    postinro: number;
+    postinro: string;
     toimipaikka: string;
 }

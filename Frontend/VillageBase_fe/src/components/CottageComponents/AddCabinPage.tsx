@@ -3,17 +3,23 @@ import styles from "./AddCabinPage.module.css";
 import { AddCottage, CottageMAXID } from "./CottageFetch";
 import { CottageInterface } from "./CottageInterface";
 import { useToolState } from "../MainComponents/ToolStateContext";
+import { PostInterface } from "../PostInterface.ts";
+import { AddPost } from "../PostFetch.ts";
+import { RegionFetch } from "../RegionComponents/RegionFetch.ts";
+import { RegionInterface } from "../RegionComponents/RegionInterface.ts";
 
 const AddCabinPage = () => {
     const [maxId, setMaxId] = useState("");
     const [regionId, setRegionId] = useState("");
     const [zipCode, setZipCode] = useState("");
+    const [city, setCity] = useState("");
     const [cottageName, setCottageName] = useState("");
     const [address, setAddress] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
     const [maxPersons, setMaxPersons] = useState("");
     const [equipment, setEquipment] = useState("");
+    const [regions, setRegions] = useState<RegionInterface[]>([]);
 
     const { addBtn, setAddBtn } = useToolState();
 
@@ -32,12 +38,19 @@ const AddCabinPage = () => {
             varustelu: equipment,
         };
 
+        const newPost: PostInterface = {
+            postinro: zipCode,
+            toimipaikka: city,
+        };
+
+        AddPost(newPost);
+
         AddCottage(newCottage).then((data) => {
-            console.log(data);
             setAddBtn(!addBtn);
             setMaxId("");
             setRegionId("");
             setZipCode("");
+            setCity("");
             setCottageName("");
             setAddress("");
             setPrice("");
@@ -51,6 +64,9 @@ const AddCabinPage = () => {
         CottageMAXID().then((data) => {
             setMaxId(data + 1);
         });
+        RegionFetch().then((fetchedRegions) => {
+            setRegions(fetchedRegions);
+        });
     }, []);
 
     return (
@@ -63,11 +79,17 @@ const AddCabinPage = () => {
                 </div>
                 <div className={styles.inputContainer}>
                     <label>Alue</label>
-                    <input
-                        type="text"
-                        value={regionId}
+                    <select
+                        defaultValue={"default"}
                         onChange={(e) => setRegionId(e.target.value)}
-                    />
+                    >
+                        <option value={"default"}>Valitse alue</option>
+                        {regions.map((region, index) => (
+                            <option key={index} value={region.alue_id}>
+                                {region.alue_id}, {region.nimi}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className={styles.inputContainer}>
                     <label>Postinumero</label>
@@ -75,6 +97,14 @@ const AddCabinPage = () => {
                         type="text"
                         value={zipCode}
                         onChange={(e) => setZipCode(e.target.value)}
+                    />
+                </div>
+                <div className={styles.inputContainer}>
+                    <label>Kaupunki</label>
+                    <input
+                        type="text"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
