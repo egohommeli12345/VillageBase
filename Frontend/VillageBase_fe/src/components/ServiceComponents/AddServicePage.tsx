@@ -4,13 +4,16 @@ import { ServiceInterface } from "./ServiceInterface";
 import { ServiceMAXID } from "./ServiceFetch";
 import { useToolState } from "../MainComponents/ToolStateContext";
 import { ServiceAdd } from "./ServiceFetch";
+import { RegionInterface } from "../RegionComponents/RegionInterface.ts";
+import { RegionFetch } from "../RegionComponents/RegionFetch.ts";
 
 const AddServicePage = () => {
     const [maxId, setMaxId] = useState("");
     const [serviceName, setServiceName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
-    const [areaId, setAreaId] = useState("");
+    const [regionId, setRegionId] = useState("");
+    const [regions, setRegions] = useState<RegionInterface[]>([]);
     const [type, setType] = useState("");
     const [vat, setVat] = useState("");
     // Lisätään tarvittaessa lisää
@@ -22,7 +25,7 @@ const AddServicePage = () => {
 
         const newService: ServiceInterface = {
             palvelu_id: Number(maxId ? maxId : 0),
-            alue_id: Number(areaId ? areaId : 0),
+            alue_id: Number(regionId ? regionId : 0),
             nimi: serviceName,
             tyyppi: Number(type ? type : 0),
             kuvaus: description,
@@ -30,13 +33,15 @@ const AddServicePage = () => {
             alv: Number(vat ? vat : 0),
         };
 
+        console.log(newService);
+
         ServiceAdd(newService).then((data) => {
             console.log(data);
             setAddBtn(!addBtn);
             setServiceName("");
             setDescription("");
             setPrice("");
-            setAreaId("");
+            setRegionId("");
             setType("");
             setVat("");
         });
@@ -46,6 +51,9 @@ const AddServicePage = () => {
         ServiceMAXID().then((data) => {
             setMaxId(data + 1);
         });
+        RegionFetch(setRegions).then((fetchedRegions) => {
+            setRegions(fetchedRegions);
+        });
     }, [addBtn]);
 
     return (
@@ -54,19 +62,21 @@ const AddServicePage = () => {
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.inputContainer}>
                     <label htmlFor="serviceMaxId">Palvelun ID:</label>
-                    <input
-                        type="text"
-                        disabled
-                        value={maxId}
-                    />
+                    <input type="text" disabled value={maxId} />
                 </div>
                 <div className={styles.inputContainer}>
-                    <label htmlFor="areaId">Alueen ID:</label>
-                    <input
-                        type="text"
-                        value={areaId}
-                        onChange={(e) => setAreaId(e.target.value)}
-                    />
+                    <label htmlFor="regionId">Alueen ID:</label>
+                    <select
+                        defaultValue={"default"}
+                        onChange={(e) => setRegionId(e.target.value)}
+                    >
+                        <option value={"default"}>Valitse alue</option>
+                        {regions.map((region) => (
+                            <option value={region.alue_id}>
+                                {region.alue_id}, {region.nimi}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className={styles.inputContainer}>
                     <label htmlFor="serviceName">Palvelun tiedot:</label>

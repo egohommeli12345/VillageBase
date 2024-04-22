@@ -64,7 +64,7 @@ const AddCabinPage = () => {
         CottageMAXID().then((data) => {
             setMaxId(data + 1);
         });
-        RegionFetch().then((fetchedRegions) => {
+        RegionFetch(setRegions).then((fetchedRegions) => {
             setRegions(fetchedRegions);
         });
     }, []);
