@@ -7,6 +7,8 @@ import {
 import { CustomerFetch } from "../CustomerComponents/CustomerFetch.ts";
 import { CottageInterface } from "../CottageComponents/CottageInterface.ts";
 import { CustomerInterface } from "../CustomerComponents/CustomerInterface.ts";
+import { GetServiceByRegionId } from "../ServiceComponents/ServiceFetch.ts";
+import { ServiceInterface } from "../ServiceComponents/ServiceInterface.ts";
 
 const AddReservationPage = () => {
     // Reservation
@@ -14,8 +16,6 @@ const AddReservationPage = () => {
     const [endDate, setEndDate] = useState("");
     const [cottage, setCottage] = useState("default");
     const [customer, setCustomer] = useState("default");
-    const [services, setServices] = useState("");
-    // Customer
     const [zipCode, setZipCode] = useState("");
     const [city, setCity] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -24,13 +24,13 @@ const AddReservationPage = () => {
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
 
+    const [services, setServices] = useState<ServiceInterface[]>([]);
     const [cottages, setCottages] = useState<CottageInterface[]>([]);
     const [customers, setCustomers] = useState<CustomerInterface[]>([]);
     const [disabled, setDisabled] = useState(true);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        console.log("handleSubmit called");
         // Lähetä tiedot backendiin tässä
     };
 
@@ -41,11 +41,15 @@ const AddReservationPage = () => {
         setCottage("default");
     };
 
-    /*const availableServices = () => {
-        GetAvailableServices(cottage).then((data) => {
-            console.log(data);
-        });
-    };*/
+    const availableServices = () => {
+        if (cottage != "default") {
+            GetServiceByRegionId(parseInt(cottage)).then((data) => {
+                setServices(data);
+            });
+        } else {
+            alert("Valitse ensin mökki");
+        }
+    };
 
     const getCustomers = () => {
         CustomerFetch().then((data) => {
@@ -56,7 +60,6 @@ const AddReservationPage = () => {
 
     // For development purposes, logs the selected option
     useEffect(() => {
-        console.log(customer);
         if (customer != "default") {
             setDisabled(true);
         } else {
@@ -113,22 +116,18 @@ const AddReservationPage = () => {
                 <div className={styles.inputs}>
                     <h2>Palvelut</h2>
                     <div className={styles.checkBoxContainer}>
-                        <div className={styles.checkbox}>
-                            <input type="checkbox" />
-                            <label>Siivous</label>
-                        </div>
-                        <div className={styles.checkbox}>
-                            <input type="checkbox" />
-                            <label>Porosafari</label>
-                        </div>
-                        <div className={styles.checkbox}>
-                            <input type="checkbox" />
-                            <label>Keilaus</label>
-                        </div>
-                        <div className={styles.checkbox}>
-                            <input type="checkbox" />
-                            <label>Olutmaistelu</label>
-                        </div>
+                        <button onClick={availableServices} type={"button"}>
+                            Hae palvelut
+                        </button>
+                        {services?.map((service) => (
+                            <div className={styles.checkbox}>
+                                <input type={"checkbox"} />
+                                <label>{service.nimi}</label>
+                            </div>
+                        ))}
+                        {services.length < 1 ? (
+                            <p>Palveluita ei saatavilla</p>
+                        ) : null}
                     </div>
                 </div>
                 <div className={styles.inputs} id={"customerForm"}>

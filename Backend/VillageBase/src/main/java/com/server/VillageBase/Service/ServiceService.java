@@ -32,6 +32,10 @@ public class  ServiceService {
         return serviceRepository.save(serviceObject);
     }
 
+    public List<ServiceObject> getServiceByCottageId(int id) {
+        return serviceRepository.getServiceObjectByCottageId(id);
+    }
+
     @Transactional
     public void deleteService(int id) {
         billingRepository.deleteByServiceId(id);

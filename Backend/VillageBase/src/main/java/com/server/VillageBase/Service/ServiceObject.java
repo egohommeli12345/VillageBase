@@ -20,6 +20,7 @@ public class ServiceObject {
     private String kuvaus;
     private int hinta;
     private int alv;
+
     public ServiceObject() {
     }
 

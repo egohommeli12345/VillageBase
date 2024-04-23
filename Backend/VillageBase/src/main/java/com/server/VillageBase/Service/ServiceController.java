@@ -39,4 +39,9 @@ public class ServiceController {
         serviceService.deleteService(id);
         return "Service deleted";
     }
+
+    @GetMapping("/api/services/getbyregionid")
+    public List<ServiceObject> getServiceByCottageId(@RequestParam int id) {
+        return serviceService.getServiceByCottageId(id);
+    }
 }

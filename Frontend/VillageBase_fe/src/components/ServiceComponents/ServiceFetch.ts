@@ -36,3 +36,15 @@ export async function ServiceDelete(id: number) {
         alert("Palvelun poisto epäonnistui");
     }
 }
+
+export async function GetServiceByRegionId(id: number) {
+    const response = await fetch(
+        `http://localhost:8080/api/services/getbyregionid?id=${id}`,
+    );
+    const services = await response.json();
+    if (response.ok) {
+        return services;
+    } else {
+        alert("Virhe palveluiden haussa");
+    }
+}
