@@ -11,6 +11,8 @@ import { GetServiceByRegionId } from "../ServiceComponents/ServiceFetch.ts";
 import { ServiceInterface } from "../ServiceComponents/ServiceInterface.ts";
 import { ReservationInterface } from "./ReservationInterface.ts";
 import { DatetimeBuilder } from "./DatetimeBuilder.ts";
+import { PostInterface } from "../PostInterface.ts";
+import { ReservationServiceInterface } from "../ServiceComponents/ReservationServiceInterface.ts";
 
 const AddReservationPage = () => {
     const [maxIdReservation, setMaxIdReservation] = useState<number>();
@@ -31,6 +33,9 @@ const AddReservationPage = () => {
     const [email, setEmail] = useState("");
 
     const [services, setServices] = useState<ServiceInterface[]>([]);
+    const [selectedServices, setSelectedServices] = useState<
+        ReservationServiceInterface[]
+    >([]);
     const [cottages, setCottages] = useState<CottageInterface[]>([]);
     const [customers, setCustomers] = useState<CustomerInterface[]>([]);
     const [customerDropdown, setCustomerDropdown] = useState<number>(-1);
@@ -51,19 +56,58 @@ const AddReservationPage = () => {
 
         console.log(formattedCurrentDateTime);
 
+        if (customer === maxIdCustomer) {
+            const newPost: PostInterface = {
+                postinro: zipCode,
+                toimipaikka: city,
+            };
+
+            const newCustomer: CustomerInterface = {
+                asiakas_id: customer ? customer : 0,
+                postinro: zipCode,
+                etunimi: firstName,
+                sukunimi: lastName,
+                lahiosoite: address,
+                email: email,
+                puhelinnro: phone,
+            };
+        }
+
         const newReservation: ReservationInterface = {
             varaus_id: maxIdReservation ? maxIdReservation : 0,
             asiakas_id: customer ? customer : 0,
             mokki_mokki_id: parseInt(cottage),
             varattu_pvm: formattedCurrentDateTime,
             vahvistus_pvm: formattedCurrentDateTime,
-            varattu_alkupvm: startDate,
-            varattu_loppupvm: endDate,
+            varattu_alkupvm: startDate + " " + startTime + ":00",
+            varattu_loppupvm: endDate + " " + endTime + ":00",
         };
 
         console.log(newReservation);
         console.log(startTime);
     };
+
+    const handleInputChange = (palvelu_id: number, lkm: number) => {
+        if (lkm) {
+            setSelectedServices([
+                ...selectedServices,
+                {
+                    varaus_id: maxIdReservation ? maxIdReservation : 0,
+                    palvelu_id: palvelu_id,
+                    lkm: lkm,
+                },
+            ]);
+        }
+    };
+
+    const emptySelectedServices = () => {
+        setSelectedServices([]);
+    };
+
+    useEffect(() => {
+        console.log(selectedServices);
+        selectedServices.map((service) => console.log(service));
+    }, [selectedServices]);
 
     const avaibleCottages = () => {
         GetAvailableCottages(startDate, endDate).then((data) => {
@@ -76,6 +120,7 @@ const AddReservationPage = () => {
         if (cottage != "default") {
             GetServiceByRegionId(parseInt(cottage)).then((data) => {
                 setServices(data);
+                setSelectedServices([]);
             });
         } else {
             alert("Valitse ensin mökki");
@@ -192,19 +237,41 @@ const AddReservationPage = () => {
                 </div>
                 <div className={styles.inputs}>
                     <h2>Palvelut</h2>
-                    <div className={styles.checkBoxContainer}>
+                    <div className={styles.inputContainer}>
                         <button onClick={availableServices} type={"button"}>
                             Hae palvelut
                         </button>
+
                         {services?.map((service) => (
-                            <div className={styles.checkbox}>
-                                <input type={"checkbox"} />
-                                <label>{service.nimi}</label>
-                            </div>
+                            <>
+                                <input
+                                    type={"text"}
+                                    placeholder={"Lukumäärä"}
+                                    id={"service"}
+                                    onChange={(event) =>
+                                        handleInputChange(
+                                            service.palvelu_id,
+                                            parseInt(event.target.value),
+                                        )
+                                    }
+                                />
+                                <label htmlFor={"service"}>
+                                    {service.nimi}, ID: {service.palvelu_id}
+                                </label>
+                            </>
                         ))}
                         {services.length < 1 ? (
                             <p>Palveluita ei saatavilla</p>
                         ) : null}
+                        <h3>Valitut palvelut:</h3>
+                        {selectedServices.map((service) => (
+                            <p>
+                                {service.palvelu_id}, {service.lkm}
+                            </p>
+                        ))}
+                        <button type={"button"} onClick={emptySelectedServices}>
+                            Tyhjennä palvelut
+                        </button>
                     </div>
                 </div>
                 <div className={styles.inputs} id={"customerForm"}>
