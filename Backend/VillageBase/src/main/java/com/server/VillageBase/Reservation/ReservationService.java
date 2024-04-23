@@ -41,4 +41,8 @@ public class ReservationService {
         reservationServicesRepository.deleteByReservationId(id);
         reservationRepository.deleteByReservationId(id);
     }
+
+    public int getMaxId() {
+        return reservationRepository.findReservationWithMaxId();
+    }
 }

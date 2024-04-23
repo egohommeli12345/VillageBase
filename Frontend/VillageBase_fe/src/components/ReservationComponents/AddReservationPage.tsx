@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AddReservationPage.module.css";
+import { GetAvailableCottages, ReservationMAXID } from "./ReservationFetch.ts";
 import {
-    GetAvailableCottages,
-    GetAvailableServices,
-} from "./ReservationFetch.ts";
-import { CustomerFetch } from "../CustomerComponents/CustomerFetch.ts";
+    CustomerFetch,
+    CustomerMAXID,
+} from "../CustomerComponents/CustomerFetch.ts";
 import { CottageInterface } from "../CottageComponents/CottageInterface.ts";
 import { CustomerInterface } from "../CustomerComponents/CustomerInterface.ts";
 import { GetServiceByRegionId } from "../ServiceComponents/ServiceFetch.ts";
 import { ServiceInterface } from "../ServiceComponents/ServiceInterface.ts";
+import { ReservationInterface } from "./ReservationInterface.ts";
+import { DatetimeBuilder } from "./DatetimeBuilder.ts";
 
 const AddReservationPage = () => {
-    // Reservation
+    const [maxIdReservation, setMaxIdReservation] = useState<number>();
+    const [maxIdCustomer, setMaxIdCustomer] = useState<number>();
+    /*const [reservedDate, setReservedDate] = useState("");*/
     const [startDate, setStartDate] = useState("");
+    const [startTime, setStartTime] = useState("");
     const [endDate, setEndDate] = useState("");
+    const [endTime, setEndTime] = useState("");
     const [cottage, setCottage] = useState("default");
-    const [customer, setCustomer] = useState("default");
+    const [customer, setCustomer] = useState<number>();
     const [zipCode, setZipCode] = useState("");
     const [city, setCity] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -27,11 +33,36 @@ const AddReservationPage = () => {
     const [services, setServices] = useState<ServiceInterface[]>([]);
     const [cottages, setCottages] = useState<CottageInterface[]>([]);
     const [customers, setCustomers] = useState<CustomerInterface[]>([]);
-    const [disabled, setDisabled] = useState(true);
+    const [customerDropdown, setCustomerDropdown] = useState<number>(-1);
+    const [disabled, setDisabled] = useState(false);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        // Lähetä tiedot backendiin tässä
+
+        const newCurrentDateTime: Date = new Date();
+        const formattedCurrentDateTime: string = DatetimeBuilder(
+            newCurrentDateTime.getUTCFullYear().toString(),
+            newCurrentDateTime.getUTCMonth().toString(),
+            newCurrentDateTime.getUTCDate().toString(),
+            newCurrentDateTime.getUTCHours().toString(),
+            newCurrentDateTime.getUTCMinutes().toString(),
+            newCurrentDateTime.getUTCSeconds().toString(),
+        );
+
+        console.log(formattedCurrentDateTime);
+
+        const newReservation: ReservationInterface = {
+            varaus_id: maxIdReservation ? maxIdReservation : 0,
+            asiakas_id: customer ? customer : 0,
+            mokki_mokki_id: parseInt(cottage),
+            varattu_pvm: formattedCurrentDateTime,
+            vahvistus_pvm: formattedCurrentDateTime,
+            varattu_alkupvm: startDate,
+            varattu_loppupvm: endDate,
+        };
+
+        console.log(newReservation);
+        console.log(startTime);
     };
 
     const avaibleCottages = () => {
@@ -55,23 +86,45 @@ const AddReservationPage = () => {
         CustomerFetch().then((data) => {
             setCustomers(data);
         });
-        setCustomer("default");
     };
 
-    // For development purposes, logs the selected option
     useEffect(() => {
-        if (customer != "default") {
+        ReservationMAXID().then((data) => {
+            setMaxIdReservation(data);
+        });
+        CustomerMAXID().then((data) => {
+            setMaxIdCustomer(data);
+        });
+    }, []);
+
+    useEffect(() => {
+        if (customerDropdown !== -1) {
             setDisabled(true);
-        } else {
+            setCustomer(customerDropdown);
+        } else if (customerDropdown === -1) {
             setDisabled(false);
+            setCustomer(maxIdCustomer);
         }
-    }, [customer]);
+    }, [customerDropdown, customer, maxIdCustomer]);
 
     return (
         <div className={styles.formTemplate}>
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.inputs}>
                     <h2>Mökki</h2>
+                    <p>
+                        *Varauksen vahvistuspäiväksi tulee päivä, jolloin varaus
+                        luodaan
+                    </p>
+                    <div className={styles.inputContainer}>
+                        <label htmlFor="maxId">Varauksen ID:</label>
+                        <input
+                            id="maxId"
+                            type="text"
+                            value={maxIdReservation}
+                            disabled={true}
+                        />
+                    </div>
                     <div className={styles.dateContainer}>
                         <label htmlFor="startDate">Varauksen alkupäivä:</label>
                         <input
@@ -88,6 +141,30 @@ const AddReservationPage = () => {
                             type="date"
                             value={endDate}
                             onChange={(e) => setEndDate(e.target.value)}
+                        />
+                    </div>
+                    <div className={styles.dateContainer}>
+                        <label htmlFor="startTime">
+                            Varauksen alkukellonaika: (valitse aika
+                            nuolinäppäimillä)
+                        </label>
+                        <input
+                            id="startTime"
+                            type="time"
+                            value={startTime}
+                            onChange={(e) => setStartTime(e.target.value)}
+                        />
+                    </div>
+                    <div className={styles.dateContainer}>
+                        <label htmlFor="endTime">
+                            Varauksen loppukellonaika: (valitse aika
+                            nuolinäppäimillä)
+                        </label>
+                        <input
+                            id="endTime"
+                            type="time"
+                            value={endTime}
+                            onChange={(e) => setEndTime(e.target.value)}
                         />
                     </div>
                     <button type={"button"} onClick={avaibleCottages}>
@@ -132,9 +209,6 @@ const AddReservationPage = () => {
                 </div>
                 <div className={styles.inputs} id={"customerForm"}>
                     <h2>Asiakas</h2>
-                    {/*<div className={styles.inputContainer}>
-                        <input type="text" disabled value={maxId} />
-                    </div>*/}
                     <div className={styles.inputContainer}>
                         <label>Valitse olemassa oleva asiakas:</label>
                         <button type="button" onClick={getCustomers}>
@@ -144,9 +218,11 @@ const AddReservationPage = () => {
                         <select
                             name="customers"
                             id="customers"
-                            onChange={(e) => setCustomer(e.target.value)}
+                            onChange={(e) =>
+                                setCustomerDropdown(parseInt(e.target.value))
+                            }
                         >
-                            <option value="default">Valitse asiakas</option>
+                            <option value={-1}>Valitse asiakas</option>
                             {customers.map((customer) => (
                                 <option
                                     key={customer.asiakas_id}
@@ -157,6 +233,9 @@ const AddReservationPage = () => {
                                 </option>
                             ))}
                         </select>
+                    </div>
+                    <div className={styles.inputContainer}>
+                        <input type="text" disabled value={maxIdCustomer} />
                     </div>
                     <div className={styles.inputContainer}>
                         <label>Asiakkaan etunimi:</label>

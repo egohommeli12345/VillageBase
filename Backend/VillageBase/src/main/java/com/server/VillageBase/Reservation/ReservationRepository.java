@@ -14,6 +14,9 @@ import java.util.List;
 // EntityRepository needs to extend JpaRepository (it contains the CRUD logic)
 
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
+
+    @Query("SELECT MAX(varaus_id) FROM Reservation") int findReservationWithMaxId();
+
     @Modifying
     @Query("DELETE FROM Reservation WHERE asiakas_id = ?1") void deleteByCustomerId(int id);
 
@@ -29,8 +32,4 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     @Modifying
     @Query("DELETE FROM Reservation WHERE varaus_id = ?1") void deleteByReservationId(int id);
 
-    /*@Modifying
-    @Query("DELETE FROM Reservation WHERE varaus_id IN " +
-            "(SELECT id.varaus_id FROM ReservationServices WHERE id" +
-            ".palvelu_id = ?1)") void deleteByServiceId(int id);*/
 }

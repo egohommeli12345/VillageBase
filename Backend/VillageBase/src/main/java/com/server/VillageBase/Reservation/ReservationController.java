@@ -46,4 +46,9 @@ public class ReservationController {
         reservationService.deleteReservation(id);
         return "Reservation deleted";
     }
+
+    @GetMapping("/api/reservations/maxid")
+    public int getMaxId() {
+        return reservationService.getMaxId();
+    }
 }
