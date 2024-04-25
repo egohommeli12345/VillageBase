@@ -19,8 +19,19 @@ export default function BillingPage() {
 
     // State to track the active container
     const [activeContainerId, setActiveContainerId] = useState<number | null>(
-        null,
+        null
     );
+
+    // Function to mark a billing as paid
+    const handleMarkAsPaid = (lasku_id: number) => {
+        const updatedBillings = billings.map((billing) => {
+            if (billing.lasku_id === lasku_id) {
+                return { ...billing, maksettu: 1 };
+            }
+            return billing;
+        });
+        setBillings(updatedBillings);
+    };
 
     // Function to toggle the active container
     const makeActive = (id: number) => {
@@ -46,9 +57,9 @@ export default function BillingPage() {
                 Object.values(item).some((value) =>
                     String(value)
                         .toLowerCase()
-                        .includes(searchQuery.toLowerCase()),
-                ),
-            ),
+                        .includes(searchQuery.toLowerCase())
+                )
+            )
         );
     }, [searchQuery, billings]);
 
@@ -133,6 +144,16 @@ export default function BillingPage() {
                                     ? "maksettu"
                                     : "maksamatta"}
                             </p>
+                            {billing.maksettu === 0 ? (
+                                <button
+                                    className={styles.paidButton}
+                                    onClick={() =>
+                                        handleMarkAsPaid(billing.lasku_id)
+                                    }
+                                >
+                                    Merkitse maksetuksi
+                                </button>
+                            ) : null}
                         </div>
                         {/* <button className={styles.cardButton}>Lisätietoja</button> */}
                     </div>
