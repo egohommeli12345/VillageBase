@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -50,5 +51,14 @@ public class ReservationController {
     @GetMapping("/api/reservations/maxid")
     public int getMaxId() {
         return reservationService.getMaxId();
+    }
+
+    @PostMapping("/api/reservations/reservationserviceadd")
+    public String addReservationService(@RequestBody List<ReservationServices> reservationServices) {
+        for (ReservationServices rs : reservationServices) {
+            System.out.println(rs); // Print the entire ReservationServices object
+            System.out.println(rs.getId()); // Print the embedded ID specifically
+        }
+        return "Added";
     }
 }

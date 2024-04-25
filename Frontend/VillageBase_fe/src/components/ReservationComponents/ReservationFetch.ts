@@ -1,3 +1,8 @@
+import {
+    ReservationServiceInterface,
+    ReservationServiceInterface1,
+} from "../ServiceComponents/ReservationServiceInterface.ts";
+
 export async function ReservationFetch() {
     // Fetches all reservations from the backend
     const response = await fetch("http://localhost:8080/api/reservations/all");
@@ -49,5 +54,27 @@ export async function ReservationDelete(id: number) {
         alert("Varaus poistettu onnistuneesti");
     } else {
         alert("Varauksen poisto epäonnistui");
+    }
+}
+
+export async function ReservationServiceAdd(
+    reservationServices: ReservationServiceInterface1[],
+) {
+    const json: string = '["id":{"varaus_id":1,"palvelu_id":3},"lkm":2]';
+    console.log(JSON.stringify(reservationServices) + "TESTI");
+    const response = await fetch(
+        `http://localhost:8080/api/reservations/reservationserviceadd`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(reservationServices),
+        },
+    );
+    if (response.ok) {
+        console.log("Varauksen palvelut lisätty");
+    } else {
+        alert("Varauksen palveluita lisättäessä virhe");
     }
 }

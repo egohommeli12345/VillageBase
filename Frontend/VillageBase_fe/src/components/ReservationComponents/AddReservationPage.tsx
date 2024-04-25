@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AddReservationPage.module.css";
-import { GetAvailableCottages, ReservationMAXID } from "./ReservationFetch.ts";
+import {
+    GetAvailableCottages,
+    ReservationMAXID,
+    ReservationServiceAdd,
+} from "./ReservationFetch.ts";
 import {
     CustomerFetch,
     CustomerMAXID,
@@ -12,16 +16,20 @@ import { ServiceInterface } from "../ServiceComponents/ServiceInterface.ts";
 import { ReservationInterface } from "./ReservationInterface.ts";
 import { DatetimeBuilder } from "./DatetimeBuilder.ts";
 import { PostInterface } from "../PostInterface.ts";
-import { ReservationServiceInterface } from "../ServiceComponents/ReservationServiceInterface.ts";
+import {
+    ReservationServiceIdInterface,
+    ReservationServiceInterface,
+    ReservationServiceInterface1,
+} from "../ServiceComponents/ReservationServiceInterface.ts";
 
 const AddReservationPage = () => {
     const [maxIdReservation, setMaxIdReservation] = useState<number>();
     const [maxIdCustomer, setMaxIdCustomer] = useState<number>();
     /*const [reservedDate, setReservedDate] = useState("");*/
     const [startDate, setStartDate] = useState("");
-    const [startTime, setStartTime] = useState("");
+    const [startTime, setStartTime] = useState("00:00");
     const [endDate, setEndDate] = useState("");
-    const [endTime, setEndTime] = useState("");
+    const [endTime, setEndTime] = useState("00:00");
     const [cottage, setCottage] = useState("default");
     const [customer, setCustomer] = useState<number>();
     const [zipCode, setZipCode] = useState("");
@@ -34,7 +42,7 @@ const AddReservationPage = () => {
 
     const [services, setServices] = useState<ServiceInterface[]>([]);
     const [selectedServices, setSelectedServices] = useState<
-        ReservationServiceInterface[]
+        ReservationServiceInterface1[]
     >([]);
     const [cottages, setCottages] = useState<CottageInterface[]>([]);
     const [customers, setCustomers] = useState<CustomerInterface[]>([]);
@@ -71,7 +79,15 @@ const AddReservationPage = () => {
                 email: email,
                 puhelinnro: phone,
             };
+
+            console.log(newPost, newCustomer);
         }
+
+        selectedServices.forEach((selectedService) =>
+            console.log(selectedService),
+        );
+        console.log(selectedServices);
+        ReservationServiceAdd(selectedServices);
 
         const newReservation: ReservationInterface = {
             varaus_id: maxIdReservation ? maxIdReservation : 0,
@@ -88,12 +104,29 @@ const AddReservationPage = () => {
     };
 
     const handleInputChange = (palvelu_id: number, lkm: number) => {
-        if (lkm) {
+        const test: ReservationServiceIdInterface = {
+            varaus_id: maxIdReservation ? maxIdReservation : 0,
+            palvelu_id: palvelu_id,
+        };
+        /*const test2: ReservationServiceInterface1 = {
+            id: test,
+            lkm: lkm,
+        };*/
+        /*if (lkm) {
             setSelectedServices([
                 ...selectedServices,
                 {
                     varaus_id: maxIdReservation ? maxIdReservation : 0,
                     palvelu_id: palvelu_id,
+                    lkm: lkm,
+                },
+            ]);
+        }*/
+        if (lkm) {
+            setSelectedServices([
+                ...selectedServices,
+                {
+                    id: test,
                     lkm: lkm,
                 },
             ]);
@@ -104,10 +137,10 @@ const AddReservationPage = () => {
         setSelectedServices([]);
     };
 
-    useEffect(() => {
+    /*useEffect(() => {
         console.log(selectedServices);
         selectedServices.map((service) => console.log(service));
-    }, [selectedServices]);
+    }, [selectedServices]);*/
 
     const avaibleCottages = () => {
         GetAvailableCottages(startDate, endDate).then((data) => {

@@ -19,6 +19,14 @@ public class ReservationServicesId implements Serializable {
         this.palvelu_id = palvelu_id;
     }
 
+    public int getVaraus_id() {
+        return varaus_id;
+    }
+
+    public int getPalvelu_id() {
+        return palvelu_id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
