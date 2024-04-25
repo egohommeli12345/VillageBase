@@ -22,7 +22,7 @@ export default function BillingPage() {
         null
     );
 
-    // Lisätty
+    // Function to mark a billing as paid
     const handleMarkAsPaid = (lasku_id: number) => {
         const updatedBillings = billings.map((billing) => {
             if (billing.lasku_id === lasku_id) {
