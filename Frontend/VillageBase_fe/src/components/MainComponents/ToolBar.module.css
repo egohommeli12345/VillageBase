@@ -115,7 +115,11 @@
     margin-top: 0.5em;
 }
 
+.sortMenuItem:focus, 
+.sortMenuItem:active, 
 .sortMenuItem:hover {
+    background-color: #f1f1f1;
+    border-bottom: 0.2em solid #007bff;
     cursor: pointer;
 }
 
