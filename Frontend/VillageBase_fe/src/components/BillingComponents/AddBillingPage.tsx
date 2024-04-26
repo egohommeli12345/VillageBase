@@ -47,7 +47,7 @@ const AddBillingPage = () => {
         console.log(JSON.stringify(bill));
 
         await BillingAdd(bill);
-        /*window.location.reload();*/
+        window.location.reload();
     };
 
     useEffect(() => {
