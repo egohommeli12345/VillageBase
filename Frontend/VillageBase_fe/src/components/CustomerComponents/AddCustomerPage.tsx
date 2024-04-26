@@ -39,7 +39,7 @@ const AddCustomerPage = () => {
             puhelinnro: phone,
         };
 
-        AddCustomer(newCustomer).then(() => {
+        await AddCustomer(newCustomer).then(() => {
             setAddBtn(!addBtn);
             setFirstName("");
             setLastName("");

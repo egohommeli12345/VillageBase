@@ -32,10 +32,6 @@ const AddBillingPage = () => {
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
 
-        console.log("summa ", summa);
-        console.log("mokkisumma ", mokki_summa);
-        console.log("palvelusumma ", palvelu_summa);
-
         const bill: BillingInterface = {
             lasku_id: Number(MAXID_lasku ? MAXID_lasku : 0),
             varaus_id: varaus_id ? varaus_id : 0,

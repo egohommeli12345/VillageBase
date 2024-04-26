@@ -4,14 +4,18 @@ import { RegionAdd, RegionMAXID } from "./RegionFetch";
 import { useToolState } from "../MainComponents/ToolStateContext";
 import { RegionInterface } from "./RegionInterface";
 
-const AddRegionPage = ({setRegions}: { setRegions: React.Dispatch<React.SetStateAction<RegionInterface[]>> }) => {
+const AddRegionPage = ({
+    setRegions,
+}: {
+    setRegions: React.Dispatch<React.SetStateAction<RegionInterface[]>>;
+}) => {
     const [regionName, setRegionName] = useState("");
     const [regionMaxId, setRegionMaxId] = useState("");
     // Lisätään tarvittaessa lisää
 
     const { addBtn, setAddBtn } = useToolState();
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         //  Tässä kohtaa lomakkeen tiedot ovat valmiina lähetettäväksi backendiin
         // Lähetä tiedot backendiin tässä
@@ -20,12 +24,13 @@ const AddRegionPage = ({setRegions}: { setRegions: React.Dispatch<React.SetState
             nimi: regionName,
         };
 
-        RegionAdd(newRegion, setRegions).then((data) => {
+        await RegionAdd(newRegion, setRegions).then((data) => {
             console.log(data);
             setAddBtn(!addBtn);
             setRegionMaxId("");
             setRegionName("");
         });
+        window.location.reload();
     };
 
     useEffect(() => {
