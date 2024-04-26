@@ -45,4 +45,12 @@ public class ReservationService {
     public int getMaxId() {
         return reservationRepository.findReservationWithMaxId();
     }
+
+    public void addReservationServices(List<ReservationServices> reservationServices) {
+        reservationServicesRepository.saveAll(reservationServices);
+    }
+
+    public void addReservation(Reservation reservation) {
+        reservationRepository.save(reservation);
+    }
 }

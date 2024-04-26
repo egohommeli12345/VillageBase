@@ -73,7 +73,10 @@ function ReportPage() {
                         <div key={report.id} className={styles.reportItem}>
                             <span>{report.title}</span>
                             <span>{report.created}</span>
-                            <button onClick={() => handleDownloadPdf(report)}>
+                            <button
+                                className={styles.pdfButton}
+                                onClick={() => handleDownloadPdf(report)}
+                            >
                                 Lataa PDF
                             </button>
                         </div>

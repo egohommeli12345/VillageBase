@@ -6,6 +6,7 @@ import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../MainComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
+import AddBillingPage from "./AddBillingPage.tsx";
 
 // Function for BillingPage
 export default function BillingPage() {
@@ -19,7 +20,7 @@ export default function BillingPage() {
 
     // State to track the active container
     const [activeContainerId, setActiveContainerId] = useState<number | null>(
-        null
+        null,
     );
 
     // Function to mark a billing as paid
@@ -57,9 +58,9 @@ export default function BillingPage() {
                 Object.values(item).some((value) =>
                     String(value)
                         .toLowerCase()
-                        .includes(searchQuery.toLowerCase())
-                )
-            )
+                        .includes(searchQuery.toLowerCase()),
+                ),
+            ),
         );
     }, [searchQuery, billings]);
 
@@ -98,7 +99,7 @@ export default function BillingPage() {
                         onClick={handleCloseBtn}
                     />
                     <div className={styles.popUpContent}>
-                        {/* <AddServicePage /> */}
+                        <AddBillingPage></AddBillingPage>
                     </div>
                 </div>
             </div>

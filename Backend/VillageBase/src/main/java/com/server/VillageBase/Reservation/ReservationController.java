@@ -55,10 +55,13 @@ public class ReservationController {
 
     @PostMapping("/api/reservations/reservationserviceadd")
     public String addReservationService(@RequestBody List<ReservationServices> reservationServices) {
-        for (ReservationServices rs : reservationServices) {
-            System.out.println(rs); // Print the entire ReservationServices object
-            System.out.println(rs.getId()); // Print the embedded ID specifically
-        }
+        reservationService.addReservationServices(reservationServices);
         return "Added";
+    }
+
+    @PostMapping("/api/reservations/add")
+    public String addReservation(@RequestBody Reservation reservation) {
+        reservationService.addReservation(reservation);
+        return "Reservation added";
     }
 }

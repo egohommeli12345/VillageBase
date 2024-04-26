@@ -8,5 +8,9 @@ export const AddPost = async (postObject: PostInterface) => {
         },
         body: JSON.stringify(postObject),
     });
-    return response.json();
+    if (response.ok) {
+        alert("Posti lisätty");
+    } else {
+        alert("Postia lisättäessä virhe");
+    }
 };
