@@ -25,6 +25,8 @@ export async function AddCustomer(customer: CustomerInterface) {
     });
     if (response.ok) {
         alert("Asiakas lisätty");
+    } else {
+        alert("Virhe asiakasta lisättäessä");
     }
 }
 

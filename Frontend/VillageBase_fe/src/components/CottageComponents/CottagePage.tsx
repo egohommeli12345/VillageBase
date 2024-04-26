@@ -77,7 +77,7 @@ export default function CottagePage() {
     };
 
     useEffect(() => {
-        if (activeContainerId !== null) {
+        if (activeContainerId !== null && deleteBtn) {
             CottageDelete(activeContainerId);
         }
     }, [deleteBtn]);
@@ -113,6 +113,9 @@ export default function CottagePage() {
                             {cottage.mokkinimi} {cottage.mokki_id}
                         </div>
                         <div className={styles.cardBody}>
+                            <p>
+                                <strong>Alue ID:</strong> {cottage.alue_id}
+                            </p>
                             <p>
                                 <strong>Osoite:</strong> {cottage.katuosoite},{" "}
                                 {cottage.postinro}

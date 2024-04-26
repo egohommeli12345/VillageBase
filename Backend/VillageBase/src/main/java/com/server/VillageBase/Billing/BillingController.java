@@ -39,4 +39,10 @@ public class BillingController {
         billingService.addBilling(billing);
         return "Bill added";
     }
+
+    @GetMapping("/api/billings/markaspaid")
+    public String markAsPaid(@RequestParam int id) {
+        billingService.markAsPaid(id);
+        return "Marked as paid";
+    }
 }

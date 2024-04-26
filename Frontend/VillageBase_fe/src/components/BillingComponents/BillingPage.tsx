@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./BillingPage.module.css";
-import { BillingDelete, BillingFetch } from "./BillingFetch";
+import { BillingDelete, BillingFetch, MarkAsPaid } from "./BillingFetch";
 import { BillingInterface } from "./BillingInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
@@ -24,7 +24,7 @@ export default function BillingPage() {
     );
 
     // Function to mark a billing as paid
-    const handleMarkAsPaid = (lasku_id: number) => {
+    const handleMarkAsPaid = async (lasku_id: number) => {
         const updatedBillings = billings.map((billing) => {
             if (billing.lasku_id === lasku_id) {
                 return { ...billing, maksettu: 1 };
@@ -32,6 +32,8 @@ export default function BillingPage() {
             return billing;
         });
         setBillings(updatedBillings);
+        await MarkAsPaid(lasku_id);
+        window.location.reload();
     };
 
     // Function to toggle the active container
@@ -84,7 +86,7 @@ export default function BillingPage() {
     };
 
     useEffect(() => {
-        if (activeContainerId !== null) {
+        if (activeContainerId !== null && deleteBtn) {
             BillingDelete(activeContainerId);
         }
     }, [deleteBtn]);
@@ -123,21 +125,10 @@ export default function BillingPage() {
 
                         <div className={styles.cardBody}>
                             <p>
-                                <strong>Laskun päivämäärä:</strong>{" "}
-                                {billing.lasku_pvm}
-                            </p>
-                            <p>
-                                <strong>Eräpäivä:</strong> {billing.erapaiva}
-                            </p>
-                            <p>
                                 <strong>Summa:</strong> {billing.summa}€
                             </p>
                             <p>
                                 <strong>ALV:</strong> {billing.alv}%
-                            </p>
-                            <p>
-                                <strong>Viitenumero:</strong>{" "}
-                                {billing.viitenumero}
                             </p>
                             <p>
                                 <strong>Status:</strong>{" "}

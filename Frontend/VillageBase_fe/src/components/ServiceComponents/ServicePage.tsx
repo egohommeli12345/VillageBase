@@ -70,7 +70,7 @@ export default function ServicePage() {
     }, []);
 
     useEffect(() => {
-        if (activeContainerId !== null) {
+        if (activeContainerId !== null && deleteBtn) {
             ServiceDelete(activeContainerId);
         }
     }, [deleteBtn]);
@@ -107,7 +107,16 @@ export default function ServicePage() {
                         </div>
                         <div className={styles.cardBody}>
                             <p>
+                                <strong>Alue ID:</strong> {service.alue_id}
+                            </p>
+                            <p>
+                                <strong>Tyyppi:</strong> {service.tyyppi}
+                            </p>
+                            <p>
                                 <strong>Hinta:</strong> {service.hinta}€
+                            </p>
+                            <p>
+                                <strong>Alv:</strong> {service.alv}%
                             </p>
                             <p>
                                 <strong>Kuvaus:</strong> {service.kuvaus}

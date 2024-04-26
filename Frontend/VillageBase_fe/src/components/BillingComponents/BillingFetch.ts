@@ -50,3 +50,14 @@ export async function GetTotalServicePriceByReservationId(id: number) {
         return 0;
     }
 }
+
+export async function MarkAsPaid(id: number) {
+    const response = await fetch(
+        `http://localhost:8080/api/billings/markaspaid?id=${id}`,
+    );
+    if (response.ok) {
+        alert("Lasku merkitty maksetuksi");
+    } else {
+        alert("Virhe laskun merkitsemisessä maksetuksi");
+    }
+}

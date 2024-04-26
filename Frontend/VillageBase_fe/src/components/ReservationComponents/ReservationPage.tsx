@@ -82,7 +82,7 @@ export default function ReservationPage() {
     };
 
     useEffect(() => {
-        if (activeContainerId !== null) {
+        if (activeContainerId !== null && deleteBtn) {
             ReservationDelete(activeContainerId);
         }
     }, [deleteBtn]);
@@ -116,7 +116,7 @@ export default function ReservationPage() {
                                         : styles.cardHeader
                                 }
                             >
-                                Varaus {reservation.varaus_id}
+                                Varaus ID: {reservation.varaus_id}
                             </div>
                             <div className={styles.cardBody}>
                                 <p>

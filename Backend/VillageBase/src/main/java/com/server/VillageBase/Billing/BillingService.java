@@ -32,4 +32,8 @@ public class BillingService {
     public void addBilling(Billing billing) {
         billingRepository.save(billing);
     }
+
+    public void markAsPaid(int id) {
+        billingRepository.markAsPaidByBillingId(id);
+    }
 }

@@ -1,12 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AddCustomerPage.module.css";
-import {useToolState} from "../MainComponents/ToolStateContext.tsx";
-import {CustomerInterface} from "./CustomerInterface.ts";
-import {AddCustomer, CustomerMAXID} from "./CustomerFetch.ts";
+import { useToolState } from "../MainComponents/ToolStateContext.tsx";
+import { CustomerInterface } from "./CustomerInterface.ts";
+import { AddCustomer, CustomerMAXID } from "./CustomerFetch.ts";
+import { PostInterface } from "../PostInterface.ts";
+import { AddPost } from "../PostFetch.ts";
 
 const AddCustomerPage = () => {
     const [maxId, setMaxId] = useState();
     const [zipCode, setZipCode] = useState("");
+    const [city, setCity] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [address, setAddress] = useState("");
@@ -16,8 +19,15 @@ const AddCustomerPage = () => {
 
     const { addBtn, setAddBtn } = useToolState();
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
+
+        const newPost: PostInterface = {
+            postinro: zipCode,
+            toimipaikka: city,
+        };
+
+        await AddPost(newPost);
 
         const newCustomer: CustomerInterface = {
             asiakas_id: Number(maxId ? maxId : 0),
@@ -38,23 +48,21 @@ const AddCustomerPage = () => {
             setPhone("");
             setEmail("");
         });
+        window.location.reload();
     };
 
     useEffect(() => {
-         CustomerMAXID().then((data) => {
-             setMaxId(data + 1);
-         });}, [addBtn]);
+        CustomerMAXID().then((data) => {
+            setMaxId(data + 1);
+        });
+    }, [addBtn]);
 
     return (
         <div className={styles.formTemplate}>
             <h1>Lisää uusi asiakas</h1>
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.inputContainer}>
-                    <input
-                        type="text"
-                        disabled
-                        value={maxId}
-                    />
+                    <input type="text" disabled value={maxId} />
                 </div>
                 <div className={styles.inputContainer}>
                     <label>Asiakkaan etunimi:</label>
@@ -86,6 +94,14 @@ const AddCustomerPage = () => {
                         type="text"
                         value={zipCode}
                         onChange={(e) => setZipCode(e.target.value)}
+                    />
+                </div>
+                <div className={styles.inputContainer}>
+                    <label>Kaupunki:</label>
+                    <input
+                        type="text"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
                     />
                 </div>
                 <div className={styles.inputContainer}>
