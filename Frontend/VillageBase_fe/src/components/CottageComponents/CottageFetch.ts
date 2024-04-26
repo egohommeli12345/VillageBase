@@ -38,3 +38,11 @@ export async function CottageDelete(id: number) {
         alert("Mökin poisto epäonnistui");
     }
 }
+
+export async function GetCottageByCottageId(id: number) {
+    const response = await fetch(
+        `http://localhost:8080/api/cottages/getcottagebycottageid?id=${id}`,
+    );
+    const cottage = await response.json();
+    return cottage;
+}

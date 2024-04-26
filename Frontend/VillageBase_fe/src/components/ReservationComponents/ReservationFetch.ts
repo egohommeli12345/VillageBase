@@ -89,3 +89,11 @@ export async function ReservationAdd(reservation: ReservationInterface) {
         alert("Varauksta lisättäessä virhe");
     }
 }
+
+export async function GetReservationById(id: number) {
+    const response = await fetch(
+        `http://localhost:8080/api/reservations/getreservationbyid?id=${id}`,
+    );
+    const reservation = await response.json();
+    return reservation;
+}

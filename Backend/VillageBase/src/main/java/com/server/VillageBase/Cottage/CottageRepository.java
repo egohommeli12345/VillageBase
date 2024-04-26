@@ -34,5 +34,7 @@ public interface CottageRepository extends JpaRepository<Cottage, Integer> {
 
     @Modifying
     @Query("DELETE FROM Cottage WHERE mokki_id = ?1") void deleteByCottageId(int id);
+
+    @Query(value = "SELECT * FROM mokki WHERE mokki_id = ?1", nativeQuery = true) Cottage findCottageByCottageId(int id);
 }
 

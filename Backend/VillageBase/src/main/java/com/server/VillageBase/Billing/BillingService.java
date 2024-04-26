@@ -24,4 +24,12 @@ public class BillingService {
     public void deleteBilling(int id) {
         billingRepository.deleteByBillingId(id);
     }
+
+    public int getMaxId() {
+        return billingRepository.findBillWithMaxId();
+    }
+
+    public void addBilling(Billing billing) {
+        billingRepository.save(billing);
+    }
 }

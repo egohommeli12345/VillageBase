@@ -1,10 +1,7 @@
 package com.server.VillageBase.Billing;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +29,14 @@ public class BillingController {
     public String deleteBilling(@RequestParam int id) {
         billingService.deleteBilling(id);
         return "Bill deleted";
+    }
+
+    @GetMapping("/api/billings/maxid")
+    public int getMaxId() { return billingService.getMaxId(); }
+
+    @PostMapping("/api/billings/add")
+    public String addBilling(@RequestBody Billing billing) {
+        billingService.addBilling(billing);
+        return "Bill added";
     }
 }

@@ -53,4 +53,12 @@ public class ReservationService {
     public void addReservation(Reservation reservation) {
         reservationRepository.save(reservation);
     }
+
+    public Reservation getReservationByReservationId(int id) {
+        return reservationRepository.getReservationById(id);
+    }
+
+    public double getTotalServicePriceByReservationId(int id) {
+        return reservationServicesRepository.getTotalServicePriceByReservationId(id);
+    }
 }

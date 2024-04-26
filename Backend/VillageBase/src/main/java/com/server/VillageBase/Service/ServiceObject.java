@@ -18,13 +18,14 @@ public class ServiceObject {
     private String nimi;
     private int tyyppi;
     private String kuvaus;
-    private int hinta;
+    private double hinta;
     private int alv;
 
     public ServiceObject() {
     }
 
-    public ServiceObject(int palvelu_id, int alue_id, String nimi, int tyyppi, String kuvaus, int hinta, int alv) {
+    public ServiceObject(int palvelu_id, int alue_id, String nimi, int tyyppi
+            , String kuvaus, double hinta, int alv) {
         this.palvelu_id = palvelu_id;
         this.alue_id = alue_id;
         this.nimi = nimi;
@@ -74,7 +75,7 @@ public class ServiceObject {
         this.kuvaus = kuvaus;
     }
 
-    public int getHinta() {
+    public double getHinta() {
         return hinta;
     }
 

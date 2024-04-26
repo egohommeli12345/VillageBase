@@ -44,4 +44,9 @@ public class CottageController {
         cottageService.deleteCottage(id);
         return "Cottage deleted";
     }
+
+    @GetMapping("/api/cottages/getcottagebycottageid")
+    public Cottage getCottageByCottageId(@RequestParam int id) {
+        return cottageService.getCottageByCottageId(id);
+    }
 }

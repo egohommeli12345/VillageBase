@@ -29,4 +29,6 @@ public interface BillingRepository extends JpaRepository<Billing, Integer>{
     @Query("DELETE FROM Billing WHERE varaus_id IN" +
             "(SELECT id.varaus_id FROM ReservationServices WHERE id" +
             ".palvelu_id = ?1)") void deleteByServiceId(int id);
+
+    @Query("SELECT MAX(lasku_id) FROM Billing") int findBillWithMaxId();
 }

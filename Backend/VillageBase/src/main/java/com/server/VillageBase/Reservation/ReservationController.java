@@ -64,4 +64,14 @@ public class ReservationController {
         reservationService.addReservation(reservation);
         return "Reservation added";
     }
+
+    @GetMapping("/api/reservations/getreservationbyid")
+    public Reservation getReservationById(@RequestParam int id) {
+        return reservationService.getReservationByReservationId(id);
+    }
+
+    @GetMapping("/api/reservations/getTotalServicePriceByReservationId")
+    public double getTotalServicePriceByReservationId(@RequestParam int id) {
+        return reservationService.getTotalServicePriceByReservationId(id);
+    }
 }
