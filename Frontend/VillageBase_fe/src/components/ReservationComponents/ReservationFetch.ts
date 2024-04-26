@@ -97,3 +97,11 @@ export async function GetReservationById(id: number) {
     const reservation = await response.json();
     return reservation;
 }
+
+export async function GetReservationServiceListByReservationId(id: number) {
+    const response = await fetch(
+        `http://localhost:8080/api/reservations/getreservationservicelistbyreservationid?id=${id}`,
+    );
+    const services = await response.json();
+    return services;
+}

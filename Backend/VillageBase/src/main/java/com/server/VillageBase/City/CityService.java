@@ -11,4 +11,8 @@ public class CityService {
     public void addPost(City city) {
         cityRepository.addCityIfNotExists(city.getPostinro(), city.getToimipaikka());
     }
+
+    public City getPostByZip(String zip) {
+        return cityRepository.getCityByZip(zip);
+    }
 }

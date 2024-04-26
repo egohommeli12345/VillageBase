@@ -39,9 +39,9 @@ export async function CottageDelete(id: number) {
     }
 }
 
-export async function GetCottageByCottageId(id: number) {
+export async function GetCottageByReservationId(id: number) {
     const response = await fetch(
-        `http://localhost:8080/api/cottages/getcottagebycottageid?id=${id}`,
+        `http://localhost:8080/api/cottages/getcottagebyreservationid?id=${id}`,
     );
     const cottage = await response.json();
     return cottage;

@@ -12,7 +12,7 @@ import {
     GetTotalServicePriceByReservationId,
 } from "./BillingFetch.ts";
 import { DateParser } from "../ReservationComponents/DatetimeBuilder.ts";
-import { GetCottageByCottageId } from "../CottageComponents/CottageFetch.ts";
+import { GetCottageByReservationId } from "../CottageComponents/CottageFetch.ts";
 import { CottageInterface } from "../CottageComponents/CottageInterface.ts";
 
 const AddBillingPage = () => {
@@ -32,6 +32,10 @@ const AddBillingPage = () => {
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
 
+        console.log(summa);
+        console.log(mokki_summa);
+        console.log(palvelu_summa);
+
         const bill: BillingInterface = {
             lasku_id: Number(MAXID_lasku ? MAXID_lasku : 0),
             varaus_id: varaus_id ? varaus_id : 0,
@@ -43,7 +47,7 @@ const AddBillingPage = () => {
         console.log(JSON.stringify(bill));
 
         await BillingAdd(bill);
-        window.location.reload();
+        /*window.location.reload();*/
     };
 
     useEffect(() => {
@@ -61,7 +65,7 @@ const AddBillingPage = () => {
             GetReservationById(varaus_id).then((data) => {
                 setReservation(data);
             });
-            GetCottageByCottageId(varaus_id).then((data) => {
+            GetCottageByReservationId(varaus_id).then((data) => {
                 setCottage(data);
             });
             GetTotalServicePriceByReservationId(varaus_id).then((data) => {
@@ -78,6 +82,7 @@ const AddBillingPage = () => {
             );
 
             setMokki_summa(length * cottage.hinta);
+            console.log(length);
         }
     }, [reservation, cottage]);
 

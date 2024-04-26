@@ -43,5 +43,10 @@ public class CustomerController {
         customerService.deleteCustomerInfo(id);
         return "Customer deleted";
     }
+
+    @GetMapping("/api/customers/getcustomerbyid")
+    public Customer getCustomerById(@RequestParam int id) {
+        return customerService.getCustomerById(id);
+    }
 }
 

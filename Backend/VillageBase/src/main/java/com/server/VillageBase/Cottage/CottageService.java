@@ -48,7 +48,7 @@ public class CottageService {
                 cottageRepository.deleteByCottageId(id);
         }
 
-        public Cottage getCottageByCottageId(int id) {
-                return cottageRepository.findCottageByCottageId(id);
+        public Cottage getCottageByReservationId(int id) {
+                return cottageRepository.findCottageByReservationId(id);
         }
 }

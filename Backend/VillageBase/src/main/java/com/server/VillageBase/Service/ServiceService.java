@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // @Service maps the class as a service layer
@@ -41,5 +42,18 @@ public class  ServiceService {
         billingRepository.deleteByServiceId(id);
         reservationServicesRepository.deleteByServiceId(id);
         serviceRepository.deleteByServiceId(id);
+    }
+
+    public List<ServiceObject> getServicesByReservationId(int id) {
+        List<ServiceObject> serviceObjectList = new ArrayList<ServiceObject>();
+        List<Integer> serviceIds =
+                reservationServicesRepository.getReservationServiceIdListByReservationId(id);
+        for(Integer serviceId : serviceIds) {
+            serviceObjectList.add(serviceRepository.getServicesByReservationId(serviceId));
+        }
+        for(ServiceObject service : serviceObjectList) {
+            System.out.println(service);
+        }
+        return serviceObjectList;
     }
 }

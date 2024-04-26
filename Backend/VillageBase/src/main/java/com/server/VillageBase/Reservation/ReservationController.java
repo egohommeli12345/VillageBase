@@ -74,4 +74,9 @@ public class ReservationController {
     public double getTotalServicePriceByReservationId(@RequestParam int id) {
         return reservationService.getTotalServicePriceByReservationId(id);
     }
+
+    @GetMapping("/api/reservations/getreservationservicelistbyreservationid")
+    public List<ReservationServices> getReservationServiceListByReservationId(@RequestParam int id) {
+        return reservationService.getReservationServiceListByReservationId(id);
+    }
 }

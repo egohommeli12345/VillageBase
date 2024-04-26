@@ -1,4 +1,12 @@
 import jsPDF from "jspdf";
+import { BillingInterface } from "./BillingInterface.ts";
+import { CustomerInterface } from "../CustomerComponents/CustomerInterface.ts";
+import { ReservationInterface } from "../ReservationComponents/ReservationInterface.ts";
+import { PostInterface } from "../PostInterface.ts";
+import { DateParser } from "../ReservationComponents/DatetimeBuilder.ts";
+import { CottageInterface } from "../CottageComponents/CottageInterface.ts";
+import { ReservationServiceInterface } from "../ServiceComponents/ReservationServiceInterface.ts";
+import { ServiceInterface } from "../ServiceComponents/ServiceInterface.ts";
 
 // Needs to be refactored to use the data from the database
 /*
@@ -13,7 +21,15 @@ import jsPDF from "jspdf";
     - Total amount
 */
 
-export const generatePdfInvoice = () => {
+export const generatePdfInvoice = (
+    bill: BillingInterface,
+    reservation: ReservationInterface,
+    customer: CustomerInterface,
+    post: PostInterface,
+    cottage: CottageInterface,
+    services: ServiceInterface[],
+    reservationServices: ReservationServiceInterface[],
+) => {
     const doc = new jsPDF();
 
     const pageWidth = doc.internal.pageSize.getWidth();
@@ -33,32 +49,37 @@ export const generatePdfInvoice = () => {
     doc.setFont("Helvetica", "normal");
     doc.text("LASKU", pageWidth - x, y, { align: "right" });
     doc.setFontSize(12);
-    doc.text("# 1234", pageWidth - x, 33, { align: "right" });
+    doc.text(`# ${bill.lasku_id}`, pageWidth - x, 33, { align: "right" });
 
     y = 50;
 
     doc.text(
         ["Lähettäjä:", "VillageNewbies", "Kylätie 24, 12345", "Kylälä"],
         x,
-        y
+        y,
     );
     y = 80;
     doc.text(
-        ["Saaja:", "Manu Maksaja", "Maksukatu 0€, 00000", "Köyhälä"],
+        [
+            "Saaja:",
+            `${customer.etunimi} ${customer.sukunimi}`,
+            `${customer.lahiosoite},` + ` ${customer.postinro}`,
+            `${customer.postinro}, ${post.toimipaikka}`,
+        ],
         x,
-        y
+        y,
     );
 
     y = 75;
     x = pageWidth - 70;
     doc.text("Päivämäärä:", x, y, { align: "right" });
-    doc.text("01.01.2024", x + 5, y);
+    doc.text(`${reservation.vahvistus_pvm}`, x + 5, y);
     y += 10;
     doc.text("Eräpäivä:", x, y, { align: "right" });
-    doc.text("01.02.2024", x + 5, y);
+    doc.text(`${reservation.varattu_alkupvm}`, x + 5, y);
     y += 10;
     doc.text("Summa:", x, y, { align: "right" });
-    doc.text("884.00 €", x + 5, y);
+    doc.text(`${bill.summa} €`, x + 5, y);
 
     y = 110;
 
@@ -79,23 +100,50 @@ export const generatePdfInvoice = () => {
     y += 5;
     doc.text("Lakeside Haven", x, y);
     y += 5;
-    doc.text("2024.06.01 14.00 - 2024.06.08 10.00", x, y);
-    doc.text("8", x * 4, y);
-    doc.text("95.50 €", x * 5, y);
-    doc.text("764.00 €", pageWidth - x, y, { align: "right" });
+    doc.text(`${reservation.varattu_alkupvm} `, x, y);
+    y += 5;
+    doc.text(`- ${reservation.varattu_loppupvm}`, x, y);
+    doc.text(
+        `${DateParser(reservation.varattu_alkupvm, reservation.varattu_loppupvm)}`,
+        x * 4,
+        y,
+    );
+    doc.text(`${cottage.hinta} €`, x * 5, y);
+    doc.text(
+        `${cottage.hinta * DateParser(reservation.varattu_alkupvm, reservation.varattu_loppupvm)} €`,
+        pageWidth - x,
+        y,
+        { align: "right" },
+    );
     y += 10;
     doc.text("Lisäpalvelu:", x, y);
     y += 5;
-    doc.text("Lake Excursions", x, y);
+    {
+        services.map((service, index) => {
+            doc.text(`${service.nimi}`, x, y);
+            doc.text(`${reservationServices[index].lkm}`, x * 4, y);
+            doc.text(`${service.hinta} €`, x * 5, y);
+            doc.text(
+                `${service.hinta * reservationServices[index].lkm} €`,
+                pageWidth - x,
+                y,
+                { align: "right" },
+            );
+            y += 5;
+        });
+    }
+    /*doc.text("Lake Excursions", x, y);
     doc.text("3", x * 4, y);
     doc.text("40.00 €", x * 5, y);
-    doc.text("120.00 €", pageWidth - x, y, { align: "right" });
+    doc.text("120.00 €", pageWidth - x, y, { align: "right" });*/
     y += 10;
 
     doc.line(10, y, pageWidth - 10, y);
     y += 10;
 
-    doc.text("884.00 €", pageWidth - x, y, { align: "right" });
+    doc.text(`${bill.summa} €`, pageWidth - x, y, { align: "right" });
+    y += 5;
+    doc.text(`+ alv ${bill.alv} %`, pageWidth - x, y, { align: "right" });
 
     y += 10;
 

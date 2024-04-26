@@ -61,4 +61,8 @@ public class ReservationService {
     public double getTotalServicePriceByReservationId(int id) {
         return reservationServicesRepository.getTotalServicePriceByReservationId(id);
     }
+
+    public List<ReservationServices> getReservationServiceListByReservationId(int id) {
+        return reservationServicesRepository.getReservationServiceListByReservationId(id);
+    }
 }

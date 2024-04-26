@@ -38,3 +38,11 @@ export async function CustomerDelete(id: number) {
         alert("Asiakas poistettu");
     }
 }
+
+export async function GetCustomerById(id: number) {
+    const response = await fetch(
+        `http://localhost:8080/api/customers/getcustomerbyid?id=${id}`,
+    );
+    const customer = await response.json();
+    return customer;
+}

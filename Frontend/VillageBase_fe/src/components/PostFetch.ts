@@ -14,3 +14,11 @@ export const AddPost = async (postObject: PostInterface) => {
         alert("Postia lisättäessä virhe");
     }
 };
+
+export async function GetPostByZip(zip: string) {
+    const response = await fetch(
+        `http://localhost:8080/api/post/getpostbyzip?zip=${zip}`,
+    );
+    const customer = await response.json();
+    return customer;
+}

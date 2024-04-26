@@ -45,4 +45,8 @@ public class CustomerService {
         reservationRepository.deleteByCustomerId(asiakas_id);
         customerRepository.deleteById(asiakas_id);
     }
+
+    public Customer getCustomerById(int id) {
+        return customerRepository.getCustomerById(id);
+    }
 }

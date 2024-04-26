@@ -48,3 +48,11 @@ export async function GetServiceByRegionId(id: number) {
         alert("Virhe palveluiden haussa");
     }
 }
+
+export async function GetServiceListByReservationId(id: number) {
+    const response = await fetch(
+        `http://localhost:8080/api/services/getservicesbyreservationid?id=${id}`,
+    );
+    const services = await response.json();
+    return services;
+}
