@@ -110,7 +110,7 @@ export default function CottagePage() {
                                     : styles.cardHeader
                             }
                         >
-                            {cottage.mokkinimi} {cottage.mokki_id}
+                            {cottage.mokkinimi}, ID: {cottage.mokki_id}
                         </div>
                         <div className={styles.cardBody}>
                             <p>

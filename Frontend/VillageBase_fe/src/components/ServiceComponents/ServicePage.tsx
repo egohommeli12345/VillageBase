@@ -103,7 +103,7 @@ export default function ServicePage() {
                                     : styles.cardHeader
                             }
                         >
-                            {service.nimi} {service.palvelu_id}
+                            {service.nimi}, ID: {service.palvelu_id}
                         </div>
                         <div className={styles.cardBody}>
                             <p>
