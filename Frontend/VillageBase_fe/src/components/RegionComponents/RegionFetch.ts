@@ -70,8 +70,8 @@ export async function RegionEdit(region: RegionInterface) {
         body: JSON.stringify(region),
     });
     if (response.ok) {
-        alert("Aluetta muokattu");
+        console.log("Aluetta muokattu");
     } else {
-        alert("Alueen muokkaamisessa virhe");
+        console.log("Alueen muokkaamisessa virhe");
     }
 }
