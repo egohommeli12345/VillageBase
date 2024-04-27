@@ -32,7 +32,7 @@ export default function RegionPage() {
 
     // State to track the active container
     const [activeContainerId, setActiveContainerId] = useState<number | null>(
-        null,
+        null
     );
 
     // Function to toggle the active container
@@ -60,9 +60,9 @@ export default function RegionPage() {
                 Object.values(item).some((value) =>
                     String(value)
                         .toLowerCase()
-                        .includes(searchQuery.toLowerCase()),
-                ),
-            ),
+                        .includes(searchQuery.toLowerCase())
+                )
+            )
         );
     }, [searchQuery, regions]);
 
