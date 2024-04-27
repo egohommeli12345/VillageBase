@@ -28,4 +28,7 @@ public interface ServiceRepository extends JpaRepository<ServiceObject, Integer>
             "SELECT alue_id FROM mokki WHERE mokki_id = ?1)",
             nativeQuery = true)
     List<ServiceObject> getServiceObjectByCottageId(int id);
+
+    @Query(value = "SELECT * FROM palvelu WHERE palvelu_id = ?1",
+            nativeQuery = true) ServiceObject getServicesByReservationId(int id);
 }

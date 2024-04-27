@@ -76,7 +76,7 @@ export default function CustomerPage() {
     };
 
     useEffect(() => {
-        if (activeContainerId !== null) {
+        if (activeContainerId !== null && deleteBtn) {
             CustomerDelete(activeContainerId);
         }
     }, [deleteBtn]);

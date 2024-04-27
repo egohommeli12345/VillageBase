@@ -111,8 +111,23 @@
     border: 3px solid #0011ff; /* Highlight with a blue border */
 }
 
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .paidButton {
     background-color: #0011ff;
+    color: #fff;
+    border: none;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.pdfButton {
+    background-color: #000000;
     color: #fff;
     border: none;
     padding: 0.5em;

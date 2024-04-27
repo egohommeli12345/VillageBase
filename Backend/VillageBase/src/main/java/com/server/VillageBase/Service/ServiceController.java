@@ -12,7 +12,7 @@ import java.util.List;
 // a RESTful controller: it is capable of handling the requests of the client
 // @CrossOrigin is used to allow cross-origin requests from the specified client
 // in this case, the client is running on http://localhost:5173 (=frontend)
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173"})
 @RestController
 public class ServiceController {
     // @Autowired will allow the use of CottageService without the need to instantiate it
@@ -43,5 +43,10 @@ public class ServiceController {
     @GetMapping("/api/services/getbyregionid")
     public List<ServiceObject> getServiceByCottageId(@RequestParam int id) {
         return serviceService.getServiceByCottageId(id);
+    }
+
+    @GetMapping("/api/services/getservicesbyreservationid")
+    public List<ServiceObject> getServicesByReservationId(@RequestParam int id) {
+        return serviceService.getServicesByReservationId(id);
     }
 }

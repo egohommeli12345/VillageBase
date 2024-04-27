@@ -41,3 +41,36 @@ export function DatetimeBuilder(
         seconds
     );
 }
+
+export function DateParser(dateTimeString: string, dateTimeString2: string) {
+    const [dateParts, timeParts] = dateTimeString.split(" ");
+    const [year, month, day] = dateParts.split("-").map(Number);
+    const [hours, minutes, seconds] = timeParts.split(":").map(Number);
+
+    const [dateParts2, timeParts2] = dateTimeString2.split(" ");
+    const [year2, month2, day2] = dateParts2.split("-").map(Number);
+    const [hours2, minutes2, seconds2] = timeParts2.split(":").map(Number);
+    const newDate: Date = new Date(
+        year,
+        month - 1,
+        day,
+        hours,
+        minutes,
+        seconds,
+    );
+    const newDate2: Date = new Date(
+        year2,
+        month2 - 1,
+        day2,
+        hours2,
+        minutes2,
+        seconds2,
+    );
+    return BetweenDates([newDate, newDate2]);
+}
+
+export function BetweenDates(dates: Date[]) {
+    const differenceInTime = dates[1].getTime() - dates[0].getTime();
+    const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+    return differenceInDays;
+}

@@ -4,13 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.util.Date;
+
 // @Entity is used to map this class as a data entity
 // It matches the datamodel in the database
 // @Table is used to specify the database table from which the data is read
 
 @Entity
 @Table (name = "varaus")
-public class Reservation<R, S> {
+public class Reservation {
     // @Id specifies the primary key in the table
     // Variable names need be same as in the table
 

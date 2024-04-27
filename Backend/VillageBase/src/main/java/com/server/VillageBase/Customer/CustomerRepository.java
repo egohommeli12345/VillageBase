@@ -14,4 +14,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>{
 
     @Modifying
     @Query("DELETE FROM Customer WHERE asiakas_id = ?1") void deleteById(int id);
+
+    @Query(value = "SELECT * FROM asiakas WHERE asiakas_id = ?1",
+            nativeQuery = true) Customer getCustomerById(int id);
 }

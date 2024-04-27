@@ -23,7 +23,7 @@ const AddCabinPage = () => {
 
     const { addBtn, setAddBtn } = useToolState();
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
         const newCottage: CottageInterface = {
@@ -43,9 +43,9 @@ const AddCabinPage = () => {
             toimipaikka: city,
         };
 
-        AddPost(newPost);
+        await AddPost(newPost);
 
-        AddCottage(newCottage).then((data) => {
+        await AddCottage(newCottage).then((data) => {
             setAddBtn(!addBtn);
             setMaxId("");
             setRegionId("");
@@ -58,6 +58,7 @@ const AddCabinPage = () => {
             setMaxPersons("");
             setEquipment("");
         });
+        window.location.reload();
     };
 
     useEffect(() => {

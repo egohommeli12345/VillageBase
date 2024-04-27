@@ -24,7 +24,9 @@ export async function AddCustomer(customer: CustomerInterface) {
         body: JSON.stringify(customer),
     });
     if (response.ok) {
-        alert("Asiakas lisätty onnistuneesti");
+        alert("Asiakas lisätty");
+    } else {
+        alert("Virhe asiakasta lisättäessä");
     }
 }
 
@@ -33,6 +35,14 @@ export async function CustomerDelete(id: number) {
         `http://localhost:8080/api/customers/delete?id=${id}`,
     );
     if (response.ok) {
-        alert("Asiakas poistettu onnistuneesti");
+        alert("Asiakas poistettu");
     }
+}
+
+export async function GetCustomerById(id: number) {
+    const response = await fetch(
+        `http://localhost:8080/api/customers/getcustomerbyid?id=${id}`,
+    );
+    const customer = await response.json();
+    return customer;
 }

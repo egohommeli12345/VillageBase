@@ -55,10 +55,28 @@ public class ReservationController {
 
     @PostMapping("/api/reservations/reservationserviceadd")
     public String addReservationService(@RequestBody List<ReservationServices> reservationServices) {
-        for (ReservationServices rs : reservationServices) {
-            System.out.println(rs); // Print the entire ReservationServices object
-            System.out.println(rs.getId()); // Print the embedded ID specifically
-        }
+        reservationService.addReservationServices(reservationServices);
         return "Added";
+    }
+
+    @PostMapping("/api/reservations/add")
+    public String addReservation(@RequestBody Reservation reservation) {
+        reservationService.addReservation(reservation);
+        return "Reservation added";
+    }
+
+    @GetMapping("/api/reservations/getreservationbyid")
+    public Reservation getReservationById(@RequestParam int id) {
+        return reservationService.getReservationByReservationId(id);
+    }
+
+    @GetMapping("/api/reservations/getTotalServicePriceByReservationId")
+    public double getTotalServicePriceByReservationId(@RequestParam int id) {
+        return reservationService.getTotalServicePriceByReservationId(id);
+    }
+
+    @GetMapping("/api/reservations/getreservationservicelistbyreservationid")
+    public List<ReservationServices> getReservationServiceListByReservationId(@RequestParam int id) {
+        return reservationService.getReservationServiceListByReservationId(id);
     }
 }

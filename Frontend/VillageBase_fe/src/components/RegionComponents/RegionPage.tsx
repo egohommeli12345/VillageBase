@@ -76,8 +76,8 @@ export default function RegionPage() {
     };
 
     useEffect(() => {
-        if (activeContainerId !== null) {
-            RegionDelete(activeContainerId, setRegions);        
+        if (activeContainerId !== null && deleteBtn) {
+            RegionDelete(activeContainerId, setRegions);
         }
     }, [deleteBtn]);
 

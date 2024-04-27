@@ -1,11 +1,27 @@
 import { useEffect, useState } from "react";
 import styles from "./BillingPage.module.css";
-import { BillingDelete, BillingFetch } from "./BillingFetch";
+import { BillingDelete, BillingFetch, MarkAsPaid } from "./BillingFetch";
 import { BillingInterface } from "./BillingInterface";
 import { useSortType } from "../SortingComponents/SortTypeContext";
 import { SortItems } from "../SortingComponents/SorterFunc";
 import { useSearch } from "../MainComponents/SearchContext";
 import { useToolState } from "../MainComponents/ToolStateContext";
+import AddBillingPage from "./AddBillingPage.tsx";
+import { generatePdfInvoice } from "./GenerateInvoice.ts";
+import { CottageInterface } from "../CottageComponents/CottageInterface.ts";
+import { CustomerInterface } from "../CustomerComponents/CustomerInterface.ts";
+import { ReservationInterface } from "../ReservationComponents/ReservationInterface.ts";
+import {
+    GetReservationById,
+    GetReservationServiceListByReservationId,
+} from "../ReservationComponents/ReservationFetch.ts";
+import { GetCustomerById } from "../CustomerComponents/CustomerFetch.ts";
+import { PostInterface } from "../PostInterface.ts";
+import { GetPostByZip } from "../PostFetch.ts";
+import { GetCottageByReservationId } from "../CottageComponents/CottageFetch.ts";
+import { ServiceInterface } from "../ServiceComponents/ServiceInterface.ts";
+import { GetServiceListByReservationId } from "../ServiceComponents/ServiceFetch.ts";
+import { ReservationServiceInterface } from "../ServiceComponents/ReservationServiceInterface.ts";
 
 // Function for BillingPage
 export default function BillingPage() {
@@ -17,13 +33,18 @@ export default function BillingPage() {
     const [billings, setBillings] = useState<BillingInterface[]>([]);
     const [filteredData, setFilteredData] = useState<BillingInterface[]>([]);
 
+    const [cottage, setCottage] = useState<CottageInterface>();
+    const [customer, setCustomer] = useState<CustomerInterface>();
+    const [reservation, setReservation] = useState<ReservationInterface>();
+    const [billing, setBilling] = useState<BillingInterface>();
+
     // State to track the active container
     const [activeContainerId, setActiveContainerId] = useState<number | null>(
-        null
+        null,
     );
 
     // Function to mark a billing as paid
-    const handleMarkAsPaid = (lasku_id: number) => {
+    const handleMarkAsPaid = async (lasku_id: number) => {
         const updatedBillings = billings.map((billing) => {
             if (billing.lasku_id === lasku_id) {
                 return { ...billing, maksettu: 1 };
@@ -31,7 +52,82 @@ export default function BillingPage() {
             return billing;
         });
         setBillings(updatedBillings);
+        await MarkAsPaid(lasku_id);
+        window.location.reload();
     };
+
+    const handlePrintPdf = async (billing: BillingInterface) => {
+        /*
+    Data needed:
+    - Invoice ID
+    - Payment amount
+    - Due date alkupvm
+    - Recipient
+    - Service name
+    - Service price
+    - Timeframe for the reservation
+    - Total amount
+*/
+        const reservation: ReservationInterface = await GetReservationById(
+            billing.varaus_id,
+        );
+        const customer: CustomerInterface = await GetCustomerById(
+            reservation.asiakas_id,
+        );
+        const post: PostInterface = await GetPostByZip(customer.postinro);
+        const cottage: CottageInterface = await GetCottageByReservationId(
+            billing.varaus_id,
+        );
+        const services: ServiceInterface[] =
+            await GetServiceListByReservationId(billing.varaus_id);
+        const reservationServices: ReservationServiceInterface[] =
+            await GetReservationServiceListByReservationId(billing.varaus_id);
+        console.log(reservationServices);
+
+        generatePdfInvoice(
+            billing,
+            reservation,
+            customer,
+            post,
+            cottage,
+            services,
+            reservationServices,
+        );
+    };
+
+    /*useEffect(() => {
+        if (varaus_id) {
+            // Do the fetch only if varaus_id is defined
+            GetReservationById(varaus_id).then((data) => {
+                setReservation(data);
+            });
+            GetCottageByCottageId(varaus_id).then((data) => {
+                setCottage(data);
+            });
+            GetTotalServicePriceByReservationId(varaus_id).then((data) => {
+                setPalvelu_summa(data);
+            });
+        }
+    }, [varaus_id]);
+
+    useEffect(() => {
+        if (reservation && cottage) {
+            const length: number = DateParser(
+                reservation.varattu_alkupvm,
+                reservation.varattu_loppupvm,
+            );
+
+            setMokki_summa(length * cottage.hinta);
+        }
+    }, [reservation, cottage]);
+
+    useEffect(() => {
+        if (mokki_summa && palvelu_summa) {
+            setSumma(mokki_summa + palvelu_summa);
+        } else {
+            setSumma(mokki_summa);
+        }
+    }, [mokki_summa, palvelu_summa]);*/
 
     // Function to toggle the active container
     const makeActive = (id: number) => {
@@ -57,9 +153,9 @@ export default function BillingPage() {
                 Object.values(item).some((value) =>
                     String(value)
                         .toLowerCase()
-                        .includes(searchQuery.toLowerCase())
-                )
-            )
+                        .includes(searchQuery.toLowerCase()),
+                ),
+            ),
         );
     }, [searchQuery, billings]);
 
@@ -83,7 +179,7 @@ export default function BillingPage() {
     };
 
     useEffect(() => {
-        if (activeContainerId !== null) {
+        if (activeContainerId !== null && deleteBtn) {
             BillingDelete(activeContainerId);
         }
     }, [deleteBtn]);
@@ -98,7 +194,7 @@ export default function BillingPage() {
                         onClick={handleCloseBtn}
                     />
                     <div className={styles.popUpContent}>
-                        {/* <AddServicePage /> */}
+                        <AddBillingPage></AddBillingPage>
                     </div>
                 </div>
             </div>
@@ -122,21 +218,10 @@ export default function BillingPage() {
 
                         <div className={styles.cardBody}>
                             <p>
-                                <strong>Laskun päivämäärä:</strong>{" "}
-                                {billing.lasku_pvm}
-                            </p>
-                            <p>
-                                <strong>Eräpäivä:</strong> {billing.erapaiva}
-                            </p>
-                            <p>
                                 <strong>Summa:</strong> {billing.summa}€
                             </p>
                             <p>
                                 <strong>ALV:</strong> {billing.alv}%
-                            </p>
-                            <p>
-                                <strong>Viitenumero:</strong>{" "}
-                                {billing.viitenumero}
                             </p>
                             <p>
                                 <strong>Status:</strong>{" "}
@@ -144,16 +229,24 @@ export default function BillingPage() {
                                     ? "maksettu"
                                     : "maksamatta"}
                             </p>
-                            {billing.maksettu === 0 ? (
+                            <div className={styles.buttonContainer}>
+                                {billing.maksettu === 0 ? (
+                                    <button
+                                        className={styles.paidButton}
+                                        onClick={() =>
+                                            handleMarkAsPaid(billing.lasku_id)
+                                        }
+                                    >
+                                        Merkitse maksetuksi
+                                    </button>
+                                ) : null}
                                 <button
-                                    className={styles.paidButton}
-                                    onClick={() =>
-                                        handleMarkAsPaid(billing.lasku_id)
-                                    }
+                                    className={styles.pdfButton}
+                                    onClick={() => handlePrintPdf(billing)}
                                 >
-                                    Merkitse maksetuksi
+                                    Tulosta PDF lasku
                                 </button>
-                            ) : null}
+                            </div>
                         </div>
                         {/* <button className={styles.cardButton}>Lisätietoja</button> */}
                     </div>

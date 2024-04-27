@@ -14,5 +14,8 @@ public interface CityRepository extends JpaRepository<City, String> {
             "WHERE NOT EXISTS (SELECT * FROM posti WHERE postinro = ?1)",
             nativeQuery = true)
     void addCityIfNotExists(String postinro, String toimipaikka);
+
+    @Query(value = "SELECT * FROM posti WHERE postinro = ?1",
+            nativeQuery = true) City getCityByZip(String zip);
 }
 

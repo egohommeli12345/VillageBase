@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface ReservationServicesRepository extends JpaRepository<ReservationServices, ReservationServicesId> {
     @Modifying
     @Query("DELETE FROM ReservationServices WHERE id.varaus_id = ?1") void deleteById(int id);
@@ -23,4 +25,21 @@ public interface ReservationServicesRepository extends JpaRepository<Reservation
     @Modifying
     @Query("DELETE FROM ReservationServices WHERE id.varaus_id = ?1") void deleteByReservationId(int id);
 
+    @Query(value = "select (vp.lkm * p.hinta) as 'hinta' from " +
+            "varauksen_palvelut vp " +
+            "join palvelu p on p.palvelu_id = vp.palvelu_id " +
+            "where varaus_id = ?1", nativeQuery = true)
+    double getTotalServicePriceByReservationId(int id);
+
+    @Query(value = "SELECT palvelu_id FROM varauksen_palvelut WHERE varaus_id" +
+            " = ?1",
+            nativeQuery =
+            true)
+    List<Integer> getReservationServiceIdListByReservationId(int id);
+
+    @Query(value = "SELECT * FROM varauksen_palvelut WHERE varaus_id" +
+            " = ?1",
+            nativeQuery =
+                    true)
+    List<ReservationServices> getReservationServiceListByReservationId(int id);
 }

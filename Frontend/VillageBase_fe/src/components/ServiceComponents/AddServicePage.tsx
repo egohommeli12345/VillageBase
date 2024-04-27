@@ -20,7 +20,7 @@ const AddServicePage = () => {
 
     const { addBtn, setAddBtn } = useToolState();
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
         const newService: ServiceInterface = {
@@ -33,9 +33,7 @@ const AddServicePage = () => {
             alv: Number(vat ? vat : 0),
         };
 
-        console.log(newService);
-
-        ServiceAdd(newService).then((data) => {
+        await ServiceAdd(newService).then((data) => {
             console.log(data);
             setAddBtn(!addBtn);
             setServiceName("");
@@ -45,6 +43,7 @@ const AddServicePage = () => {
             setType("");
             setVat("");
         });
+        window.location.reload();
     };
 
     useEffect(() => {

@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./AddReservationPage.module.css";
 import {
     GetAvailableCottages,
+    ReservationAdd,
     ReservationMAXID,
     ReservationServiceAdd,
 } from "./ReservationFetch.ts";
 import {
+    AddCustomer,
     CustomerFetch,
     CustomerMAXID,
 } from "../CustomerComponents/CustomerFetch.ts";
@@ -19,13 +21,12 @@ import { PostInterface } from "../PostInterface.ts";
 import {
     ReservationServiceIdInterface,
     ReservationServiceInterface,
-    ReservationServiceInterface1,
 } from "../ServiceComponents/ReservationServiceInterface.ts";
+import { AddPost } from "../PostFetch.ts";
 
 const AddReservationPage = () => {
     const [maxIdReservation, setMaxIdReservation] = useState<number>();
     const [maxIdCustomer, setMaxIdCustomer] = useState<number>();
-    /*const [reservedDate, setReservedDate] = useState("");*/
     const [startDate, setStartDate] = useState("");
     const [startTime, setStartTime] = useState("00:00");
     const [endDate, setEndDate] = useState("");
@@ -42,14 +43,16 @@ const AddReservationPage = () => {
 
     const [services, setServices] = useState<ServiceInterface[]>([]);
     const [selectedServices, setSelectedServices] = useState<
-        ReservationServiceInterface1[]
+        ReservationServiceInterface[]
     >([]);
     const [cottages, setCottages] = useState<CottageInterface[]>([]);
     const [customers, setCustomers] = useState<CustomerInterface[]>([]);
     const [customerDropdown, setCustomerDropdown] = useState<number>(-1);
     const [disabled, setDisabled] = useState(false);
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const formRef = useRef(null);
+
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
         const newCurrentDateTime: Date = new Date();
@@ -61,8 +64,6 @@ const AddReservationPage = () => {
             newCurrentDateTime.getUTCMinutes().toString(),
             newCurrentDateTime.getUTCSeconds().toString(),
         );
-
-        console.log(formattedCurrentDateTime);
 
         if (customer === maxIdCustomer) {
             const newPost: PostInterface = {
@@ -80,14 +81,12 @@ const AddReservationPage = () => {
                 puhelinnro: phone,
             };
 
-            console.log(newPost, newCustomer);
-        }
+            console.log(newPost);
+            console.log(newCustomer);
 
-        selectedServices.forEach((selectedService) =>
-            console.log(selectedService),
-        );
-        console.log(selectedServices);
-        ReservationServiceAdd(selectedServices);
+            await AddPost(newPost);
+            await AddCustomer(newCustomer);
+        }
 
         const newReservation: ReservationInterface = {
             varaus_id: maxIdReservation ? maxIdReservation : 0,
@@ -99,8 +98,9 @@ const AddReservationPage = () => {
             varattu_loppupvm: endDate + " " + endTime + ":00",
         };
 
-        console.log(newReservation);
-        console.log(startTime);
+        await ReservationAdd(newReservation);
+        await ReservationServiceAdd(selectedServices);
+        window.location.reload();
     };
 
     const handleInputChange = (palvelu_id: number, lkm: number) => {
@@ -108,20 +108,6 @@ const AddReservationPage = () => {
             varaus_id: maxIdReservation ? maxIdReservation : 0,
             palvelu_id: palvelu_id,
         };
-        /*const test2: ReservationServiceInterface1 = {
-            id: test,
-            lkm: lkm,
-        };*/
-        /*if (lkm) {
-            setSelectedServices([
-                ...selectedServices,
-                {
-                    varaus_id: maxIdReservation ? maxIdReservation : 0,
-                    palvelu_id: palvelu_id,
-                    lkm: lkm,
-                },
-            ]);
-        }*/
         if (lkm) {
             setSelectedServices([
                 ...selectedServices,
@@ -136,11 +122,6 @@ const AddReservationPage = () => {
     const emptySelectedServices = () => {
         setSelectedServices([]);
     };
-
-    /*useEffect(() => {
-        console.log(selectedServices);
-        selectedServices.map((service) => console.log(service));
-    }, [selectedServices]);*/
 
     const avaibleCottages = () => {
         GetAvailableCottages(startDate, endDate).then((data) => {
@@ -168,10 +149,10 @@ const AddReservationPage = () => {
 
     useEffect(() => {
         ReservationMAXID().then((data) => {
-            setMaxIdReservation(data);
+            setMaxIdReservation(data + 1);
         });
         CustomerMAXID().then((data) => {
-            setMaxIdCustomer(data);
+            setMaxIdCustomer(data + 1);
         });
     }, []);
 
@@ -187,7 +168,7 @@ const AddReservationPage = () => {
 
     return (
         <div className={styles.formTemplate}>
-            <form onSubmit={handleSubmit} className={styles.form}>
+            <form onSubmit={handleSubmit} className={styles.form} ref={formRef}>
                 <div className={styles.inputs}>
                     <h2>Mökki</h2>
                     <p>
@@ -299,7 +280,7 @@ const AddReservationPage = () => {
                         <h3>Valitut palvelut:</h3>
                         {selectedServices.map((service) => (
                             <p>
-                                {service.palvelu_id}, {service.lkm}
+                                ID: {service.id.palvelu_id}, Lkm: {service.lkm}
                             </p>
                         ))}
                         <button type={"button"} onClick={emptySelectedServices}>
