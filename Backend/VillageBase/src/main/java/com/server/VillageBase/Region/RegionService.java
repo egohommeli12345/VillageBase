@@ -50,4 +50,12 @@ public class RegionService {
         serviceRepository.deleteByRegionId(id);
         regionRepository.deleteByRegionId(id);
     }
+
+    public Region getRegionById(int id) {
+        return regionRepository.getRegionById(id);
+    }
+
+    public void editRegion(Region region) {
+        regionRepository.editRegion(region.getAlue_id(), region.getNimi());
+    }
 }

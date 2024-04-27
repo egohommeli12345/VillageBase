@@ -83,7 +83,9 @@ export default function RegionPage() {
 
     return (
         <div className={styles.regionBG}>
-            <div className={addBtn ? styles.addPageBg : styles.hidden}>
+            <div
+                className={addBtn || editBtn ? styles.addPageBg : styles.hidden}
+            >
                 <div className={styles.addPage}>
                     <img
                         className={styles.closeAddPage}
@@ -91,7 +93,13 @@ export default function RegionPage() {
                         onClick={handleCloseBtn}
                     />
                     <div className={styles.popUpContent}>
-                        <AddRegionPage setRegions={setRegions} />
+                        {addBtn && <AddRegionPage setRegions={setRegions} />}
+                        {editBtn && activeContainerId && (
+                            <AddRegionPage
+                                setRegions={setRegions}
+                                regionId={activeContainerId}
+                            />
+                        )}
                     </div>
                 </div>
             </div>
@@ -109,7 +117,7 @@ export default function RegionPage() {
                                     : styles.cardHeader
                             }
                         >
-                            {region.nimi} {region.alue_id}
+                            {region.nimi}, ID: {region.alue_id}
                         </div>
                         <div className={styles.cardBody}>
                             <p>

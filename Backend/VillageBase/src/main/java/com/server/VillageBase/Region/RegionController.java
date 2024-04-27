@@ -43,4 +43,15 @@ public class RegionController {
         regionService.deleteRegion(id);
         return "Service deleted";
     }
+
+    @GetMapping("/api/regions/getregionbyid")
+    public Region getRegionById(@RequestParam int id) {
+        return regionService.getRegionById(id);
+    }
+
+    @PostMapping("/api/regions/edit")
+    public String editRegion(@RequestBody Region region) {
+        regionService.editRegion(region);
+        return "Region edited";
+    }
 }
